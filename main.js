@@ -1,6 +1,5 @@
 
 let producto
-let diaActual= new Date()
 let totalProductos = 0   
 let total= 0
 let productos = 0 
@@ -37,6 +36,7 @@ function add(codigo){
 
 // Funcion que aplica descuentos en caso que corresponda y totaliza
 function Totalizar(total, medioPago){
+    let diaActual= new Date()
     if (medioPago=="e"){
         total = (total - (total * 0.10));
         alert (`Pagando en efectivo tiene un descuento del 10%, su total a pagar es de: $${total}`)
