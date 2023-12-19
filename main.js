@@ -1,9 +1,32 @@
+class articulo{
+    constructor(datosArticulo){
+        this.id= id;
+        this.nombre= nombre;
+        this.precioAlquiler= precioAlquiler;
+        this.precioRepo= precioRepo;
+        this.stock= stock;
+        this.stockAlquiler= stockAlquiler;
+    }
+}
+
+const articulo1 = new articulo({
+        id: 1,
+        nombre: "Mesa",
+        precioAlquiler: 500,
+        precioRepo: 3000,
+        stock: 10,
+        stockAlquiler: 10,
+});
+
+console.log(articulo1.nombre);
+
 
 let producto
 let totalProductos = 0   
 let total= 0
 let productos = 0 
 let medio= ""
+
 
 // Funcion que suma articulos al carrito
 function add(codigo){
