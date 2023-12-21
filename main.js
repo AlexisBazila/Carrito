@@ -1,11 +1,11 @@
 class articulo{
     constructor(datosArticulo){
-        this.id= id;
-        this.nombre= nombre;
-        this.precioAlquiler= precioAlquiler;
-        this.precioRepo= precioRepo;
-        this.stock= stock;
-        this.stockAlquiler= stockAlquiler;
+        this.id= datosArticulo.id;
+        this.nombre= datosArticulo.nombre;
+        this.precioAlquiler= datosArticulo.precioAlquiler;
+        this.precioRepo= datosArticulo.precioRepo;
+        this.stock= datosArticulo.stock;
+        this.stockAlquiler= datosArticulo.stockAlquiler;
     }
 }
 
@@ -16,6 +16,14 @@ const articulo1 = new articulo({
         precioRepo: 3000,
         stock: 10,
         stockAlquiler: 10,
+});
+const articulo2 = new articulo({
+    id: 2,
+    nombre: "silla",
+    precioAlquiler: 600,
+    precioRepo: 300,
+    stock: 10,
+    stockAlquiler: 10,
 });
 
 console.log(articulo1.nombre);
