@@ -1,32 +1,31 @@
-class articulo{
-    constructor(datosArticulo){
-        this.id= datosArticulo.id;
-        this.nombre= datosArticulo.nombre;
-        this.precioAlquiler= datosArticulo.precioAlquiler;
-        this.precioRepo= datosArticulo.precioRepo;
-        this.stock= datosArticulo.stock;
-        this.stockAlquiler= datosArticulo.stockAlquiler;
-    }
-}
+// class articulo{
+//     constructor(datosArticulo){
+//         this.id= datosArticulo.id;
+//         this.nombre= datosArticulo.nombre;
+//         this.precioAlquiler= datosArticulo.precioAlquiler;
+//         this.precioRepo= datosArticulo.precioRepo;
+//         this.stock= datosArticulo.stock;
+//         this.stockAlquiler= datosArticulo.stockAlquiler;
+//     }
+// }
 
-const articulo1 = new articulo({
-        id: 1,
-        nombre: "Mesa",
-        precioAlquiler: 500,
-        precioRepo: 3000,
-        stock: 10,
-        stockAlquiler: 10,
-});
-const articulo2 = new articulo({
-    id: 2,
-    nombre: "silla",
-    precioAlquiler: 600,
-    precioRepo: 300,
-    stock: 10,
-    stockAlquiler: 10,
-});
+// const articulo1 = new articulo({
+//         id: 1,
+//         nombre: "Mesa",
+//         precioAlquiler: 500,
+//         precioRepo: 3000,
+//         stock: 10,
+//         stockAlquiler: 10,
+// });
+// const articulo2 = new articulo({
+//     id: 2,
+//     nombre: "silla",
+//     precioAlquiler: 600,
+//     precioRepo: 300,
+//     stock: 10,
+//     stockAlquiler: 10,
+// });
 
-console.log(articulo1.nombre);
 
 
 let producto
@@ -35,28 +34,33 @@ let total= 0
 let productos = 0 
 let medio= ""
 
+const p1 = ["P1", "Mesa", 3000, 30000, 50, 50]
+const p2 = ["P2", "Silla", 1000, 10000, 500, 500]
+const p3 = ["P3", "Mantel", 500, 5000, 500, 500]
+const p4 = ["P4", "Plato", 150, 1500, 5000, 500]
+const p5 = ["P5", "Cubiertos", 100, 1000, 50, 50]
 
 // Funcion que suma articulos al carrito
 function add(codigo){
     producto= codigo;
     switch (codigo){
         case "P1":
-            totalProductos= totalProductos + 3000;
+            totalProductos= totalProductos + p1[2];
             productos++
             break;
         case "P2":
-            totalProductos= totalProductos + 5000;
+            totalProductos= totalProductos + p2[2];
             productos++
             break;
         case "P3":
             alert("El producto P3 no pose stock actualmente, elija otro producto");
             break;
         case "P4":
-            totalProductos= totalProductos + 15000;
+            totalProductos= totalProductos + p4[2];
             productos++
             break;
         case "P5":
-            totalProductos= totalProductos + 10000;
+            totalProductos= totalProductos + p5[2];
             productos++
             break;
         default:
