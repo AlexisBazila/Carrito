@@ -12,16 +12,33 @@ const i5 = ["I5", "Cubiertos", 100, 1000, 50, 50];
 class fiesta{
     constructor(){
         this.nombre = prompt("Ingrese el nombre del evento del alquiler actual");
-        do{
-            let fechaEve = new Date(prompt("ingrese fecha del evento (Formato: YYYYY-MM-DD):"));
+        let fechaEve = new Date(prompt("Ingrese la fecha del evento (Formato: YYYYY-MM-DD):"));
+        if((!fechaEve instanceof Date) || isNaN(fechaEve)){
+            while((!this.fechaEve instanceof Date) || isNaN(this.fechaEve)){
+                let fechaEve = new Date(prompt("la fecha ingresada no es correcta, por favor ingrese la fecha del evento (Formato: YYYYY-MM-DD):"));
+                this.fechaEve = fechaEve;
+            }
+        }else{
             this.fechaEve = fechaEve;
-        }while((!this.fechaEve instanceof Date) || isNaN(this.fechaEve))
-        do{
-            let fechaIni = new Date(prompt("Ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):"));
-            this.fechaIni = fechaIni;
-        }while(((!this.fechaIni instanceof Date) || isNaN(this.fechaIni)) || (this.fechaIni > this.fechaEve))
-        // ;
-        // this.fechaFin = prompt("Ingrese la fecha de finalizacion del aqluiler");
+        }
+
+        let fechaIni = new Date(prompt("Ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):"));
+        if(((!fechaIni instanceof Date) || isNaN(fechaIni)) || (fechaIni > fechaEve)){
+
+        }else{
+            
+        }
+
+
+        // do{
+
+        //     this.fechaIni = fechaIni;
+        // }while(((!this.fechaIni instanceof Date) || isNaN(this.fechaIni)) || (this.fechaIni > this.fechaEve))
+        // do{
+        //     let fechaFin = new Date(prompt("Ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"));
+        //     this.fechaFin = fechaFin;
+        // }while(((!this.fechaFin instanceof Date) || isNaN(this.fechaFin)) || (this.fechaFin > this.fechaIni))
+        
     }
 
 }
@@ -41,4 +58,4 @@ alert("SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar regis
 
     fiestaAlquiler = new fiesta()
     
-    alert(fiestaAlquiler.fechaIni);
+    alert(fiestaAlquiler.fechaEve);
