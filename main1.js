@@ -21,26 +21,30 @@ class fiesta{
         }else{
             this.fechaEve = fechaEve;
         }
-
         let fechaIni = new Date(prompt("Ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):"));
         if(((!fechaIni instanceof Date) || isNaN(fechaIni)) || (fechaIni > fechaEve)){
-
+            while(((!this.fechaIni instanceof Date) || isNaN(this.fechaIni)) || (this.fechaIni > this.fechaEve)){
+                let fechaIni = new Date(prompt("la fecha ingresada no es correcta, ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):"));
+                this.fechaIni=fechaIni
+            }
         }else{
-            
+            this.fechaIni = fechaIni;
         }
-
-
-        // do{
-
-        //     this.fechaIni = fechaIni;
-        // }while(((!this.fechaIni instanceof Date) || isNaN(this.fechaIni)) || (this.fechaIni > this.fechaEve))
-        // do{
-        //     let fechaFin = new Date(prompt("Ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"));
-        //     this.fechaFin = fechaFin;
-        // }while(((!this.fechaFin instanceof Date) || isNaN(this.fechaFin)) || (this.fechaFin > this.fechaIni))
-        
+        let fechaFin = new Date(prompt("Ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"))
+        if(((!fechaFin instanceof Date) || isNaN(fechaFin)) || (fechaFin < fechaIni)){
+            while(((!this.fechaFin instanceof Date) || isNaN(this.fechaFin)) || (this.fechaFin < this.fechaIni)){
+                let fechaFin = new Date(prompt("la fecha ingresada no es correcta, ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"));
+                this.fechaFin = fechaFin;
+            }
+        }else{
+            this.fechaFin = fechaFin;
+        } 
     }
 
+    diasAlquiler(){
+        let diasDeAlquiler= ((this.fechaFin - this.fechaIni) / (24 * 60 * 60 * 1000));
+        return diasDeAlquiler;
+    }
 }
 
 class cliente{
@@ -58,4 +62,7 @@ alert("SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar regis
 
     fiestaAlquiler = new fiesta()
     
-    alert(fiestaAlquiler.fechaEve);
+    alert(`El evento ${fiestaAlquiler.nombre} fue creado con fecha ${fiestaAlquiler.fechaEve}.`);
+    alert(`El alquiler para el evento ${fiestaAlquiler.nombre} inicia el ${fiestaAlquiler.fechaIni} y finaliza el ${fiestaAlquiler.fechaFin}.`);
+
+    alert(`El alquiler es de ${fiestaAlquiler.diasAlquiler()} Dias`);
