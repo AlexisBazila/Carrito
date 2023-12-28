@@ -48,9 +48,29 @@ class fiesta{
 }
 
 class cliente{
-    constructor(cuit, nombre){
-        this.cuit=cuit;
-        this.nombre=nombre;
+    constructor(){
+        let cuitdni = prompt("ingrese su n° de cuit sin guiones o su numero de DNI")
+        if(cuitdni.length === 7 || cuitdni.length === 8){
+            alert("El dato ingresado es un DNI, vamos a calcular su cuit");
+        } 
+        else if(cuitdni.length===11){
+            alert("el dato que ingresaste puede que sea un cuit, veamos con que comienza");
+            let inicioCuit = cuitdni.slice(0, 2);
+            alert(inicioCuit);
+            if([20, 23, 24, 27, 30].includes(parseInt(inicioCuit))){
+                alert("Definitivamente es un numero de cuit, permitanos validar si es correcto");
+                let finalCuit = cuitdni.slice(10,11);
+                alert(`Su cuit inicia con ${inicioCuit} y finaliza con ${finalCuit}`);
+                let dniDelCuit = cuitdni.slice(2, 10);
+                alert(`Su DNI es ${dniDelCuit}`);
+                alert(cuitdni)
+            }
+        }
+        else{
+            alert("El dato ingresado no parece coincidir ni con un cuit ni con un dni, intentemoslo de nuevo")
+        }
+        // this.cuit=cuit;
+        // this.nombre=nombre;
     }
 }
 //DEFINICION DE FUNCIONES
@@ -60,9 +80,9 @@ class cliente{
 
 alert("SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar registre un evento:");
 
-    fiestaAlquiler = new fiesta()
-    
-    alert(`El evento ${fiestaAlquiler.nombre} fue creado con fecha ${fiestaAlquiler.fechaEve}.`);
-    alert(`El alquiler para el evento ${fiestaAlquiler.nombre} inicia el ${fiestaAlquiler.fechaIni} y finaliza el ${fiestaAlquiler.fechaFin}.`);
+// fiestaAlquiler = new fiesta()
+// alert(`El evento ${fiestaAlquiler.nombre} fue creado con fecha ${fiestaAlquiler.fechaEve}.`);
+// alert(`El alquiler para el evento ${fiestaAlquiler.nombre} inicia el ${fiestaAlquiler.fechaIni} y finaliza el ${fiestaAlquiler.fechaFin}.`);
+// alert(`El alquiler es de ${fiestaAlquiler.diasAlquiler()} Dias`);
 
-    alert(`El alquiler es de ${fiestaAlquiler.diasAlquiler()} Dias`);
+let cliente1= new cliente();
