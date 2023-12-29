@@ -53,19 +53,33 @@ class cliente{
         if(cuitdni.length === 7 || cuitdni.length === 8){
             alert("El dato ingresado es un DNI, vamos a calcular su cuit");
         } 
-        else if(cuitdni.length===11){
-            alert("el dato que ingresaste puede que sea un cuit, veamos con que comienza");
-            let inicioCuit = cuitdni.slice(0, 2);
-            alert(inicioCuit);
-            if([20, 23, 24, 27, 30].includes(parseInt(inicioCuit))){
-                alert("Definitivamente es un numero de cuit, permitanos validar si es correcto");
-                let finalCuit = cuitdni.slice(10,11);
-                alert(`Su cuit inicia con ${inicioCuit} y finaliza con ${finalCuit}`);
-                let dniDelCuit = cuitdni.slice(2, 10);
-                alert(`Su DNI es ${dniDelCuit}`);
-                alert(cuitdni)
-            }
+        else if (cuitdni.length === 11) {
+    alert("El dato que ingresaste puede que sea un CUIT. Veamos con qué comienza.");
+    let inicioCuit = cuitdni.slice(0, 2);
+    alert(inicioCuit);
+
+    if ([20, 23, 24, 27, 30].includes(parseInt(inicioCuit))) {
+        alert("Definitivamente es un número de CUIT. Permítanos validar si es correcto.");
+        let finalCuit = cuitdni.slice(10, 11);  // Corregí el índice para obtener el dígito verificador
+        alert(`Su CUIT inicia con ${inicioCuit} y finaliza con ${finalCuit}`);
+        let dniDelCuit = cuitdni.slice(2, 10);
+        alert(`Su DNI es ${dniDelCuit}`);
+        
+        let cuitBase = cuitdni
+        alert(cuitBase);
+        let suma = 0;
+
+        for (let i = 0; i < cuitBase.length; i++) {
+            let digito = parseInt(cuitBase.charAt(i));
+            digito *= (i % 2 === 0) ? 2 : 1;
+            digito = (digito > 9) ? digito - 9 : digito;
+            suma += digito;
         }
+
+        let digitoVerificador = (10 - (suma % 10)) % 10;
+        alert(digitoVerificador);
+    }
+}
         else{
             alert("El dato ingresado no parece coincidir ni con un cuit ni con un dni, intentemoslo de nuevo")
         }
