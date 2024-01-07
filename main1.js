@@ -1,6 +1,8 @@
 //DEFINICION DE VARIABLES
 let itemSelec;
-let fiestaAlquiler = new Array();
+let fiestas = new Array();
+let clientes = new Array();
+
 
 const i1 = ["I1", "Mesa", 3000, 30000, 50, 50];
 const i2 = ["I2", "Silla", 1000, 10000, 500, 500];
@@ -10,7 +12,8 @@ const i5 = ["I5", "Cubiertos", 100, 1000, 50, 50];
 
 //DEFINICION DE CLASES
 class fiesta {
-  constructor() {
+  constructor(cliente) {
+    this.cliente=cliente;
     this.nombre = prompt("Ingrese el nombre del evento del alquiler actual");
     let fechaEve = new Date(
       prompt("Ingrese la fecha del evento (Formato: YYYYY-MM-DD):")
@@ -147,7 +150,16 @@ class cliente {
   }
 }
 //DEFINICION DE FUNCIONES
-
+function listarClientes(){
+  let listaClientes = "";
+  for (let i = 0; i < clientes.length; i++) {
+    listaClientes +=  `${i} -> ${clientes[i].cuitdni} - ${clientes[i].nombre}`
+    if (i < clientes.length - 1) {
+      listaClientes += "\n";
+    }
+  }
+  return listaClientes;
+}
 //INICIO DE LA APP
 
 alert(
@@ -162,9 +174,13 @@ alert(
 // let cliente1 = new cliente();
 // alert(`El cliente ${cliente1.nombre} fue creado con el tipo: ${cliente1.tipo} y el identificador: ${cliente1.cuitdni}`);
 
-do{
-fiestaAlquiler.push(new fiesta())
-}while(confirm("Desea cargar un nuevo registro?"))
+// do{
+//   clientes.push(new cliente())
+// }while(confirm("Desea cargar un nuevo cliente?"))
+// do{
+//   let IdCliente = prompt(`Seleccione el cliente con el que quiera regisrar la fiesta \n ${listarClientes()}`);
+//   fiestas.push(new fiesta(clientes[IdCliente]))
+// }while(confirm("Desea cargar un nuevo registro?"))
 
-let idFiesta = prompt("ingrese ID a consultar")
-alert(fiestaAlquiler[parseInt(idFiesta)].nombre)
+// alert(`La fiesta ${fiestas[0].nombre} pertenece al cliente ${fiestas[0].cliente.nombre}`);
+
