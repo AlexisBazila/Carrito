@@ -1,19 +1,20 @@
 //DEFINICION DE VARIABLES
 let itemSelec;
-let fiestas = new Array();
+let eventos = new Array();
 let clientes = new Array();
+let items = new Array();
+let alquileres = new Array();
 
 
-const i1 = ["I1", "Mesa", 3000, 30000, 50, 50];
-const i2 = ["I2", "Silla", 1000, 10000, 500, 500];
-const i3 = ["I3", "Mantel", 500, 5000, 500, 500];
-const i4 = ["I4", "Plato", 150, 1500, 5000, 500];
-const i5 = ["I5", "Cubiertos", 100, 1000, 50, 50];
+items[1] = { codigo: "I1", nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
+items[2] = { codigo: "I2", nombre: "Silla", precioAlquiler: 1000, precioReposicion: 10000, stock: 500, Disponible: 500 };
+items[3] = { codigo: "I3", nombre: "Mantel", precioAlquiler: 500, precioReposicion: 5000, stock: 500, Disponible: 500 };
+items[4] = { codigo: "I4", nombre: "Plato", precioAlquiler: 150, precioReposicion: 1500, stock: 5000, Disponible: 500 };
+items[5] = { codigo: "I5", nombre: "Cubiertos", precioAlquiler: 100, precioReposicion: 1000, stock: 50, Disponible: 50 };
 
 //DEFINICION DE CLASES
-class fiesta {
-  constructor(cliente) {
-    this.cliente=cliente;
+class evento {
+  constructor() {
     this.nombre = prompt("Ingrese el nombre del evento del alquiler actual");
     let fechaEve = new Date(
       prompt("Ingrese la fecha del evento (Formato: YYYYY-MM-DD):")
@@ -81,7 +82,7 @@ class fiesta {
 
 class cliente {
   constructor() {
-    this.nombre = prompt("Ingrese su nombre");
+    this.nombre = prompt("Ingrese el nombre del cliente");
     while (this.nombre == "") {
       this.nombre = prompt("Debe ingresar un nombre para continuar");
     }
@@ -149,6 +150,19 @@ class cliente {
     // }
   }
 }
+
+class alquiler{
+  constructor(cliente){
+    this.cliente = cliente;
+    this.evento = new evento();
+    let items = new Array;
+    do{
+
+    }
+  }
+
+
+}
 //DEFINICION DE FUNCIONES
 function listarClientes(){
   let listaClientes = "";
@@ -160,27 +174,34 @@ function listarClientes(){
   }
   return listaClientes;
 }
+
+function listarAlquileres(){
+  let listaAlquileres = "";
+  for (let i = 0; i < alquileres.length; i++) {
+    listaAlquileres +=  `${i} -> ${alquileres[i].evento.nombre} - ${alquileres[i].evento.fechaEve} - ${alquileres[i].evento.fechaIni} - ${alquileres[i].evento.fechaFin} - Cliente: - ${alquileres[i].cliente.nombre}`
+    if (i < alquileres.length - 1) {
+      listaAlquileres += "\n";
+    }
+  }
+  return listaAlquileres;
+}
 //INICIO DE LA APP
 
 alert(
-  "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar registre un evento:"
+  "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar registre un cliente:"
 );
 
-// fiestaAlquiler = new fiesta()
-// alert(`El evento ${fiestaAlquiler.nombre} fue creado con fecha ${fiestaAlquiler.fechaEve}.`);
-// alert(`El alquiler para el evento ${fiestaAlquiler.nombre} inicia el ${fiestaAlquiler.fechaIni} y finaliza el ${fiestaAlquiler.fechaFin}.`);
-// alert(`El alquiler es de ${fiestaAlquiler.diasAlquiler()} Dias`);
+do{
+  clientes.push(new cliente())
+}while(confirm("Desea cargar un nuevo cliente?"))
 
-// let cliente1 = new cliente();
-// alert(`El cliente ${cliente1.nombre} fue creado con el tipo: ${cliente1.tipo} y el identificador: ${cliente1.cuitdni}`);
 
-// do{
-//   clientes.push(new cliente())
-// }while(confirm("Desea cargar un nuevo cliente?"))
-// do{
-//   let IdCliente = prompt(`Seleccione el cliente con el que quiera regisrar la fiesta \n ${listarClientes()}`);
-//   fiestas.push(new fiesta(clientes[IdCliente]))
-// }while(confirm("Desea cargar un nuevo registro?"))
+do{
+  let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
+  alquileres.push(new alquiler(clientes[IdCliente]))
+}while(confirm("Desea cargar un nuevo alquiler?"))
 
-// alert(`La fiesta ${fiestas[0].nombre} pertenece al cliente ${fiestas[0].cliente.nombre}`);
+prompt(`Los alquileres creados son: \n ${listarAlquileres()}`);
+
+
 
