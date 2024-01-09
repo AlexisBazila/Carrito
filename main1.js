@@ -6,11 +6,11 @@ let items = new Array();
 let alquileres = new Array();
 
 
-items[1] = { codigo: "I1", nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
-items[2] = { codigo: "I2", nombre: "Silla", precioAlquiler: 1000, precioReposicion: 10000, stock: 500, Disponible: 500 };
-items[3] = { codigo: "I3", nombre: "Mantel", precioAlquiler: 500, precioReposicion: 5000, stock: 500, Disponible: 500 };
-items[4] = { codigo: "I4", nombre: "Plato", precioAlquiler: 150, precioReposicion: 1500, stock: 5000, Disponible: 500 };
-items[5] = { codigo: "I5", nombre: "Cubiertos", precioAlquiler: 100, precioReposicion: 1000, stock: 50, Disponible: 50 };
+items[0] = { nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
+items[1] = { nombre: "Silla", precioAlquiler: 1000, precioReposicion: 10000, stock: 500, Disponible: 500 };
+items[2] = { nombre: "Mantel", precioAlquiler: 500, precioReposicion: 5000, stock: 500, Disponible: 500 };
+items[3] = { nombre: "Plato", precioAlquiler: 150, precioReposicion: 1500, stock: 5000, Disponible: 500 };
+items[4] = { nombre: "Cubiertos", precioAlquiler: 100, precioReposicion: 1000, stock: 50, Disponible: 50 };
 
 //DEFINICION DE CLASES
 class evento {
@@ -155,17 +155,17 @@ class alquiler{
   constructor(cliente){
     this.cliente = cliente;
     this.evento = new evento();
-    let items = new Array;
+    this.itemsAlquiler = [];
     do{
-
-    }
+      let idItem = prompt(`Seleccione el item a agregar en el alquiler \n ${listarItems()}`);
+      let cantidad = prompt("Indique la cantidad a alquilar");
+      this.itemsAlquiler.push({id: idItem, cantidad: cantidad});
+    }while(confirm("Desea cargar un nuevo item?"))
   }
-
-
 }
 //DEFINICION DE FUNCIONES
 function listarClientes(){
-  let listaClientes = "";
+  let listaClientes = "ID - CUIT/DNI - Nombre \n";
   for (let i = 0; i < clientes.length; i++) {
     listaClientes +=  `${i} -> ${clientes[i].cuitdni} - ${clientes[i].nombre}`
     if (i < clientes.length - 1) {
@@ -176,7 +176,7 @@ function listarClientes(){
 }
 
 function listarAlquileres(){
-  let listaAlquileres = "";
+  let listaAlquileres = "ID - Evento - Fecha del evento - Fecha de inicio Alq. - Fecha de fin del Alq. - Cliente \n";
   for (let i = 0; i < alquileres.length; i++) {
     listaAlquileres +=  `${i} -> ${alquileres[i].evento.nombre} - ${alquileres[i].evento.fechaEve} - ${alquileres[i].evento.fechaIni} - ${alquileres[i].evento.fechaFin} - Cliente: - ${alquileres[i].cliente.nombre}`
     if (i < alquileres.length - 1) {
@@ -184,6 +184,28 @@ function listarAlquileres(){
     }
   }
   return listaAlquileres;
+}
+
+function listarItems(){
+  let listaItems = "ID - Item - Precio - Stock \n";
+  for (let i = 0; i < 4; i++) {
+    listaItems +=  `${i} -> ${items[i].nombre} - ${items[i].precioAlquiler} - ${items[i].Disponible}`
+    if (i < items.length - 1) {
+      listaItems += "\n";
+    }
+  }
+  return listaItems;
+}
+
+function calcularCosto(alquiler){
+  let total = 0;
+  let subtotal = 0;
+  for (let i = 0; i < alquileres[alquiler].itemsAlquiler.length; i++) {
+    subtotal = items[alquileres[alquiler].itemsAlquiler[i].id].precioAlquiler * alquileres[alquiler].itemsAlquiler[i].cantidad;
+    total += subtotal;
+    subtotal=0;   
+  }
+  return total;
 }
 //INICIO DE LA APP
 
@@ -201,7 +223,11 @@ do{
   alquileres.push(new alquiler(clientes[IdCliente]))
 }while(confirm("Desea cargar un nuevo alquiler?"))
 
-prompt(`Los alquileres creados son: \n ${listarAlquileres()}`);
+do{
+  let IdAlquiler = prompt(`Seleccione el alquiler que desea totalizar: \n ${listarAlquileres()}`);
+  alert(calcularCosto(IdAlquiler));
+}while(confirm("Desea calcular otro costo?"))
+
 
 
 
