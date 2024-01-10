@@ -175,7 +175,15 @@ alert(
   "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
 );
 
-
+do{
+  prompt(
+    `Digite una de las letras para continuar al menu correspondiente \n
+    C -> Menu Clientes \n
+    A -> Menu Alquileres \n
+    `
+    
+  );
+}
 
 do{
   clientes.push(new cliente())
