@@ -210,8 +210,10 @@ function calcularCosto(alquiler){
 //INICIO DE LA APP
 
 alert(
-  "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar registre un cliente:"
+  "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
 );
+
+
 
 do{
   clientes.push(new cliente())

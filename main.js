@@ -1,110 +1,197 @@
-// class articulo{
-//     constructor(datosArticulo){
-//         this.id= datosArticulo.id;
-//         this.nombre= datosArticulo.nombre;
-//         this.precioAlquiler= datosArticulo.precioAlquiler;
-//         this.precioRepo= datosArticulo.precioRepo;
-//         this.stock= datosArticulo.stock;
-//         this.stockAlquiler= datosArticulo.stockAlquiler;
-//     }
-// }
-
-// const articulo1 = new articulo({
-//         id: 1,
-//         nombre: "Mesa",
-//         precioAlquiler: 500,
-//         precioRepo: 3000,
-//         stock: 10,
-//         stockAlquiler: 10,
-// });
-// const articulo2 = new articulo({
-//     id: 2,
-//     nombre: "silla",
-//     precioAlquiler: 600,
-//     precioRepo: 300,
-//     stock: 10,
-//     stockAlquiler: 10,
-// });
+///DEFINICION DE VARIABLES
+let itemSelec;
+let eventos = new Array();
+let clientes = new Array();
+let items = new Array();
+let alquileres = new Array();
 
 
+items[0] = { nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
+items[1] = { nombre: "Silla", precioAlquiler: 1000, precioReposicion: 10000, stock: 500, Disponible: 500 };
+items[2] = { nombre: "Mantel", precioAlquiler: 500, precioReposicion: 5000, stock: 500, Disponible: 500 };
+items[3] = { nombre: "Plato", precioAlquiler: 150, precioReposicion: 1500, stock: 5000, Disponible: 500 };
+items[4] = { nombre: "Cubiertos", precioAlquiler: 100, precioReposicion: 1000, stock: 50, Disponible: 50 };
 
-let producto
-let totalProductos = 0   
-let total= 0
-let productos = 0 
-let medio= ""
-
-const p1 = ["P1", "Mesa", 3000, 30000, 50, 50]
-const p2 = ["P2", "Silla", 1000, 10000, 500, 500]
-const p3 = ["P3", "Mantel", 500, 5000, 500, 500]
-const p4 = ["P4", "Plato", 150, 1500, 5000, 500]
-const p5 = ["P5", "Cubiertos", 100, 1000, 50, 50]
-
-// Funcion que suma articulos al carrito
-function add(codigo){
-    producto= codigo;
-    switch (codigo){
-        case "P1":
-            totalProductos= totalProductos + p1[2];
-            productos++
-            break;
-        case "P2":
-            totalProductos= totalProductos + p2[2];
-            productos++
-            break;
-        case "P3":
-            alert("El producto P3 no pose stock actualmente, elija otro producto");
-            break;
-        case "P4":
-            totalProductos= totalProductos + p4[2];
-            productos++
-            break;
-        case "P5":
-            totalProductos= totalProductos + p5[2];
-            productos++
-            break;
-        default:
-            alert(`el producto ${codigo} no se encuentra registrado`);
-            break;
+//DEFINICION DE CLASES
+class evento {
+  constructor() {
+    this.nombre = prompt("Ingrese el nombre del evento del alquiler actual");
+    let fechaEve = new Date(
+      prompt("Ingrese la fecha del evento (Formato: YYYYY-MM-DD):")
+    );
+    if (!fechaEve instanceof Date || isNaN(fechaEve)) {
+      while (!this.fechaEve instanceof Date || isNaN(this.fechaEve)) {
+        let fechaEve = new Date(
+          prompt(
+            "la fecha ingresada no es correcta, por favor ingrese la fecha del evento (Formato: YYYYY-MM-DD):"
+          )
+        );
+        this.fechaEve = fechaEve;
+      }
+    } else {
+      this.fechaEve = fechaEve;
     }
+    let fechaIni = new Date(
+      prompt("Ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):")
+    );
+    if (!fechaIni instanceof Date || isNaN(fechaIni) || fechaIni > fechaEve) {
+      while (
+        !this.fechaIni instanceof Date ||
+        isNaN(this.fechaIni) ||
+        this.fechaIni > this.fechaEve
+      ) {
+        let fechaIni = new Date(
+          prompt(
+            "la fecha ingresada no es correcta, ingrese la fecha de inicio del alquiler (Formato: YYYYY-MM-DD):"
+          )
+        );
+        this.fechaIni = fechaIni;
+      }
+    } else {
+      this.fechaIni = fechaIni;
+    }
+    let fechaFin = new Date(
+      prompt(
+        "Ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"
+      )
+    );
+    if (!fechaFin instanceof Date || isNaN(fechaFin) || fechaFin < fechaIni) {
+      while (
+        !this.fechaFin instanceof Date ||
+        isNaN(this.fechaFin) ||
+        this.fechaFin < this.fechaIni
+      ) {
+        let fechaFin = new Date(
+          prompt(
+            "la fecha ingresada no es correcta, ingrese la fecha de finalizacion del aqluiler (Formato: YYYYY-MM-DD):"
+          )
+        );
+        this.fechaFin = fechaFin;
+      }
+    } else {
+      this.fechaFin = fechaFin;
+    }
+  }
+
+  diasAlquiler() {
+    let diasDeAlquiler =
+      (this.fechaFin - this.fechaIni) / (24 * 60 * 60 * 1000);
+    return diasDeAlquiler;
+  }
 }
 
-// Funcion que aplica descuentos en caso que corresponda y totaliza
-function Totalizar(total, medioPago){
-    let diaActual= new Date()
-    if (medioPago=="e"){
-        total = (total - (total * 0.10));
-        alert (`Pagando en efectivo tiene un descuento del 10%, su total a pagar es de: $${total}`)
+class cliente {
+  constructor() {
+    this.nombre = prompt("Ingrese el nombre del cliente");
+    while (this.nombre == "") {
+      this.nombre = prompt("Debe ingresar un nombre para continuar");
     }
-    else{
-        if (diaActual.getDay()== 3 || diaActual.getDay()== 4 || diaActual.getDay()== 5){
-            total = (total - (total * 0.30));
-            alert (`Pagando con tarjeta los Martes, Miercoles y Jueves tienes un descuento del 30%, su total a pagar es de: $${total}`)
-        }
-        else{
-            alert (`No se han aplicado descuentos, su total a pagar es de: $${total}`)
-        }
+    this.tipo = prompt(
+      "Ingrese su tipo de persona (M= Masculino | F= Femenino | J= juridica"
+    );
+    while (this.tipo == "" || !["M", "F", "J"].includes(this.tipo)) {
+      this.tipo = prompt(
+        "No se ha ingresado un tipo correcto. Ingrese su tipo de persona (M= Masculino | F= Femenino | J= juridica"
+      );
     }
+    this.cuitdni = prompt(
+      "ingrese su n° de cuit sin guiones o su numero de DNI"
+    );
+    let inicioCuit = this.cuitdni.slice(0, 2);
+    while (
+      (this.cuitdni.length !== 7 &&
+        this.cuitdni.length !== 8 &&
+        this.cuitdni.length !== 11) ||
+      (this.cuitdni.length === 11 &&
+        ![20, 23, 27, 30].includes(parseInt(inicioCuit)))
+    ) {
+      this.cuitdni = prompt(
+        "El dato ingresado no coincide ni con un DNI ni con un cuit. ingrese su n° de cuit sin guiones o su numero de DNI"
+      );
+      let inicioCuit = this.cuitdni.slice(0, 2);
+    }
+  }
 }
 
-do{
+class alquiler{
+  constructor(cliente){
+    this.cliente = cliente;
+    this.evento = new evento();
+    this.itemsAlquiler = [];
     do{
-        add(prompt("Ingrese el código del producto que desea añadir al carrito"));
-     } while(confirm("el producto fue añadido al carrito, Desea añadir otro producto?"))
+      let idItem = prompt(`Seleccione el item a agregar en el alquiler \n ${listarItems()}`);
+      let cantidad = prompt("Indique la cantidad a alquilar");
+      this.itemsAlquiler.push({id: idItem, cantidad: cantidad});
+    }while(confirm("Desea cargar un nuevo item?"))
+  }
+}
+//DEFINICION DE FUNCIONES
+function listarClientes(){
+  let listaClientes = "ID - CUIT/DNI - Nombre \n";
+  for (let i = 0; i < clientes.length; i++) {
+    listaClientes +=  `${i} -> ${clientes[i].cuitdni} - ${clientes[i].nombre}`
+    if (i < clientes.length - 1) {
+      listaClientes += "\n";
+    }
+  }
+  return listaClientes;
+}
 
-     if(productos>1){
-        alert(`Su carrito pose un total de ${productos} productos y suma: $${totalProductos}`);
+function listarAlquileres(){
+  let listaAlquileres = "ID - Evento - Fecha del evento - Fecha de inicio Alq. - Fecha de fin del Alq. - Cliente \n";
+  for (let i = 0; i < alquileres.length; i++) {
+    listaAlquileres +=  `${i} -> ${alquileres[i].evento.nombre} - ${alquileres[i].evento.fechaEve} - ${alquileres[i].evento.fechaIni} - ${alquileres[i].evento.fechaFin} - Cliente: - ${alquileres[i].cliente.nombre}`
+    if (i < alquileres.length - 1) {
+      listaAlquileres += "\n";
     }
-    else{
-        alert(`Su carrito pose un total de ${productos} producto y suma: $${totalProductos}`)
+  }
+  return listaAlquileres;
+}
+
+function listarItems(){
+  let listaItems = "ID - Item - Precio - Stock \n";
+  for (let i = 0; i < 4; i++) {
+    listaItems +=  `${i} -> ${items[i].nombre} - ${items[i].precioAlquiler} - ${items[i].Disponible}`
+    if (i < items.length - 1) {
+      listaItems += "\n";
     }
-} while(confirm("Desea seguir agregando productos en su carrito?"))
+  }
+  return listaItems;
+}
+
+function calcularCosto(alquiler){
+  let total = 0;
+  let subtotal = 0;
+  for (let i = 0; i < alquileres[alquiler].itemsAlquiler.length; i++) {
+    subtotal = items[alquileres[alquiler].itemsAlquiler[i].id].precioAlquiler * alquileres[alquiler].itemsAlquiler[i].cantidad;
+    total += subtotal;
+    subtotal=0;   
+  }
+  return total;
+}
+//INICIO DE LA APP
+
+alert(
+  "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
+);
+
+
 
 do{
-    medio = prompt("Ingrese el medio de pago: e=efectivo - t=tarjeta");
-    medio= medio.toLowerCase()
-} while (medio != "e" && medio != "t" )
+  clientes.push(new cliente())
+}while(confirm("Desea cargar un nuevo cliente?"))
 
-Totalizar(totalProductos, medio);
+
+do{
+  let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
+  alquileres.push(new alquiler(clientes[IdCliente]))
+}while(confirm("Desea cargar un nuevo alquiler?"))
+
+do{
+  let IdAlquiler = prompt(`Seleccione el alquiler que desea totalizar: \n ${listarAlquileres()}`);
+  alert(calcularCosto(IdAlquiler));
+}while(confirm("Desea calcular otro costo?"))
+
+
 
 
