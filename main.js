@@ -88,14 +88,6 @@ class cliente {
     while (this.nombre == "") {
       this.nombre = prompt("Debe ingresar un nombre para continuar");
     }
-    this.tipo = prompt(
-      "Ingrese su tipo de persona (M= Masculino | F= Femenino | J= juridica"
-    );
-    while (this.tipo == "" || !["M", "F", "J"].includes(this.tipo)) {
-      this.tipo = prompt(
-        "No se ha ingresado un tipo correcto. Ingrese su tipo de persona (M= Masculino | F= Femenino | J= juridica"
-      );
-    }
     this.cuitdni = prompt(
       "ingrese su n° de cuit sin guiones o su numero de DNI"
     );
@@ -114,8 +106,9 @@ class cliente {
     }
   }
 
-  borrarCliente(id){
-    
+  borrarCliente(){
+      clientes.splice(clientes.indexOf(this), 1);
+      alert(`El cliente ${this.nombre} ha sido eliminado.`);
   }
 }
 
@@ -176,7 +169,6 @@ function calcularCosto(alquiler){
   return total;
 }
 //INICIO DE LA APP
-
 alert(
   "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
 );
@@ -204,6 +196,10 @@ do{
                   }while(confirm("Desea cargar un nuevo cliente?"))
                 break;
             case "B":
+                do{
+                  let IdCliente = prompt(`Seleccione el cliente que desea eliminar: \n ${listarClientes()}`);
+                  clientes[IdCliente].borrarCliente()
+                }while(confirm("Desea eliminar otro cliente?"))
                 break;
             case "M":
                 break;
@@ -222,10 +218,16 @@ do{
           );
           switch (codigo){
             case "A":
+              while(clientes.length === 0){
+                alert("Para cargar un alquiler debe de tener al menos un cliente cargado");
                 do{
-                    let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
-                    alquileres.push(new alquiler(clientes[IdCliente]))
-                  }while(confirm("Desea cargar un nuevo alquiler?"))
+                  clientes.push(new cliente())
+                }while(confirm("Desea cargar otro cliente?"))
+              }
+              do{
+                let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
+                alquileres.push(new alquiler(clientes[IdCliente]))
+              }while(confirm("Desea cargar un nuevo alquiler?"))
                 break;
             case "B":
                 break;
