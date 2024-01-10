@@ -78,6 +78,8 @@ class evento {
       (this.fechaFin - this.fechaIni) / (24 * 60 * 60 * 1000);
     return diasDeAlquiler;
   }
+
+  
 }
 
 class cliente {
@@ -110,6 +112,10 @@ class cliente {
       );
       let inicioCuit = this.cuitdni.slice(0, 2);
     }
+  }
+
+  borrarCliente(id){
+    
   }
 }
 
@@ -176,29 +182,79 @@ alert(
 );
 
 do{
-  prompt(
+  let codigo = "";
+  codigo = prompt(
     `Digite una de las letras para continuar al menu correspondiente \n
     C -> Menu Clientes \n
-    A -> Menu Alquileres \n
-    `
-    
+    A -> Menu Alquileres \n `
   );
+
+  switch (codigo){
+    case "C":
+        codigo = prompt(
+            `ha accedido al menu cliente, digite un codigo para contunuar \n
+            A -> Alta Clientes \n
+            B -> Baja Clientes \n 
+            M -> Modificacion Clientes \n`
+          );
+          switch (codigo){
+            case "A":
+                do{
+                    clientes.push(new cliente())
+                  }while(confirm("Desea cargar un nuevo cliente?"))
+                break;
+            case "B":
+                break;
+            case "M":
+                break;
+            default:
+                alert(`el codigo ${codigo} no se una opcion valida`);
+                break;
+          }
+        break;
+    case "A":
+        codigo = prompt(
+            `ha accedido al menu Alquileres, digite un codigo para contunuar \n
+            A -> Alta Alquileres \n
+            B -> Baja Alquileres \n 
+            M -> Modificacion Alquileres \n
+            T -> Totalizar costos alquiler \n`
+          );
+          switch (codigo){
+            case "A":
+                do{
+                    let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
+                    alquileres.push(new alquiler(clientes[IdCliente]))
+                  }while(confirm("Desea cargar un nuevo alquiler?"))
+                break;
+            case "B":
+                break;
+            case "M":
+                break;
+            case "T":
+                do{
+                    let IdAlquiler = prompt(`Seleccione el alquiler que desea totalizar: \n ${listarAlquileres()}`);
+                    alert(calcularCosto(IdAlquiler));
+                  }while(confirm("Desea calcular otro costo?"))
+                 break;
+            default:
+                alert(`el codigo ${codigo} no se una opcion valida`);
+                break;
+          }
+        break;
+        break;
+    default:
+        alert(`el codigo ${codigo} no se una opcion valida`);
+        break;
 }
-
-do{
-  clientes.push(new cliente())
-}while(confirm("Desea cargar un nuevo cliente?"))
+}while(confirm("Desea realizar otra operacion?"))
 
 
-do{
-  let IdCliente = prompt(`Seleccione el cliente a registrar el alquiler \n ${listarClientes()}`);
-  alquileres.push(new alquiler(clientes[IdCliente]))
-}while(confirm("Desea cargar un nuevo alquiler?"))
 
-do{
-  let IdAlquiler = prompt(`Seleccione el alquiler que desea totalizar: \n ${listarAlquileres()}`);
-  alert(calcularCosto(IdAlquiler));
-}while(confirm("Desea calcular otro costo?"))
+
+
+
+
 
 
 
