@@ -110,6 +110,7 @@ class cliente {
       clientes.splice(clientes.indexOf(this), 1);
       alert(`El cliente ${this.nombre} ha sido eliminado.`);
   }
+
 }
 
 class alquiler{
@@ -121,9 +122,11 @@ class alquiler{
       let idItem = prompt(`Seleccione el item a agregar en el alquiler \n ${listarItems()}`);
       let cantidad = prompt("Indique la cantidad a alquilar");
       this.itemsAlquiler.push({id: idItem, cantidad: cantidad});
+      items[idItem].Disponible -= cantidad
     }while(confirm("Desea cargar un nuevo item?"))
   }
 }
+
 //DEFINICION DE FUNCIONES
 function listarClientes(){
   let listaClientes = "ID - CUIT/DNI - Nombre \n";
@@ -168,6 +171,7 @@ function calcularCosto(alquiler){
   }
   return total;
 }
+
 //INICIO DE LA APP
 alert(
   "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
@@ -202,6 +206,7 @@ do{
                 }while(confirm("Desea eliminar otro cliente?"))
                 break;
             case "M":
+                
                 break;
             default:
                 alert(`el codigo ${codigo} no se una opcion valida`);
