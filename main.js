@@ -110,6 +110,32 @@ class cliente {
       clientes.splice(clientes.indexOf(this), 1);
       alert(`El cliente ${this.nombre} ha sido eliminado.`);
   }
+
+  modificar(){
+    let nombre = prompt("Ingrese el nombre del cliente");
+    while (nombre == "") {
+      nombre = prompt("Debe ingresar un nombre para continuar");
+    }
+    let cuitdni = prompt(
+      "ingrese su n° de cuit sin guiones o su numero de DNI"
+    );
+    let inicioCuit = cuitdni.slice(0, 2);
+    while (
+      (cuitdni.length !== 7 &&
+        cuitdni.length !== 8 &&
+        cuitdni.length !== 11) ||
+      (cuitdni.length === 11 &&
+        ![20, 23, 27, 30].includes(parseInt(inicioCuit)))
+    ) {
+      cuitdni = prompt(
+        "El dato ingresado no coincide ni con un DNI ni con un cuit. ingrese su n° de cuit sin guiones o su numero de DNI"
+      );
+      let inicioCuit = cuitdni.slice(0, 2);
+    }
+    clientes[clientes.indexOf(this)].nombre=nombre
+    clientes[clientes.indexOf(this)].cuitdni=cuitdni
+  }
+
 }
 
 class alquiler{
@@ -121,9 +147,11 @@ class alquiler{
       let idItem = prompt(`Seleccione el item a agregar en el alquiler \n ${listarItems()}`);
       let cantidad = prompt("Indique la cantidad a alquilar");
       this.itemsAlquiler.push({id: idItem, cantidad: cantidad});
+      items[idItem].Disponible -= cantidad
     }while(confirm("Desea cargar un nuevo item?"))
   }
 }
+
 //DEFINICION DE FUNCIONES
 function listarClientes(){
   let listaClientes = "ID - CUIT/DNI - Nombre \n";
@@ -168,6 +196,7 @@ function calcularCosto(alquiler){
   }
   return total;
 }
+
 //INICIO DE LA APP
 alert(
   "SISTEMA DE ALQUILER DE EQUIPAMIENTOS PARA FIESTAS!! \n Para iniciar precione aceptar."
@@ -202,6 +231,10 @@ do{
                 }while(confirm("Desea eliminar otro cliente?"))
                 break;
             case "M":
+              do{
+                let IdCliente = prompt(`Seleccione el cliente que desea modificar: \n ${listarClientes()}`);
+                clientes[IdCliente].modificar()
+              }while(confirm("Desea modificar otro cliente?"))
                 break;
             default:
                 alert(`el codigo ${codigo} no se una opcion valida`);
