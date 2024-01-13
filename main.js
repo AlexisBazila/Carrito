@@ -106,7 +106,7 @@ class cliente {
     }
   }
 
-  borrarCliente(){
+  borrar(){
       clientes.splice(clientes.indexOf(this), 1);
       alert(`El cliente ${this.nombre} ha sido eliminado.`);
   }
@@ -227,7 +227,7 @@ do{
             case "B":
                 do{
                   let IdCliente = prompt(`Seleccione el cliente que desea eliminar: \n ${listarClientes()}`);
-                  clientes[IdCliente].borrarCliente()
+                  clientes[IdCliente].borrar()
                 }while(confirm("Desea eliminar otro cliente?"))
                 break;
             case "M":
