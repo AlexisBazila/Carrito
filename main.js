@@ -111,6 +111,31 @@ class cliente {
       alert(`El cliente ${this.nombre} ha sido eliminado.`);
   }
 
+  modificar(){
+    let nombre = prompt("Ingrese el nombre del cliente");
+    while (nombre == "") {
+      nombre = prompt("Debe ingresar un nombre para continuar");
+    }
+    let cuitdni = prompt(
+      "ingrese su n° de cuit sin guiones o su numero de DNI"
+    );
+    let inicioCuit = cuitdni.slice(0, 2);
+    while (
+      (cuitdni.length !== 7 &&
+        cuitdni.length !== 8 &&
+        cuitdni.length !== 11) ||
+      (cuitdni.length === 11 &&
+        ![20, 23, 27, 30].includes(parseInt(inicioCuit)))
+    ) {
+      cuitdni = prompt(
+        "El dato ingresado no coincide ni con un DNI ni con un cuit. ingrese su n° de cuit sin guiones o su numero de DNI"
+      );
+      let inicioCuit = cuitdni.slice(0, 2);
+    }
+    clientes[clientes.indexOf(this)].nombre=nombre
+    clientes[clientes.indexOf(this)].cuitdni=cuitdni
+  }
+
 }
 
 class alquiler{
@@ -206,7 +231,10 @@ do{
                 }while(confirm("Desea eliminar otro cliente?"))
                 break;
             case "M":
-                
+              do{
+                let IdCliente = prompt(`Seleccione el cliente que desea modificar: \n ${listarClientes()}`);
+                clientes[IdCliente].modificar()
+              }while(confirm("Desea modificar otro cliente?"))
                 break;
             default:
                 alert(`el codigo ${codigo} no se una opcion valida`);
