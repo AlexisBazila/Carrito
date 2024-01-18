@@ -150,6 +150,11 @@ class alquiler{
       items[idItem].Disponible -= cantidad
     }while(confirm("Desea cargar un nuevo item?"))
   }
+
+  borrar(){
+    alquileres.splice(alquileres.indexOf(this), 1);
+    alert(`El alquiler ${this.evento.nombre} del cliente ${this.cliente.nombre} ha sido eliminado.`);
+}
 }
 
 //DEFINICION DE FUNCIONES
