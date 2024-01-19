@@ -7,8 +7,6 @@ class cliente {
       this.nombre = document.getElementById("nombrecli").value;
       this.cuitdni = document.getElementById("cuitdni").value;
       this.telefon = document.getElementById("telcli").value;
-      alert(`Se ha dado de alta el cliente con los siguientes datos: \n Nombre: ${this.nombre} \n DNI: ${this.cuitdni} \n Telefono: ${this.telefon}`)
-      alert(listarClientes())
     }
   
     borrarCliente(id){
@@ -17,19 +15,25 @@ class cliente {
   }
 
   function listarClientes(){
-    let listaClientes = "ID - CUIT/DNI - Nombre \n";
+    let sectCos = document.getElementById("viewCostumers");
+    sectCos.innerHTML = ""
     for (let i = 0; i < clientes.length; i++) {
-      listaClientes +=  `${i} -> ${clientes[i].cuitdni} - ${clientes[i].nombre}`
-      if (i < clientes.length - 1) {
-        listaClientes += "\n";
-      }
+      let divCos = document.createElement("div");
+      sectCos.appendChild(divCos);
+      let pCos = document.createElement("p");
+      divCos.appendChild(pCos);
+      let NombreCos = document.createTextNode(`${i} -> ${clientes[i].cuitdni} - ${clientes[i].nombre}`);
+      pCos.appendChild(NombreCos);
+      const jsonCost = JSON.stringify(clientes);
+      localStorage.setItem("Costumers", jsonCost);
     }
-    return listaClientes;
   }
 
   let alta = document.getElementById("altacli");
-  alta.addEventListener("click", () => clientes.push(new cliente()));
-
-//   let listar = document.getElementById("listarcli");
-//   listar.addEventListener("click", () => listarClientes);
+  alta.addEventListener("click", (e) => {
+    e.preventDefault();
+    clientes.push(new cliente());
+    listarClientes();
+    }
+  )
   
