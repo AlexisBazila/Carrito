@@ -181,3 +181,18 @@ main{
 ul{
     padding-left: 0;
 }
+
+/* .contenedor{
+  position: relative;
+  left: 15%;
+  max-width: 85%;
+} */
+
+body{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+        "header header"
+        "aside main";
+}
