@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costumers</title>
+</head>
+<body>
+    <main>
+        <h1>COSTUMERS</h1>
+        <form form name="customerForm" method="POST">
+            <div class="input-div">
+                <label for="nameCus">Nombre:</label>
+                <input type="text" id="nameCus"  required />
+            </div>
+            <div class="input-div">
+                <label for="cuitdni">cuit/dni:</label>
+                <input type="number" id="cuitdni" required>
+            </div>
+            <div class="input-div">
+                <label for="telCus">Telefono:</label>
+                <input type="tel" id="telCus">
+            </div>
+            <button id="addCus">Alta</button>
+        </form>
+
+        <div id="viewCostumers">
+            <table id="tableCustomers">
+                
+              </table>
+        </div>
+
+    </main>
+    <script src="../js/customers.js" defer></script>
+</body>
+</html>
