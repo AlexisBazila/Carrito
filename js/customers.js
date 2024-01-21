@@ -22,25 +22,25 @@ class customer{
     let tabCos = document.getElementById("tableCustomers");
     tabCos.innerHTML = ``
     tabCos.innerHTML += `
-      <tr>
-        <th>CODIGO</th>
+      <tr class="headRow">
+        <th>Codigo</th>
         <th>CUIT/DNI</th>
-        <th>NOMBRE</th>
-        <th>TELEFONO</th>
-        <th>D</th>
-        <th>E</th>
+        <th>Nombre</th>
+        <th>Telefono</th>
+        <th colspan="3">Acciones</th>
       </tr>
     `
     for (let i = 0; i < Customers.length; i++) {
+      let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
       tabCos.innerHTML +=`
-        <tr>
+      <tr class="${rowClass}">
           <td>${i}</td>
           <td>${Customers[i].cuitdni}</td>
           <td>${Customers[i].nameCus}</td>
           <td>${Customers[i].telefon}</td>
-          <th><button id="delCos${i}" onclick="borrarCliente(${i})">D</button></th>
-          <th><button id="editCos${i}">E</button></th>
-          
+          <th><button  class="delBtn actionBtn" id="delCos${i}" onclick="borrarCliente(${i})"><i class='bx bx-trash'></i></button></th>
+          <th><button class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
+          <th><button class="editBtn actionBtn" id="editCos${i}"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
       `
       const jsonCost = JSON.stringify(Customers);

@@ -13,11 +13,12 @@
   }
   
   .modal-content {
-    background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    width: 20%;
+    border-radius: 15px;
+    background-color: #F7F7F7;
+    border: solid #DDDDDD 2px;
   }
   
   .close {
@@ -65,9 +66,96 @@
     margin: 1px;
     border-radius: 10px;
     background-color: #F7F7F7;
-    border: solid #DDDDDD 1px;
+    border: solid #DDDDDD 2px;
   }
 
   h1{
     font-family: Trebuchet MS;
+  }
+
+
+  .viewTable{
+    width: 98%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-family: MS Sans Serif;
+    text-align: left;
+    
+  }
+  .evenrow{
+    height: 50px;
+  }
+
+  .oddrow{
+    background-color: #F7F7F7;
+    border: solid #E8EBEE 1px;
+    height: 50px;
+  }
+
+  .headRow{
+    background-color: #F7F7F7;
+    border: solid #E8EBEE 1px;
+    font-size: 20px;
+    height: 70px;
+    
+  }
+
+  .actionBtn{
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+
+
+  .delBtn{
+    background-color: #DC3545;
+    border: solid #DC3545 1px;
+  }
+
+  .viewBtn{
+    background-color: #28A745;
+    border: solid #28A745 1px;
+  }
+
+  .editBtn{
+    background-color: #007BF5;
+    border: solid #007BF5 1px;
+  }
+  
+
+  .delBtn:hover{
+    background-color: #FFFFFF;
+    border: solid #DC3545 1px;
+    color: #DC3545;
+  }
+
+  .viewBtn:hover{
+    background-color: #FFFFFF;
+    border: solid #28A745 1px;
+    color: #28A745;
+  }
+
+  .editBtn:hover{
+    background-color: #FFFFFF;
+    border: solid #007BF5 1px;
+    color: #007BF5;
+  }
+
+  .addBtn{
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #28A745;
+    border: solid #28A745 1px;
+  }
+
+  .addBtn:hover{
+    background-color: #FFFFFF;
+    border: solid #28A745 1px;
+    color: #28A745;
   }
