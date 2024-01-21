@@ -16,8 +16,10 @@
         
         <div id="customerModal" class="modal">
           <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <!-- Aquí colocas tu formulario -->
+            <div class="modal-head">
+              <span class="close" id="closeModal">&times;</span>
+              <h2>Alta Cliente</h2>
+            </div>
             <form form name="customerForm" method="POST">
               <div class="input-div">
                 <label for="nameCus">Nombre:</label>
@@ -31,9 +33,10 @@
                 <label for="telCus">Telefono:</label>
                 <input type="tel" id="telCus">
               </div>
-              <button class="addBtn" id="addCus"><i class='bx bx-check'></i></button>
             </form>
-            <!-- Fin del formulario -->
+            <div class="modal-foot">
+              <button class="addBtn" id="addCus"><i class='bx bx-check'></i></button>
+            </div>
           </div>
         </div>
 

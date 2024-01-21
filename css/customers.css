@@ -14,15 +14,50 @@
   
   .modal-content {
     margin: 10% auto;
-    padding: 20px;
     width: 20%;
     border-radius: 15px;
     background-color: #F7F7F7;
-    border: solid #DDDDDD 2px;
   }
-  
+  .modal-head{
+    padding: 5px;
+    border-radius: 15px 15px 0 0;
+    background-color: #BCC3CA;
+  }
+  .modal-foot{
+    display: flex;
+    justify-content: right;
+    padding: 5px;
+    border-radius: 0 0 15px 15px;
+    background-color: #BCC3CA;
+  }
+
+  .modal-head h2{
+    font-family: Trebuchet MS;
+    margin-left: 15px;
+  }
+  .modal-content form{
+    margin: 20px;
+  }
+
+  .modal-content form label{
+    font-size: 15px;
+  }
+
+  .modal-content form input{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 30px;
+    border: solid #BCC3CA 1px;
+    border-radius: 6px;
+  }
+
+  .input-div input:focus{
+    outline: none;
+    border: solid #17A2B8 2px;
+  }
+
   .close {
-    color: #aaa;
+    
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -51,7 +86,7 @@
   }
   
   .openCliFormButton:hover {
-    background: #F7F7F7;
+    background: #BCC3CA;
     border: solid #17A2B8 1px;
     color: #17A2B8;
     border-radius: 10px;
@@ -65,7 +100,7 @@
     padding: 15px;
     margin: 1px;
     border-radius: 10px;
-    background-color: #F7F7F7;
+    background-color: #BCC3CA;
     border: solid #DDDDDD 2px;
   }
 
@@ -75,7 +110,7 @@
 
 
   .viewTable{
-    width: 98%;
+    width: 97%;
     border-collapse: collapse;
     margin-top: 10px;
     margin-left: 30px;
@@ -83,18 +118,26 @@
     text-align: left;
     
   }
+
+  .viewTable td{
+    padding-left: 10px;
+  }
+  .viewTable th{
+    padding-left: 10px;
+  }
+
   .evenrow{
     height: 50px;
   }
 
   .oddrow{
-    background-color: #F7F7F7;
+    background-color: #BCC3CA;
     border: solid #E8EBEE 1px;
     height: 50px;
   }
 
   .headRow{
-    background-color: #F7F7F7;
+    background-color: #BCC3CA;
     border: solid #E8EBEE 1px;
     font-size: 20px;
     height: 70px;
@@ -148,6 +191,7 @@
     height: 40px;
     width: 40px;
     border-radius: 5px;
+    margin: 5px;
     font-size: 20px;
     color: #FFFFFF;
     background-color: #28A745;
