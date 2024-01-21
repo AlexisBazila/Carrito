@@ -55,21 +55,37 @@ class customer{
     }
   }
 
-
-//BOTONES
-  let addCus = document.getElementById("addCus");
-  addCus.addEventListener("click", (e) => {
-    e.preventDefault();
-    Customers.push(new customer());
-    listCustomers();
-    modal.style.display = "none";
+function addCustomer(){
+  let footModal = document.getElementById("footModalMsg");
+  if(document.getElementById("nameCus").value != ""){
+    let cuitdni = document.getElementById("cuitdni").value;
+    if(cuitdni.length === 7 || cuitdni.length === 8){
+      Customers.push(new customer());
+      listCustomers();
+      modal.style.display = "none";
+    }else{
+      if(cuitdni.length === 11){
+        let inicioCuit = cuitdni.slice(0, 2);
+        if([20, 23, 27, 30].includes(parseInt(inicioCuit))){
+          Customers.push(new customer());
+          listCustomers();
+          modal.style.display = "none";
+        }else{
+          footModal.innerHTML=`!El Cuit o DNI no tiene el formato correcto.`
+        }
+      }else{
+        footModal.innerHTML=`!El Cuit o DNI no tiene el formato correcto.`
+      }
     }
-  )
-  
+  }else{
+    footModal.innerHTML=`!Debe completar el campo usuario.`
+  }
+}
+
 //VENTANA EMERGENTE DE ALTA
-var openFormButton = document.getElementById("openFormButton");
-var modal = document.getElementById("customerModal");
-var closeModal = document.getElementById("closeModal");
+let openFormButton = document.getElementById("openFormButton");
+let  modal = document.getElementById("customerModal");
+let closeModal = document.getElementById("closeModal");
 openFormButton.onclick = function() {
   modal.style.display = "block";
 }
@@ -82,6 +98,13 @@ window.onclick = function(event) {
   }
 }
 
+//BOTONES
+let addCus = document.getElementById("addCus");
+addCus.addEventListener("click", (e) => {
+  e.preventDefault();
+  addCustomer();
+  }
+)
 
 //CARGA
 if(localStorage.getItem("Customers")){
