@@ -114,7 +114,7 @@ if(localStorage.getItem("Customers")){
     tabCos.innerHTML = ``
     tabCos.innerHTML += `
       <tr>
-        <th>TABLA VACIA</th>
+        <th>NO EXISTEN CLIENTES PARA MOSTRAR, CARGE UN NUEVO CLIENTE DESDE EL BOTON "+ NUEVO CLIENTE"</th>
       </tr>
     `
 }
