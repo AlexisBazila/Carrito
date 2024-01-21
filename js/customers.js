@@ -11,6 +11,9 @@ class customer{
       this.nameCus = document.getElementById("nameCus").value;
       this.cuitdni = document.getElementById("cuitdni").value;
       this.telefon = document.getElementById("telCus").value;
+      document.getElementById("nameCus").value = "";
+      document.getElementById("cuitdni").value = "";
+      document.getElementById("telCus").value = "";
     }
   }
 
@@ -20,24 +23,24 @@ class customer{
     tabCos.innerHTML = ``
     tabCos.innerHTML += `
       <tr>
+        <th>CODIGO</th>
+        <th>CUIT/DNI</th>
+        <th>NOMBRE</th>
+        <th>TELEFONO</th>
         <th>D</th>
         <th>E</th>
-        <th>ID</th>
-        <th>CUIT/DNI</th>
-        <th>Nombre</th>
-        <th>Telefono</th>
       </tr>
     `
     for (let i = 0; i < Customers.length; i++) {
       tabCos.innerHTML +=`
         <tr>
-          <th><button id="delCos${i}" onclick="borrarCliente(${i})">D</button></th>
-          <th><button id="editCos${i}">E</button></th>
           <td>${i}</td>
           <td>${Customers[i].cuitdni}</td>
           <td>${Customers[i].nameCus}</td>
           <td>${Customers[i].telefon}</td>
-          <td><input type="text" value="${Customers[i].nameCus}" /></td>
+          <th><button id="delCos${i}" onclick="borrarCliente(${i})">D</button></th>
+          <th><button id="editCos${i}">E</button></th>
+          
         </tr>
       `
       const jsonCost = JSON.stringify(Customers);
@@ -59,9 +62,26 @@ class customer{
     e.preventDefault();
     Customers.push(new customer());
     listCustomers();
+    modal.style.display = "none";
     }
   )
   
+//VENTANA EMERGENTE DE ALTA
+var openFormButton = document.getElementById("openFormButton");
+var modal = document.getElementById("customerModal");
+var closeModal = document.getElementById("closeModal");
+openFormButton.onclick = function() {
+  modal.style.display = "block";
+}
+closeModal.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 
 //CARGA
 if(localStorage.getItem("Customers")){
