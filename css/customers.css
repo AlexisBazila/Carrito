@@ -39,11 +39,11 @@
     margin: 20px;
   }
 
-  .modal-content form label{
+   form label{
     font-size: 15px;
   }
 
-  .modal-content form input{
+   form input{
     width: 100%;
     margin-bottom: 10px;
     height: 30px;
@@ -51,13 +51,12 @@
     border-radius: 6px;
   }
 
-  .input-div input:focus{
+  input:focus{
     outline: none;
     border: solid #17A2B8 2px;
   }
 
   .close {
-    
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -93,12 +92,23 @@
     text-decoration: none;
   }
 
-  .headerForm{
+  .headerDataContent{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     margin: 1px;
+    border-radius: 10px;
+    background-color: #BCC3CA;
+    border: solid #DDDDDD 2px;
+  }
+
+  .find-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 15px 1px 15px 1px;
     border-radius: 10px;
     background-color: #BCC3CA;
     border: solid #DDDDDD 2px;
@@ -207,4 +217,83 @@
   .errorMsg{
     font-family: MS Sans Serif;
     color: #DC3545;
+  }
+
+  body {
+    margin: 0;
+    font-family: Trebuchet MS;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 10%;
+    height: 100vh;
+    background-color: #002949;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .sidebar li{
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .sidebar i{
+    font-size: 50px;
+  }
+  .sidebar a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 0;
+    display: block;
+  }
+  
+  .sidebar a:hover {
+    scale: 110%;
+  }
+  
+  .data-content {
+    flex: 1;
+    padding: 20px 5px 10px 20px;
+
+  }
+
+  .logo{
+    width: 15%;
+    padding: 10px;
+  }
+
+  header{
+    background-color: #002949;
+  }
+
+  .findButon{
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-family: Trebuchet MS;
+    font-size: 30px;
+    font-weight: 100;
+    padding: 10px;
+    background-color: #17A2B8;
+    border: solid #17A2B8 1px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .findButon:hover {
+    background: #BCC3CA;
+    border: solid #17A2B8 1px;
+    color: #17A2B8;
+    border-radius: 10px;
+    text-decoration: none;
   }

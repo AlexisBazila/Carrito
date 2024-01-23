@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Costumers</title>
+    <title>Rentals</title>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/customers.css" />
 </head>
@@ -22,9 +22,9 @@
           </ul>
         </nav>
         <div class="data-content">
-          <div class="headerDataContent">
-            <h1>LISTADO DE CLIENTES</h1>
-            <button id="openFormButton" class="openCliFormButton">+ Nuevo cliente</button>
+          <div class="headerForm">
+            <h1>LISTADO DE ALQUILERES</h1>
+            <button id="openFormButton" class="openCliFormButton">+ Nuevo alquiler</button>
         </div>
         <div id="customerModal" class="modal">
           <div class="modal-content">
@@ -32,7 +32,7 @@
               <span class="close" id="closeModal">&times;</span>
               <h2>ALTA CLIENTE</h2>
             </div>
-            <form name="customerForm">
+            <form form name="customerForm" method="POST">
               <div class="input-div">
                 <label for="nameCus">Nombre:</label>
                 <input type="text" id="nameCus" required />
@@ -53,16 +53,6 @@
           </div>
         </div>
   
-        <div class="find-content">
-          <form name="findForm">
-              <label for="nameFindCus">Nombre:</label>
-              <input type="text" id="nameFindCus"/>
-              <label for="cuitdnifind">Cuit/DNI:</label>
-              <input type="number" id="cuitdnifind" required>
-              <button id="findButton" class="findButon"><i class='bx bx-search-alt' undefined ></i></button>
-          </form>
-        </div>
-
         <div id="viewCostumers">
             <table class="viewTable" id="tableCustomers">
               </table>

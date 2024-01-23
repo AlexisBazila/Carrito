@@ -2,148 +2,32 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hoverable Sidebar Menu HTML CSS & JavaScript</title>
-    <!-- Boxicons CSS -->
-    <link flex href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>Eventos</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/customers.css" />
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-              </li>
-            </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+      <img class="logo" src="./img/eventos.png" alt="" />
     </header>
-    <aside>
-      <nav class="sidebar locked">
-        <div class="logo_items flex">
-          <span class="nav_image">
-            <img src="./img/eventos.png" alt="logo_img" />
-          </span>
-          <span class="logo_name">Eventos</span>
-          <i class="bx bx-lock-alt" id="lock-icon" title="Unlock Sidebar"></i>
-          <i class="bx bx-x" id="sidebar-close"></i>
-        </div>
-        <div class="menu_container">
-          <div class="menu_items">
-            <ul class="menu_item">
-              <div class="menu_title flex">
-                <span class="title">Dashboard</span>
-                <span class="line"></span>
-              </div>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-home-alt"></i>
-                  <span>Overview</span>
-                </a>
-              </li>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-grid-alt"></i>
-                  <span>All Projects</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="menu_item">
-              <div class="menu_title flex">
-                <span class="title">APP</span>
-                <span class="line"></span>
-              </div>
-              <li class="item">
-                <a href="./pages/customers.html" class="link flex">
-                  <i class="bx bxs-magic-wand"></i>
-                  <span>Costumer</span>
-                </a>
-              </li>
-              <li class="item">
-                <a href="" class="link flex">
-                  <i class="bx bx-folder"></i>
-                  <span>New Projects</span>
-                </a>
-              </li>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-cloud-upload"></i>
-                  <span>Upload New</span>
-                </a>
-              </li>
-            </ul>
-            <ul class="menu_item">
-              <div class="menu_title flex">
-                <span class="title">Setting</span>
-                <span class="line"></span>
-              </div>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-flag"></i>
-                  <span>Notice Board</span>
-                </a>
-              </li>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-award"></i>
-                  <span>Award</span>
-                </a>
-              </li>
-              <li class="item">
-                <a href="#" class="link flex">
-                  <i class="bx bx-cog"></i>
-                  <span>Setting</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="sidebar_profile flex">
-          </div>
-        </div>
-      </nav>
-    </aside>
     <main>
-      <section class="contenedor">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Recusandae odio, molestias doloremque voluptatibus voluptatem tenetur fugiat id nemo magni animi accusantium dolore, dolores eveniet ipsam labore eos iste, illum quod. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae eius nemo quo saepe ipsa soluta recusandae, autem nostrum, fugit assumenda, reiciendis culpa cumque impedit ut illum sapiente animi quis suscipit? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis amet corrupti ducimus reprehenderit itaque incidunt nam nemo cum, ex impedit iste ea inventore molestias earum repudiandae minima. Vel, molestiae accusamus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo amet quasi, sint, tempora illo quam ratione, dolor accusamus modi consectetur quia fuga? Ullam maiores assumenda cupiditate ut, labore soluta voluptatum.</p>
-      </section>
+      <div class="container">
+        <nav class="sidebar">
+          <ul>
+            <li> <a href="./index.html"><i class='bx bx-home' style='color:#ffffff' ></i><p>Inicio</p></a></li>
+            <li><a href="./pages/customers.html"> <i class='bx bx-user-circle' style='color:#ffffff'  ></i><p>Clientes</p></a></li>
+            <li><a href="./pages/rentals.html"> <i class='bx bx-cart-download' style='color:#ffffff' ></i><p>Alquileres</p></a></li>
+            <li><a href="./pages/products.html"><i class='bx bx-package' style='color:#ffffff' ></i> <p>Producto</p></a></li>
+          </ul>
+        </nav>
+
+
+      </div>
     </main>
-    <footer>
-
-    </footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <!-- <script src="main1.js" defer></script> -->
-
+    <script src="../js/customers.js" defer></script>
   </body>
 </html>
