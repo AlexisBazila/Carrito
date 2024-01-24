@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentals</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/customers.css" />
+</head>
+<body>
+    <header>
+      <img class="logo" src="../img/eventos.png" alt="">
+    </header>
+    <main>
+      <div class="container">
+        <nav class="sidebar">
+          <ul>
+            <li> <a href="../index.html"><i class='bx bx-home' style='color:#ffffff' ></i><p>Inicio</p></a></li>
+            <li><a href="./customers.html"> <i class='bx bx-user-circle' style='color:#ffffff'  ></i><p>Clientes</p></a></li>
+            <li><a href="./rentals.html"> <i class='bx bx-cart-download' style='color:#ffffff' ></i><p>Alquileres</p></a></li>
+            <li><a href="./products.html"><i class='bx bx-package' style='color:#ffffff' ></i> <p>Producto</p></a></li>
+          </ul>
+        </nav>
+        <div class="data-content">
+          <div class="headerForm">
+            <h1>LISTADO DE ALQUILERES</h1>
+            <button id="openFormButton" class="openCliFormButton">+ Nuevo alquiler</button>
+        </div>
+        <div id="customerModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-head">
+              <span class="close" id="closeModal">&times;</span>
+              <h2>ALTA CLIENTE</h2>
+            </div>
+            <form form name="customerForm" method="POST">
+              <div class="input-div">
+                <label for="nameCus">Nombre:</label>
+                <input type="text" id="nameCus" required />
+              </div>
+              <div class="input-div">
+                <label for="cuitdni">Cuit/DNI:</label>
+                <input type="number" id="cuitdni" required>
+              </div>
+              <div class="input-div">
+                <label for="telCus">Telefono:</label>
+                <input type="tel" id="telCus">
+              </div>
+            </form>
+            <div class="modal-foot">
+              <p class="errorMsg" id="footModalMsg"></p>
+              <button class="addBtn" id="addCus"><i class='bx bx-check'></i></button>
+            </div>
+          </div>
+        </div>
+  
+        <div id="viewCostumers">
+            <table class="viewTable" id="tableCustomers">
+              </table>
+        </div>
+        </div>
+      </div>
+      
+       
+
+    </main>
+    <script src="../js/customers.js" defer></script>
+</body>
+</html>
