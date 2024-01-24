@@ -53,6 +53,7 @@ function dellCustomer(id) {
     Customers.splice(id, 1);
     listCustomers();
   }
+
 }
 
 function addCustomer() {
