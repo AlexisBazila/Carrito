@@ -3,7 +3,7 @@ let Customers = new Array();
 if (localStorage.getItem("Customers")) {
   Customers = JSON.parse(localStorage.getItem("Customers"));
 }
-
+let idEditCustomer = NaN;
 
 //DEFINICION DE CLASES
 class customer {
@@ -16,6 +16,36 @@ class customer {
     document.getElementById("telCus").value = "";
   }
 }
+
+//VENTANAS MODALES
+// Alta
+let openFormButton = document.getElementById("openFormButton");
+let modal = document.getElementById("customerModal");
+let closeModal = document.getElementById("closeModal");
+openFormButton.onclick = function () {
+  modal.style.display = "block";
+}
+closeModal.onclick = function () {
+  modal.style.display = "none";
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// Modificacion
+let editModal = document.getElementById("customerEditModal");
+let closeEditModal = document.getElementById("closeEditModal");
+closeEditModal.onclick = function () {
+  editModal.style.display = "none";
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
+    editModal.style.display = "none";
+  }
+}
+
 
 //DEFINICION DE FUNCIONES
 function listCustomers() {
@@ -40,7 +70,7 @@ function listCustomers() {
           <td>${Customers[i].telefon}</td>
           <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
           <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
-          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}"><i class='bx bx-edit-alt'></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" onclick="openEditCustomer(${i})"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
       `
     const jsonCost = JSON.stringify(Customers);
@@ -113,9 +143,9 @@ function findCustomer() {
           <td>${filteredCustomers[i].cuitdni}</td>
           <td>${filteredCustomers[i].nameCus}</td>
           <td>${filteredCustomers[i].telefon}</td>
-          <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
-          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
-          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}"><i class='bx bx-edit-alt'></i></button></th>
+          <th><button  title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet' disabled></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt' disabled></i></button></th>
         </tr>
       `
     }
@@ -143,9 +173,9 @@ function findCustomer() {
             <td>${filteredCustomers[i].cuitdni}</td>
             <td>${filteredCustomers[i].nameCus}</td>
             <td>${filteredCustomers[i].telefon}</td>
-            <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
-            <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
-            <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}"><i class='bx bx-edit-alt'></i></button></th>
+            <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
+            <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet'></i></button></th>
+            <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt'></i></button></th>
           </tr>
         `
     }
@@ -173,30 +203,57 @@ function findCustomer() {
             <td>${filteredCustomers[i].cuitdni}</td>
             <td>${filteredCustomers[i].nameCus}</td>
             <td>${filteredCustomers[i].telefon}</td>
-            <th><button title="Eliminar"     class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
-            <th><button title="Visualizar"  class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
-            <th><button title="Editar"      class="editBtn actionBtn" id="editCos${i}"><i class='bx bx-edit-alt'></i></button></th>
+            <th><button title="Eliminar"     class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
+            <th><button title="Visualizar"  class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet'></i></button></th>
+            <th><button title="Editar"      class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt'></i></button></th>
           </tr>
         `
     }
   }
 }
 
-//VENTANA EMERGENTE DE ALTA
-let openFormButton = document.getElementById("openFormButton");
-let modal = document.getElementById("customerModal");
-let closeModal = document.getElementById("closeModal");
-openFormButton.onclick = function () {
-  modal.style.display = "block";
+function openEditCustomer(id){
+  editModal.style.display = "block";
+  document.getElementById("editNameCus").value =Customers[id].nameCus;
+  document.getElementById("EditCuitdni").value =Customers[id].cuitdni;
+  document.getElementById("editTelCus").value =Customers[id].telefon;
+  idEditCustomer = id;
 }
-closeModal.onclick = function () {
-  modal.style.display = "none";
-}
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+
+function editCustomer(id){
+  let nameEditCustomer = document.getElementById("editNameCus").value;
+  let telEditCustomer = document.getElementById("editTelCus").value;
+  let footModal = document.getElementById("footEditModalMsg");
+  if (nameEditCustomer != "") {
+    let cuitdni = document.getElementById("EditCuitdni").value;
+    if (cuitdni.length === 7 || cuitdni.length === 8) {
+      Customers[id].nameCus = nameEditCustomer;
+      Customers[id].cuitdni = cuitdni;
+      Customers[id].telefon = telEditCustomer;
+      listCustomers();
+      editModal.style.display = "none";
+    } else {
+      if (cuitdni.length === 11) {
+        let inicioCuit = cuitdni.slice(0, 2);
+        if ([20, 23, 27, 30].includes(parseInt(inicioCuit))) {
+          Customers[id].nameCus = nameEditCustomer;
+          Customers[id].cuitdni = cuitdni;
+          Customers[id].telefon = telEditCustomer;
+          listCustomers();
+          editModal.style.display = "none";
+        } else {
+          footModal.innerHTML = `!El Cuit o DNI no tiene el formato correcto.`
+        }
+      } else {
+        footModal.innerHTML = `!El Cuit o DNI no tiene el formato correcto.`
+      }
+    }
+  } else {
+    footModal.innerHTML = `!Debe completar el campo usuario.`
   }
+  idEditCustomer= Nan;
 }
+
 
 //BOTONES
 let addCus = document.getElementById("addCus");
@@ -220,6 +277,11 @@ unFindCus.addEventListener("click", (e) => {
   listCustomers();
 })
 
+let editCus = document.getElementById("editCus");
+editCus.addEventListener("click", (e) =>{
+  e.preventDefault();
+  editCustomer(idEditCustomer);
+})
 //CARGA
 if (localStorage.getItem("Customers")) {
   listCustomers();

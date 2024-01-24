@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Costumers</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/customers.css" />
 </head>
 <body>
   <header>
@@ -30,10 +30,12 @@
         </ul>
       </nav>
       <div class="data-content">
+        <!-- TITULO -->
         <div class="headerDataContent">
           <h1>LISTADO DE CLIENTES</h1>
           <button id="openFormButton" class="openCliFormButton">+ Nuevo cliente</button>
         </div>
+        <!-- SECCION DE ALTA -->
         <div id="customerModal" class="modal">
           <div class="modal-content">
             <div class="modal-head">
@@ -60,6 +62,36 @@
             </div>
           </div>
         </div>
+        
+        <!-- SECCION DE EDICION -->
+        <div id="customerEditModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-head">
+              <span class="close" id="closeEditModal">&times;</span>
+              <h2>EDICION CLIENTE</h2>
+            </div>
+            <form>
+              <div class="input-div">
+                <label for="editNameCus">Nombre:</label>
+                <input type="text" id="editNameCus" required />
+              </div>
+              <div class="input-div">
+                <label for="editCuitdni">Cuit/DNI:</label>
+                <input type="number" id="EditCuitdni" required>
+              </div>
+              <div class="input-div">
+                <label for="editTelCus">Telefono:</label>
+                <input type="tel" id="editTelCus">
+              </div>
+            </form>
+            <div class="modal-foot">
+              <p class="errorMsg" id="footEditModalMsg"></p>
+              <button class="addBtn" id="editCus"><i class='bx bx-check'></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCION DE BUSQUEDA -->
         <div class="find-content">
           <h2>Buscar cliente:</h2>
           <form name="findForm">

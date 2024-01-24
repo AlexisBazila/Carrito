@@ -171,35 +171,41 @@ h1 {
   background-color: #DC3545;
   border: solid #DC3545 1px;
 }
+.delBtn:disabled{
+  background-color: #dc35465e;
+}
+.delBtn:not(:disabled):hover {
+  background-color: #FFFFFF;
+  border: solid #DC3545 1px;
+  color: #DC3545;
+}
 
 .viewBtn {
   background-color: #28A745;
   border: solid #28A745 1px;
+}
+.viewBtn:disabled {
+  background-color: #28a74683;
+}
+.viewBtn:not(:disabled):hover {
+  background-color: #FFFFFF;
+  border: solid #28A745 1px;
+  color: #28A745;
 }
 
 .editBtn {
   background-color: #007BF5;
   border: solid #007BF5 1px;
 }
-
-
-.delBtn:hover {
-  background-color: #FFFFFF;
-  border: solid #DC3545 1px;
-  color: #DC3545;
+.editBtn:disabled {
+  background-color: #007bf57a;
 }
-
-.viewBtn:hover {
-  background-color: #FFFFFF;
-  border: solid #28A745 1px;
-  color: #28A745;
-}
-
-.editBtn:hover {
+.editBtn:not(:disabled):hover {
   background-color: #FFFFFF;
   border: solid #007BF5 1px;
   color: #007BF5;
 }
+
 
 .addBtn {
   height: 40px;
@@ -309,3 +315,4 @@ header {
 .headerDataContent i{
   font-size: 50px;
 }
+
