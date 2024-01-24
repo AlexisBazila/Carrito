@@ -309,3 +309,33 @@ header {
 .headerDataContent i{
   font-size: 50px;
 }
+
+/* DASHBOARD */
+.cusIndicator{
+  background-color: #75D170;
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+  padding: 0 5px 0px 5px;
+  text-align: center;
+}
+.cusIndicator i{
+  color: #306A2D;
+  font-size: 80px;
+}
+
+.indicatorNumber{
+  color: #FFFFFF;
+  font-size: 100px;
+  margin: 0;
+}
+
+.cusIndicator div p{
+  color: #FFFFFF;
+  font-size: 25px;
+}
+.indicatorTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
