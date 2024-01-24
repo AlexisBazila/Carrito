@@ -46,6 +46,18 @@ window.onclick = function (event) {
   }
 }
 
+// Vista
+let viewModal = document.getElementById("customerViewModal");
+let closeViewModal = document.getElementById("closeViewModal");
+closeViewModal.onclick = function () {
+  viewModal.style.display = "none";
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
+    viewModal.style.display = "none";
+  }
+}
+
 
 //DEFINICION DE FUNCIONES
 function listCustomers() {
@@ -69,7 +81,7 @@ function listCustomers() {
           <td>${Customers[i].nameCus}</td>
           <td>${Customers[i].telefon}</td>
           <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
-          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${i})"></i></button></th>
           <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" onclick="openEditCustomer(${i})"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
       `
@@ -254,6 +266,18 @@ function editCustomer(id){
   idEditCustomer= Nan;
 }
 
+function viewCustomer(id){
+  viewModal.style.display = "block";
+  document.getElementById("viewModalTitle").innerHTML=`
+    CLIENTE: ${id}
+  `
+  document.getElementById("viewModalContent").innerHTML=`
+    <p>Nombre: ${Customers[id].nameCus}</p>
+    <p>Cuit/DNI: ${Customers[id].cuitdni}</p>
+    <p>Telefono: ${Customers[id].telefon}</p>
+  `
+  idEditCustomer = id;
+}
 
 //BOTONES
 let addCus = document.getElementById("addCus");
