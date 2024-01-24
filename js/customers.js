@@ -91,7 +91,7 @@ function listCustomers() {
 }
 
 function dellCustomer(id) {
-  if (confirm(`esta a punto de eliminar el cliente: \n ${id} -> ${Customers[id].cuitdni} - ${Customers[id].nombre} \n Realmente desea hacerlo?`)) {
+  if (confirm(`esta a punto de eliminar el cliente: \n ${id} -> ${Customers[id].cuitdni} - ${Customers[id].nameCus} \n Realmente desea hacerlo?`)) {
     Customers.splice(id, 1);
     listCustomers();
   }
