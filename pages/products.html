@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Costumers</title>
+  <title>Equipaments</title>
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css" />
 </head>
@@ -29,14 +29,125 @@
             </a></li>
         </ul>
       </nav>
+
+      <!-- CONTENIDO EQUIPAMIENTOS -->
       <div class="data-content">
+        <!-- TITULO -->
         <div class="headerDataContent">
-            <h1><i class='bx bxs-traffic-barrier'></i>PAGINA EN CONSTRUCCION<i class='bx bxs-traffic-barrier'></i></h1>
+          <h1><i class='bx bx-chair'></i> LISTADO DE EQUIPAMIENTOS</h1>
+          <button id="openFormButton" class="openCliFormButton">+ Nuevo equipamiento</button>
+        </div>
+        <!-- SECCION DE ALTA -->
+        <div id="EquipamentModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-head">
+              <span class="close" id="closeModal">&times;</span>
+              <h2>ALTA EQUIPAMIENTO</h2>
+            </div>
+            <!-- FORMULARIO -->
+            <form>
+              <div class="input-div">
+                <label for="nameEqui">Nombre Equipo:</label>
+                <input type="text" id="nameEqui" required />
+              </div>
+              <div class="input-div">
+                <label for="pRenEqui">Precio de alquiler:</label>
+                <input type="number" id="pRenEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="pRepEqui">Precio de reposición:</label>
+                <input type="number" id="pRepEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="stockEqui">Stock total:</label>
+                <input type="number" id="stockEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="avaEqui">Stock disponible:</label>
+                <input type="number" id="avaEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="picEqui">Selecciona una imagen:</label>
+                <input type="file" id="picEqui" >
+              </form>
+              </div>
+            </form>
+            <div class="modal-foot">
+              <p class="errorMsg" id="footModalMsg"></p>
+              <button class="addBtn" id="addCus"><i class='bx bx-check'></i></button>
+            </div>
           </div>
+        </div>
+
+
+
+        <!-- SECCION DE EDICION -->
+        <div id="customerEditModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-head">
+              <span class="close" id="closeEditModal">&times;</span>
+              <h2>EDICION EQUIPAMIENTO</h2>
+            </div>
+            <form>
+              <div class="input-div">
+                <label for="editNameCus">Nombre:</label>
+                <input type="text" id="editNameCus" required />
+              </div>
+              <div class="input-div">
+                <label for="editCuitdni">Cuit/DNI:</label>
+                <input type="number" id="EditCuitdni" required>
+              </div>
+              <div class="input-div">
+                <label for="editTelCus">Telefono:</label>
+                <input type="tel" id="editTelCus">
+              </div>
+            </form>
+            <div class="modal-foot">
+              <p class="errorMsg" id="footEditModalMsg"></p>
+              <button class="addBtn" id="editCus"><i class='bx bx-check'></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCION DE VISUALIZACION -->
+        <div id="customerViewModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-head">
+              <span class="close" id="closeViewModal">&times;</span>
+              <h2 id="viewModalTitle"></h2>
+            </div>
+            <div id="viewModalContent">
+
+            </div>
+            <div class="modal-foot">
+
+            </div>
+          </div>
+        </div>
+
+        <!-- SECCION DE BUSQUEDA -->
+        <div class="find-content">
+          <h2>Buscar equipamiento:</h2>
+          <form name="findForm">
+            <label for="nameFindCus">Nombre:</label>
+            <input type="text" id="nameFindCus" />
+            <label for="cuitdnifind">Codigo:</label>
+            <input type="number" id="cuitdnifind" required>
+          </form>
+          <div>
+            <button title="Aplicar filtro" id="findButton" class="findButon"><i class='bx bx-search-alt'
+                undefined></i></button>
+            <button title="Quitar filtro" id="unFindButton" class="findButon"><i class='bx bx-eraser'></i></button>
+          </div>
+        </div>
+        <div id="viewCostumers">
+          <table class="viewTable" id="tableCustomers">
+          </table>
+        </div>
       </div>
     </div>
   </main>
-  <script src=" " defer></script>
+  <script src="../js/equipment.js" defer></script>
 </body>
 
 </html>

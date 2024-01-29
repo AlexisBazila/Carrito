@@ -1,3 +1,9 @@
+/* GENERAL */
+body {
+  margin: 0;
+  font-family: Trebuchet MS;
+}
+
 /* VENTANA MODAL */
 .modal {
   display: none;
@@ -14,7 +20,7 @@
 
 .modal-content {
   margin: 10% auto;
-  width: 20%;
+  width: 50%;
   border-radius: 15px;
   background-color: #F7F7F7;
 }
@@ -42,6 +48,26 @@
   margin: 20px;
 }
 
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.errorMsg {
+  font-family: MS Sans Serif;
+  color: #DC3545;
+}
+
+
+/* FORMULARIOS */
 form label {
   font-size: 15px;
 }
@@ -59,40 +85,10 @@ input:focus {
   border: solid #17A2B8 2px;
 }
 
-.close {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.openCliFormButton {
-  border-radius: 10px;
-  color: #FFFFFF;
-  font-family: Trebuchet MS;
-  font-size: 30px;
-  font-weight: 100;
-  padding: 10px;
-  background-color: #17A2B8;
-  border: solid #17A2B8 1px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-}
-
-.openCliFormButton:hover {
-  background: #BCC3CA;
-  border: solid #17A2B8 1px;
-  color: #17A2B8;
-  border-radius: 10px;
-  text-decoration: none;
+/* CONTENIDO */
+.container {
+  display: flex;
 }
 
 .headerDataContent {
@@ -120,7 +116,6 @@ input:focus {
 h1 {
   font-family: Trebuchet MS;
 }
-
 
 .viewTable {
   width: 97%;
@@ -158,6 +153,8 @@ h1 {
 
 }
 
+
+/* BOTONES */
 .actionBtn {
   height: 40px;
   width: 40px;
@@ -166,36 +163,40 @@ h1 {
   color: #FFFFFF;
 }
 
-
 .delBtn {
   background-color: #DC3545;
   border: solid #DC3545 1px;
+}
+.delBtn:disabled{
+  background-color: #dc35465e;
+}
+.delBtn:not(:disabled):hover {
+  background-color: #FFFFFF;
+  border: solid #DC3545 1px;
+  color: #DC3545;
 }
 
 .viewBtn {
   background-color: #28A745;
   border: solid #28A745 1px;
 }
-
-.editBtn {
-  background-color: #007BF5;
-  border: solid #007BF5 1px;
+.viewBtn:disabled {
+  background-color: #28a74683;
 }
-
-
-.delBtn:hover {
-  background-color: #FFFFFF;
-  border: solid #DC3545 1px;
-  color: #DC3545;
-}
-
-.viewBtn:hover {
+.viewBtn:not(:disabled):hover {
   background-color: #FFFFFF;
   border: solid #28A745 1px;
   color: #28A745;
 }
 
-.editBtn:hover {
+.editBtn {
+  background-color: #007BF5;
+  border: solid #007BF5 1px;
+}
+.editBtn:disabled {
+  background-color: #007bf57a;
+}
+.editBtn:not(:disabled):hover {
   background-color: #FFFFFF;
   border: solid #007BF5 1px;
   color: #007BF5;
@@ -218,20 +219,56 @@ h1 {
   color: #28A745;
 }
 
-.errorMsg {
-  font-family: MS Sans Serif;
-  color: #DC3545;
-}
-
-body {
-  margin: 0;
+.openCliFormButton {
+  border-radius: 10px;
+  color: #FFFFFF;
   font-family: Trebuchet MS;
+  font-size: 30px;
+  font-weight: 100;
+  padding: 10px;
+  background-color: #17A2B8;
+  border: solid #17A2B8 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
 }
 
-.container {
-  display: flex;
+.openCliFormButton:hover {
+  background: #BCC3CA;
+  border: solid #17A2B8 1px;
+  color: #17A2B8;
+  border-radius: 10px;
+  text-decoration: none;
 }
 
+.findButon {
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: Trebuchet MS;
+  font-size: 30px;
+  font-weight: 100;
+  padding: 10px;
+  background-color: #17A2B8;
+  border: solid #17A2B8 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  height: 80px;
+  width: 80px;
+}
+
+.findButon:hover {
+  background: #BCC3CA;
+  border: solid #17A2B8 1px;
+  color: #17A2B8;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+
+/* MENU LATERAL */
 .sidebar {
   width: 10%;
   height: 100vh;
@@ -272,6 +309,7 @@ body {
 
 }
 
+/* HEADER */
 .logo {
   width: 15%;
   padding: 10px;
@@ -279,31 +317,6 @@ body {
 
 header {
   background-color: #002949;
-}
-
-.findButon {
-  border-radius: 10px;
-  color: #FFFFFF;
-  font-family: Trebuchet MS;
-  font-size: 30px;
-  font-weight: 100;
-  padding: 10px;
-  background-color: #17A2B8;
-  border: solid #17A2B8 1px;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  height: 80px;
-  width: 80px;
-}
-
-.findButon:hover {
-  background: #BCC3CA;
-  border: solid #17A2B8 1px;
-  color: #17A2B8;
-  border-radius: 10px;
-  text-decoration: none;
 }
 
 .headerDataContent i{
@@ -337,6 +350,7 @@ header {
   color: #FFFFFF;
   font-size: 25px;
 }
+
 .indicatorTitle{
   display: flex;
   justify-content: space-between;
