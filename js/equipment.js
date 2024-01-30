@@ -1,7 +1,9 @@
 // DEFINICION DE VARIABLES
 let Equipments = new Array();
+let countEqui = 1;
 if (localStorage.getItem("Equipments")) {
   Equipments = JSON.parse(localStorage.getItem("Equipments"));
+  countEqui += Equipments.length
 }
 
 // Equipments[0] = { nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
@@ -13,7 +15,7 @@ if (localStorage.getItem("Equipments")) {
 //DEFINICION DE CLASES
 class equipment {
     constructor() {
-      // this.idEqui = document.getElementById("idEqui").value;
+      this.idEqui = countEqui;
       this.nameEqui = document.getElementById("nameEqui").value;
       this.pRenEqui = document.getElementById("pRenEqui").value;
       this.pRepEqui = document.getElementById("pRepEqui").value;
@@ -27,7 +29,6 @@ class equipment {
         this.picEqui = URL.createObjectURL(selectedFile);
       }
 
-      // document.getElementById("idEqui").value = "";
       document.getElementById("nameEqui").value = "";
       document.getElementById("pRenEqui").value = "";
       document.getElementById("pRepEqui").value = "";
@@ -67,7 +68,6 @@ picEqui.onchange = function() {
 // DEFINICION DE FUNCIONES
 function addEquipment() {
   let footModal = document.getElementById("footModalMsg");
-
   if (document.getElementById("nameEqui").value != "") {
     if (document.getElementById("pRenEqui").value != "") {
       if (document.getElementById("pRepEqui").value != "") {
@@ -77,9 +77,10 @@ function addEquipment() {
           if (pRepEquiValue > pRenEquiValue) {
             if (document.getElementById("stockEqui").value != "") {
               if (document.getElementById("avaEqui").value != "") {
-                if(parseInt(document.getElementById("stockEqui").value)> parseInt(document.getElementById("avaEqui").value)){
+                if(parseInt(document.getElementById("stockEqui").value) >= parseInt(document.getElementById("avaEqui").value)){
                   Equipments.push(new equipment());
-                  // listEquipments();
+                  listEquipments();
+                  countEqui += 1
                   modal.style.display = "none";
                 }else {
                   footModal.innerHTML = "!El stock disponible no puede ser mayor al stock total";
@@ -107,6 +108,37 @@ function addEquipment() {
   }
 }
 
+function listEquipments() {
+  let tabEqui = document.getElementById("tableEquipment");
+  tabEqui.innerHTML = ``
+  tabEqui.innerHTML += `
+      <tr class="headRow">
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Precio Alquiler</th>
+        <th>Stock tot.</th>
+        <th>Disponible</th>
+        <th colspan="3">Acciones</th>
+      </tr>
+    `
+  for (let i = 0; i < Equipments.length; i++) {
+    let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
+    tabEqui.innerHTML += `
+      <tr class="${rowClass}">
+          <td>${Equipments[i].idEqui}</td>
+          <td>${Equipments[i].nameEqui}</td>
+          <td>$${Equipments[i].pRenEqui}</td>
+          <td>${Equipments[i].stockEqui}</td>
+          <td>${Equipments[i].avaEqui}</td>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${i})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewEqui${i}"><i class='bx bx-spreadsheet' onclick="viewEquipment(${i})"></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editEqui${i}" onclick="openEditEquipment(${i})"><i class='bx bx-edit-alt'></i></button></th>
+        </tr>
+      `
+    const jsonCost = JSON.stringify(Equipments);
+    localStorage.setItem("Equipments", jsonCost);
+  }
+}
 
 //BOTONES
 let addEqui = document.getElementById("addEqui");
@@ -115,3 +147,16 @@ addEqui.addEventListener("click", (e) => {
   addEquipment();
 }
 )
+
+//CARGA
+if (localStorage.getItem("Equipments")) {
+  listEquipments();
+} else {
+  let tabEqui = document.getElementById("tableEquipment");
+  tabEqui.innerHTML = ``
+  tabEqui.innerHTML += `
+      <tr>
+        <th>NO EXISTEN EQUIPAMIENTOS PARA MOSTRAR, CARGE UN NUEVO EQUIPAMIENTO DESDE EL BOTON "+ NUEVO EQUIPAMIENTO"</th>
+      </tr>
+    `
+}
