@@ -324,6 +324,13 @@ header {
 }
 
 /* DASHBOARD */
+.dashboard{
+  display: flex;
+  align-items: center;
+}
+.dashboard a{
+  text-decoration: none;
+}
 .cusIndicator{
   background-color: #75D170;
   height: 200px;
@@ -340,15 +347,36 @@ header {
   font-size: 80px;
 }
 
+.cusIndicator div p{
+  color: #FFFFFF;
+  font-size: 25px;
+}
+
+.equiIndicator{
+  background-color: #1f9aec;
+  height: 200px;
+  width: 300px;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 0 5px 0px 5px;
+  text-align: center;
+}
+.equiIndicator:hover{
+  background-color: #007ACC;
+}
+.equiIndicator i{
+  color: #005a96;
+  font-size: 80px;
+}
+
+.equiIndicator div p{
+  color: #FFFFFF;
+  font-size: 25px;
+}
 .indicatorNumber{
   color: #FFFFFF;
   font-size: 100px;
   margin: 0;
-}
-
-.cusIndicator div p{
-  color: #FFFFFF;
-  font-size: 25px;
 }
 
 .indicatorTitle{
@@ -356,3 +384,4 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+

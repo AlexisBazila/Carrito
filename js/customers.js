@@ -60,6 +60,7 @@ window.onclick = function (event) {
 
 
 //DEFINICION DE FUNCIONES
+// Listar
 function listCustomers() {
   let tabCos = document.getElementById("tableCustomers");
   tabCos.innerHTML = ``
@@ -89,7 +90,7 @@ function listCustomers() {
     localStorage.setItem("Customers", jsonCost);
   }
 }
-
+// Eliminar
 function dellCustomer(id) {
   if (confirm(`esta a punto de eliminar el cliente: \n ${id} -> ${Customers[id].cuitdni} - ${Customers[id].nameCus} \n Realmente desea hacerlo?`)) {
     Customers.splice(id, 1);
@@ -97,7 +98,7 @@ function dellCustomer(id) {
   }
 
 }
-
+// Alta
 function addCustomer() {
   let footModal = document.getElementById("footModalMsg");
   if (document.getElementById("nameCus").value != "") {
@@ -124,7 +125,7 @@ function addCustomer() {
     footModal.innerHTML = `!Debe completar el campo usuario.`
   }
 }
-
+// Buscar
 function findCustomer() {
   let findNameCus = document.getElementById("nameFindCus").value
   let findDniCuit = document.getElementById("cuitdnifind").value
@@ -223,7 +224,7 @@ function findCustomer() {
     }
   }
 }
-
+// Edicion
 function openEditCustomer(id){
   editModal.style.display = "block";
   document.getElementById("editNameCus").value =Customers[id].nameCus;
@@ -231,7 +232,6 @@ function openEditCustomer(id){
   document.getElementById("editTelCus").value =Customers[id].telefon;
   idEditCustomer = id;
 }
-
 function editCustomer(id){
   let nameEditCustomer = document.getElementById("editNameCus").value;
   let telEditCustomer = document.getElementById("editTelCus").value;
@@ -265,7 +265,7 @@ function editCustomer(id){
   }
   idEditCustomer= Nan;
 }
-
+// Visualizacion
 function viewCustomer(id){
   viewModal.style.display = "block";
   document.getElementById("viewModalTitle").innerHTML=`
@@ -280,19 +280,19 @@ function viewCustomer(id){
 }
 
 //BOTONES
+// Alta
 let addCus = document.getElementById("addCus");
 addCus.addEventListener("click", (e) => {
   e.preventDefault();
   addCustomer();
 }
 )
-
+// Busquda
 let findCus = document.getElementById("findButton");
 findCus.addEventListener("click", (e) => {
   e.preventDefault();
   findCustomer();
 })
-
 let unFindCus = document.getElementById("unFindButton");
 unFindCus.addEventListener("click", (e) => {
   e.preventDefault();
@@ -300,7 +300,7 @@ unFindCus.addEventListener("click", (e) => {
   document.getElementById("cuitdnifind").value = ""
   listCustomers();
 })
-
+// Editar
 let editCus = document.getElementById("editCus");
 editCus.addEventListener("click", (e) =>{
   e.preventDefault();

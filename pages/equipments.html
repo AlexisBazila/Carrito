@@ -24,8 +24,8 @@
           <li><a href="./rentals.html"> <i class='bx bx-cart-download' style='color:#ffffff'></i>
               <p>Alquileres</p>
             </a></li>
-          <li><a href="./products.html"><i class='bx bx-package' style='color:#ffffff'></i>
-              <p>Producto</p>
+          <li><a href="./equipments.html"><i class='bx bx-chair' style='color:#ffffff'></i>
+              <p>Equipamientos</p>
             </a></li>
         </ul>
       </nav>
@@ -34,7 +34,8 @@
       <div class="data-content">
         <!-- TITULO -->
         <div class="headerDataContent">
-          <h1><i class='bx bx-chair'></i> LISTADO DE EQUIPAMIENTOS</h1>
+          <i class='bx bx-chair'></i> 
+          <h1>EQUIPAMIENTOS</h1>
           <button id="openFormButton" class="openCliFormButton">+ Nuevo equipamiento</button>
         </div>
         <!-- SECCION DE ALTA -->
@@ -44,8 +45,12 @@
               <span class="close" id="closeModal">&times;</span>
               <h2>ALTA EQUIPAMIENTO</h2>
             </div>
-            <!-- FORMULARIO -->
+            <!-- FORMULARIO --> 
             <form>
+              <div class="input-div">
+                <label for="codEqui">Codigo Equipo:</label>
+                <input type="text" id="codEqui" required />
+              </div>
               <div class="input-div">
                 <label for="nameEqui">Nombre Equipo:</label>
                 <input type="text" id="nameEqui" required />
@@ -78,39 +83,54 @@
             </div>
           </div>
         </div>
-
-
-
         <!-- SECCION DE EDICION -->
-        <!-- <div id="customerEditModal" class="modal">
+        <div id="equipmentEditModal" class="modal">
           <div class="modal-content">
             <div class="modal-head">
               <span class="close" id="closeEditModal">&times;</span>
               <h2>EDICION EQUIPAMIENTO</h2>
             </div>
+            <!-- FORMULARIO -->
             <form>
               <div class="input-div">
-                <label for="editNameCus">Nombre:</label>
-                <input type="text" id="editNameCus" required />
+                <label for="editCodEqui">Nombre Equipo:</label>
+                <input type="text" id="editCodEqui" required />
               </div>
               <div class="input-div">
-                <label for="editCuitdni">Cuit/DNI:</label>
-                <input type="number" id="EditCuitdni" required>
+                <label for="editNameEqui">Nombre Equipo:</label>
+                <input type="text" id="editNameEqui" required />
               </div>
               <div class="input-div">
-                <label for="editTelCus">Telefono:</label>
-                <input type="tel" id="editTelCus">
+                <label for="editPRenEqui">Precio de alquiler:</label>
+                <input type="number" id="editPRenEqui" required>
               </div>
+              <div class="input-div">
+                <label for="editPRepEqui">Precio de reposición:</label>
+                <input type="number" id="editPRepEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="editStockEqui">Stock total:</label>
+                <input type="number" id="editStockEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="editAvaEqui">Stock disponible:</label>
+                <input type="number" id="editAvaEqui" required>
+              </div>
+              <div class="input-div">
+                <label for="editPicEqui">Selecciona una imagen:</label>
+                <input type="file" id="editPicEqui" >
+              </div>
+              <img src="" id="editViewPicEqui" alt="">
             </form>
             <div class="modal-foot">
               <p class="errorMsg" id="footEditModalMsg"></p>
-              <button class="addBtn" id="editCus"><i class='bx bx-check'></i></button>
+              <button class="addBtn" id="editEqui"><i class='bx bx-check'></i></button>
             </div>
           </div>
-        </div> -->
+        </div>
 
         <!-- SECCION DE VISUALIZACION -->
-        <!-- <div id="customerViewModal" class="modal">
+        <div id="equipmentViewModal" class="modal">
           <div class="modal-content">
             <div class="modal-head">
               <span class="close" id="closeViewModal">&times;</span>
@@ -123,7 +143,7 @@
 
             </div>
           </div>
-        </div> -->
+        </div>
 
         <!-- SECCION DE BUSQUEDA -->
         <div class="find-content">
@@ -131,8 +151,8 @@
           <form name="findForm">
             <label for="nameFindEqui">Nombre:</label>
             <input type="text" id="nameFindEqui" />
-            <label for="idFindEqui">Codigo:</label>
-            <input type="number" id="idFindEqui" required>
+            <label for="codFindEqui">Codigo:</label>
+            <input type="text" id="codFindEqui">
           </form>
           <div>
             <button title="Aplicar filtro" id="findButton" class="findButon"><i class='bx bx-search-alt'
