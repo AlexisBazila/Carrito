@@ -92,11 +92,25 @@ function listCustomers() {
 }
 // Eliminar
 function dellCustomer(id) {
-  if (confirm(`esta a punto de eliminar el cliente: \n ${id} -> ${Customers[id].cuitdni} - ${Customers[id].nameCus} \n Realmente desea hacerlo?`)) {
-    Customers.splice(id, 1);
-    listCustomers();
-  }
-
+  Swal.fire({
+    title: `${id} -> ${Customers[id].cuitdni} - ${Customers[id].nameCus}`,
+    text: `esta a punto de eliminar el Cliente  ¿Realmente desea hacerlo`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, Eliminarlo!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+        Customers.splice(id, 1);
+        listCustomers();
+      Swal.fire({
+        title: "Eliminado!",
+        text: "El Cliente ha sido eliminado.",
+        icon: "success"
+      });
+    }
+  });
 }
 // Alta
 function addCustomer() {

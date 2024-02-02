@@ -173,11 +173,25 @@ function listEquipments() {
 // Eliminar
 function dellEquipment(id) {
   let i = Equipments.findIndex(equipo => equipo.idEqui === id);
-  if (confirm(`esta a punto de eliminar el Equipamiento: \n ${i} -> ${Equipments[i].codEqui} - ${Equipments[i].nameEqui} \n Realmente desea hacerlo?`)) {
-    Equipments.splice(i, 1);
-    listEquipments();
-  }
-
+  Swal.fire({
+    title: `${i} -> ${Equipments[i].codEqui} - ${Equipments[i].nameEqui}`,
+    text: `esta a punto de eliminar el Equipamiento  ¿Realmente desea hacerlo`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, Eliminarlo!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+          Equipments.splice(i, 1);
+          listEquipments();
+      Swal.fire({
+        title: "Eliminado!",
+        text: "El Equipamiento ha sido eliminado.",
+        icon: "success"
+      });
+    }
+  });
 }
 
 // Visualizacion
@@ -424,3 +438,4 @@ if (localStorage.getItem("Equipments")) {
       </tr>
     `
 }
+
