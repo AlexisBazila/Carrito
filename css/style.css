@@ -3,6 +3,9 @@ body {
   margin: 0;
   font-family: Trebuchet MS;
 }
+header{
+  height: 30px;
+}
 
 /* VENTANA MODAL */
 .modal {
@@ -85,6 +88,39 @@ input:focus {
   border: solid #17A2B8 2px;
 }
 
+/* Formulario Alquiler */
+.rentForm{
+  display: flex;
+  align-items: top;
+}
+.rentForm div{
+  margin: 5px;
+}
+.rentForm input{
+  width: 80%;
+  height: 30px;
+}
+.SectionRentForm{
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.eventSectionFomr{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.eventRentForm{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.rentDateForm{
+  display: flex;
+  justify-content: space-evenly;
+}
 
 /* CONTENIDO */
 .container {
@@ -311,8 +347,8 @@ h1 {
 
 /* HEADER */
 .logo {
-  width: 15%;
-  padding: 10px;
+  width: 100%;
+  padding: 5px;
 }
 
 header {
