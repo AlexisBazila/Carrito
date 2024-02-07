@@ -74,7 +74,10 @@ header{
   color: #DC3545;
 }
 
-
+/* .input-div{
+  display: flex;
+  flex-direction: column;
+} */
 /* FORMULARIOS */
 form label {
   font-size: 15px;
@@ -191,9 +194,12 @@ input:focus {
 .rentalView{
   border: solid #BCC3CA 1px;
   border-radius: 10px;
+  max-height: 250px;
+  overflow-y: auto;
 }
 .rentalViewTable{
   width: 95%;
+
 }
 .totalRent{
   text-align: right;
@@ -269,6 +275,7 @@ input:focus {
   max-height: 280px;
   overflow-y: auto;
 }
+
 /* CONTENIDO */
 .container {
   display: flex;

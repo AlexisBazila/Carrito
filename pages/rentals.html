@@ -58,10 +58,10 @@
                                     <option value="">--Seleccione un Cliente--</option>
                                   </select>
                                 </div> 
-                                <div class="dataCus">
-                                  <p class="titleP">Nombre:</p>
-                                  <p class="titleP">Cuit/DNI:</p>
-                                  <p class="titleP">Telefono:</p>
+                                <div class="dataCus" id="dataCus">
+                                  <p class="titleP"><b>Nombre:</b></p>
+                                  <p class="titleP"><b>Cuit/DNI:</b></p>
+                                  <p class="titleP"><b>Telefono:</b></p>
                                 </div>
                               </div>
                 
@@ -70,7 +70,7 @@
                                   <div class="eventRentForm">
                                     <div class="input-div">
                                       <label for="nameRent">Nombre del Evento:</label>
-                                      <input class="inputNameRent" type="text" id="nameRent" required />
+                                      <input class="inputNameRent" type="text" id="nameRent"/>
                                     </div>
                                     <div class="input-div">
                                       <label for="dateEve">Fecha del evento:</label>
@@ -89,9 +89,9 @@
                                       <label for="dateEndRen">Alquiler hasta:</label>
                                       <input type="date" id="dateEndRen">
                                     </div>
-                                    <div class="infoDays">
-                                      <p>Cantidad de dias: ##</p>
-                                      <p>Fecha de devolucion: ##/##/####</p>
+                                    <div class="infoDays" id="infoDays">
+                                      <p><b>Cantidad de dias:</b></p>
+                                      <p><b>Fecha de devolucion:</b></p>
                                     </div>
                                   </div>
                                 </div>
@@ -109,81 +109,7 @@
                     <button title="Aplicar filtro" id="findEquipmentButon" class="findEquipmentButon"><i class='bx bx-search-alt'
                       undefined></i></button>
                   </div>
-                  <div class="EquipmentLables">
-                    <div class="label">
-                      <div class="equipmentImage">
-                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
-                        <p>CODIGO###</p>
-                      </div>
-                      <div class="EquipmentInformation">
-                        <div>
-                          <p>Equipamiento XXXXXXXXXXXX</p>
-                          <p>Precio: $#####</p>
-                        </div>
-                        <div class="buttonEquipmentLable">
-                          <input type="text" name="" id="">
-                          <label for="">/###</label>
-                          <button>+</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    
-                    <div class="label">
-                      <div class="equipmentImage">
-                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
-                        <p>CODIGO###</p>
-                      </div>
-                      <div class="EquipmentInformation">
-                        <div>
-                          <p>Equipamiento XXXXXXXXXXXX</p>
-                          <p>Precio: $#####</p>
-                        </div>
-                        <div class="buttonEquipmentLable">
-                          <input type="text" name="" id="">
-                          <label for="">/###</label>
-                          <button>+</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    
-                    <div class="label">
-                      <div class="equipmentImage">
-                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
-                        <p>CODIGO###</p>
-                      </div>
-                      <div class="EquipmentInformation">
-                        <div>
-                          <p>Equipamiento XXXXXXXXXXXX</p>
-                          <p>Precio: $#####</p>
-                        </div>
-                        <div class="buttonEquipmentLable">
-                          <input type="text" name="" id="">
-                          <label for="">/###</label>
-                          <button>+</button>
-                        </div>
-                      </div>
-                    </div>
-
-                    
-                    <div class="label">
-                      <div class="equipmentImage">
-                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
-                        <p>CODIGO###</p>
-                      </div>
-                      <div class="EquipmentInformation">
-                        <div>
-                          <p>Equipamiento XXXXXXXXXXXX</p>
-                          <p>Precio: $#####</p>
-                        </div>
-                        <div class="buttonEquipmentLable">
-                          <input type="text" name="" id="">
-                          <label for="">/###</label>
-                          <button>+</button>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="EquipmentLables" id="EquipmentLables">
                     
                   </div>
                 </div>
@@ -279,6 +205,7 @@
         </div>
       </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/rentals.js" defer></script>
 </body>
