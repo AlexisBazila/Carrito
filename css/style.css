@@ -27,7 +27,12 @@ header{
   border-radius: 15px;
   background-color: #F7F7F7;
 }
-
+.modal-rent-content{
+  margin: 2% auto;
+  width: 90%;
+  border-radius: 15px;
+  background-color: #F7F7F7;
+}
 .modal-head {
   padding: 5px;
   border-radius: 15px 15px 0 0;
@@ -77,7 +82,7 @@ form label {
 
 form input {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   height: 30px;
   border: solid #BCC3CA 1px;
   border-radius: 6px;
@@ -90,17 +95,21 @@ input:focus {
 
 /* Formulario Alquiler */
 .rentForm{
-  display: flex;
-  align-items: top;
+
 }
 .rentForm div{
-  margin: 5px;
+  margin: 3px;
 }
-.rentForm input{
-  width: 80%;
-  height: 30px;
-}
+
 .SectionRentForm{
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.EquipmentSectionForm{
+  display: flex;
+  justify-content:baseline;
   border: solid #BCC3CA 1px;
   border-radius: 10px;
   padding: 5px;
@@ -119,9 +128,147 @@ input:focus {
 
 .rentDateForm{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.inputNameRent{
+  width: 500px;
+}
+
+.headForm{
+  display: flex;
+}
+
+.rentalViewTable {
+  width: 60%;
+  border-collapse: collapse;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-family: MS Sans Serif;
+  font-size: 9px;
+  text-align: left;
+  border: solid #E8EBEE 1px;
+  border-radius: 50px;
+  height: 250px;
+}
+
+.rentalViewTable td {
+  padding-left: 10px;
+}
+
+.rentalViewTable th {
+  padding-left: 10px;
+}
+.rentalEvenrow {
+  height: 50px;
+}
+
+.rentalOddrow {
+  background-color: #BCC3CA;
+  border: solid #E8EBEE 1px;
+  height: 50px;
+}
+
+.rentalHeadRow {
+  background-color: #BCC3CA;
+  border: solid #E8EBEE 1px;
+  font-size: 16px;
+  height: 30px;
+  
+}
+
+.infoDays p{
+  margin: 5px;
+}
+
+.SearchEquipments{
+  width: 30%;
+  padding: 5px;
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+}
+.rentalView{
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+}
+.rentalViewTable{
+  width: 95%;
+}
+.totalRent{
+  text-align: right;
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+  padding-right: 30px;
+}
+.totalRent p{
+  font-size: 20px;
+
+}
+.find{
+  display: flex;
+}
+.findEquipmentInput{
+  width: 300px;
+}
+.findEquipmentButon {
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: Trebuchet MS;
+  font-size: 20px;
+  font-weight: 100;
+  background-color: #17A2B8;
+  border: solid #17A2B8 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  height: 35px;
+  width: 35px;
+}
+
+.findEquipmentButon:hover {
+  background: #FFFFFF;
+  border: solid #17A2B8 1px;
+  color: #17A2B8;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.listEquipments{
+  width: 70%;
+  padding: 5px;
+  border: solid #BCC3CA 1px;
+  border-radius: 10px;
+}
+.equipmentImage{
+  width: 30%;
+  text-align: center;
+}
+.equipmentImage p{
+  margin: 2px;
+}
+.imgEquipment{
+  max-width: 100%;
+  height: auto;
+}
+.label{
+  display: flex;
+  border: solid #BCC3CA 1px;
+  border-radius: 5px;
+}
+.buttonEquipmentLable{
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.buttonEquipmentLable input{
+  width: 50px;
+}
+
+.EquipmentLables {
+  max-height: 280px;
+  overflow-y: auto;
+}
 /* CONTENIDO */
 .container {
   display: flex;
@@ -160,7 +307,6 @@ h1 {
   margin-left: 30px;
   font-family: MS Sans Serif;
   text-align: left;
-
 }
 
 .viewTable td {
@@ -186,7 +332,6 @@ h1 {
   border: solid #E8EBEE 1px;
   font-size: 20px;
   height: 70px;
-
 }
 
 

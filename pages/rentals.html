@@ -42,54 +42,231 @@
         </div>
         <!-- SECCION DE ALTA -->
         <div id="RentalModal" class="modal">
-          <div class="modal-content">
+          <div class="modal-rent-content">
             <div class="modal-head">
               <span class="close" id="closeModal">&times;</span>
               <h2>ALTA ALQUILER</h2>
             </div>
             <!-- FORMULARIO --> 
             <form class="rentForm">
+              <div class="headForm">
 
-              <div class="SectionRentForm">
-                <div class="input-div">
-                  <label for="idCusSelect">Cliente:</label>
-                  <select name="customers" id="idCusSelect">
-                    <option value="">--Seleccione un Cliente--</option>
-                  </select>
-                </div> 
-                <div class="dataCus">
-                  <p class="titleP">Nombre:</p>
-                  <p class="titleP">Cuit/DNI:</p>
-                  <p class="titleP">Telefono:</p>
-                </div>
+                              <div class="SectionRentForm">
+                                <div class="input-div">
+                                  <label for="idCusSelect">Cliente:</label>
+                                  <select name="customers" id="idCusSelect">
+                                    <option value="">--Seleccione un Cliente--</option>
+                                  </select>
+                                </div> 
+                                <div class="dataCus">
+                                  <p class="titleP">Nombre:</p>
+                                  <p class="titleP">Cuit/DNI:</p>
+                                  <p class="titleP">Telefono:</p>
+                                </div>
+                              </div>
+                
+                              <div class="eventSectionFomr">
+                                <div class="SectionRentForm">
+                                  <div class="eventRentForm">
+                                    <div class="input-div">
+                                      <label for="nameRent">Nombre del Evento:</label>
+                                      <input class="inputNameRent" type="text" id="nameRent" required />
+                                    </div>
+                                    <div class="input-div">
+                                      <label for="dateEve">Fecha del evento:</label>
+                                      <input type="date" id="dateEve">
+                                    </div>
+                                  </div>
+                                </div>
+                  
+                                <div class="SectionRentForm">
+                                  <div class="rentDateForm">
+                                    <div class="input-div">
+                                      <label for="dateStrRen">Alquiler desde:</label>
+                                      <input type="date" id="dateStrRen">
+                                    </div>
+                                    <div class="input-div">
+                                      <label for="dateEndRen">Alquiler hasta:</label>
+                                      <input type="date" id="dateEndRen">
+                                    </div>
+                                    <div class="infoDays">
+                                      <p>Cantidad de dias: ##</p>
+                                      <p>Fecha de devolucion: ##/##/####</p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
               </div>
 
-              <div class="eventSectionFomr">
-                <div class="SectionRentForm">
-                  <div class="eventRentForm">
+              <div class="EquipmentSectionForm">
+
+                <div class="SearchEquipments">
+                  <div class="find">
                     <div class="input-div">
-                      <label for="nameRent">Nombre del Evento:</label>
-                      <input type="text" id="nameRent" required />
+                      <label for="findEquipmentInput"></label>
+                      <input class="findEquipmentInput" type="text" id="findEquipmentInput">
                     </div>
-                    <div class="input-div">
-                      <label for="dateEve">Fecha del evento:</label>
-                      <input type="date" id="dateEve">
+                    <button title="Aplicar filtro" id="findEquipmentButon" class="findEquipmentButon"><i class='bx bx-search-alt'
+                      undefined></i></button>
+                  </div>
+                  <div class="EquipmentLables">
+                    <div class="label">
+                      <div class="equipmentImage">
+                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
+                        <p>CODIGO###</p>
+                      </div>
+                      <div class="EquipmentInformation">
+                        <div>
+                          <p>Equipamiento XXXXXXXXXXXX</p>
+                          <p>Precio: $#####</p>
+                        </div>
+                        <div class="buttonEquipmentLable">
+                          <input type="text" name="" id="">
+                          <label for="">/###</label>
+                          <button>+</button>
+                        </div>
+                      </div>
                     </div>
+
+                    
+                    <div class="label">
+                      <div class="equipmentImage">
+                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
+                        <p>CODIGO###</p>
+                      </div>
+                      <div class="EquipmentInformation">
+                        <div>
+                          <p>Equipamiento XXXXXXXXXXXX</p>
+                          <p>Precio: $#####</p>
+                        </div>
+                        <div class="buttonEquipmentLable">
+                          <input type="text" name="" id="">
+                          <label for="">/###</label>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                    <div class="label">
+                      <div class="equipmentImage">
+                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
+                        <p>CODIGO###</p>
+                      </div>
+                      <div class="EquipmentInformation">
+                        <div>
+                          <p>Equipamiento XXXXXXXXXXXX</p>
+                          <p>Precio: $#####</p>
+                        </div>
+                        <div class="buttonEquipmentLable">
+                          <input type="text" name="" id="">
+                          <label for="">/###</label>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                    <div class="label">
+                      <div class="equipmentImage">
+                        <img src="../img/equipamiento/noimage.jpg" alt="" class="imgEquipment">
+                        <p>CODIGO###</p>
+                      </div>
+                      <div class="EquipmentInformation">
+                        <div>
+                          <p>Equipamiento XXXXXXXXXXXX</p>
+                          <p>Precio: $#####</p>
+                        </div>
+                        <div class="buttonEquipmentLable">
+                          <input type="text" name="" id="">
+                          <label for="">/###</label>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
-  
-                <div class="SectionRentForm">
-                  <div class="rentDateForm">
-                    <div class="input-div">
-                      <label for="dateStrRen">Alquiler desde:</label>
-                      <input type="date" id="dateStrRen">
-                    </div>
-                    <div class="input-div">
-                      <label for="dateEndRen">Alquiler hasta:</label>
-                      <input type="date" id="dateEndRen">
-                    </div>
+
+                <div class="listEquipments">
+                  <div class="rentalView">
+
+                    <table class="rentalViewTable" id="tableEquipment">
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                      <tr class="rentalHeadRow">
+                        <th>Codigo</th>
+                        <th>Articulo</th>
+                        <th>cantidad</th>
+                        <th>Precio Alquiler</th>
+                        <th>Subtotal</th>
+                        <th>Remover</th>
+                      </tr>
+                    </table>
+                  </div>
+
+                  <div class="totalRent">
+                    <p>TOTAL:$######</p>
                   </div>
                 </div>
+                <div class="totals">
+
+                </div>
+
               </div>
           
             </form>
