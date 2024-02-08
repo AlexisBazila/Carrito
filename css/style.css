@@ -144,7 +144,7 @@ input:focus {
 }
 
 .rentalViewTable {
-  width: 60%;
+  width: 95%;
   border-collapse: collapse;
   margin-top: 5px;
   margin-left: 10px;
@@ -153,7 +153,6 @@ input:focus {
   text-align: left;
   border: solid #E8EBEE 1px;
   border-radius: 50px;
-  height: 250px;
 }
 
 .rentalViewTable td {
@@ -164,20 +163,22 @@ input:focus {
   padding-left: 10px;
 }
 .rentalEvenrow {
-  height: 50px;
+  height: 20px;
+  font-size: 14px;
 }
 
 .rentalOddrow {
   background-color: #BCC3CA;
   border: solid #E8EBEE 1px;
-  height: 50px;
+  height: 20px;
+  font-size: 14px;
 }
 
 .rentalHeadRow {
   background-color: #BCC3CA;
   border: solid #E8EBEE 1px;
   font-size: 16px;
-  height: 30px;
+  max-height: 30px;
   
 }
 
@@ -192,15 +193,13 @@ input:focus {
   border-radius: 10px;
 }
 .rentalView{
-  border: solid #BCC3CA 1px;
+  /* border: solid #BCC3CA 1px; */
   border-radius: 10px;
   max-height: 250px;
   overflow-y: auto;
+  height: 250px;
 }
-.rentalViewTable{
-  width: 95%;
 
-}
 .totalRent{
   text-align: right;
   border: solid #BCC3CA 1px;

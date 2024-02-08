@@ -8,6 +8,7 @@ let countRent = 1;
 let countPart = 1;
 let countEquipmentRent=1;
 let idEditRent = NaN;
+let total = 0;
 const today = DateTime.now();
 // Fechas
 let dateStr = NaN;
@@ -19,10 +20,10 @@ if (localStorage.getItem("Rentals")){
     countRent += Rentals.length;
 }
 // Lista de equipamientos en alquileres
-if (localStorage.getItem("equipmentsRent")) {
-  equipmentsRent = JSON.parse(localStorage.getItem("equipmentsRent"));
-  countEquipmentRent += equipmentsRent.length;
-}
+// if (localStorage.getItem("equipmentsRent")) {
+//   equipmentsRent = JSON.parse(localStorage.getItem("equipmentsRent"));
+//   countEquipmentRent += equipmentsRent.length;
+// }
 // Lista de equipamientos
 let Equipments = new Array();
 if (localStorage.getItem("Equipments")) {
@@ -36,14 +37,16 @@ if (localStorage.getItem("Customers")) {
 
 // Elementos globales
 let footModal = document.getElementById("footModalMsg");
+
 //DEFINICION DE CLASES
 class rental{
-    constructor(){
+    constructor(rentedEquipment){
         this.idRent = countRent
         this.nameRent = document.getElementById("nameRent").value;
         this.dateEve = document.getElementById("dateEve").value;
         this.dateStrRen = document.getElementById("dateStrRen").value;
         this.dateEndRen = document.getElementById("dateEndRen").value;
+        this.rentedEquipment = rentedEquipment;
         
         document.getElementById("nameRent").value = "";
         document.getElementById("dateEve").value = "";
@@ -53,16 +56,16 @@ class rental{
 }
 
 class rentedEquipment{
-  constructor(id, codEqui,amount){
-    let i = Equipments.findIndex(equipo => equipo.idEqui === codEqui);
-
-    this.id = id;
-    this.codEqui = codEqui;
-    this.nameEqui = Equipments[i].nameEqui;
-    this.pRenEqui = Equipments[i].pRenEqui;
-    this.sub= parseFloat(Equipments[i].pRenEqui) * amount;
+  constructor(codEqui,amount){
+    this.idEqui = codEqui
+    this.codEqui = Equipments[codEqui].codEqui;
+    this.nameEqui = Equipments[codEqui].nameEqui;
+    this.amount = amount;
+    this.pRenEqui = Equipments[codEqui].pRenEqui;
+    this.sub= parseFloat(Equipments[codEqui].pRenEqui) * amount;
   }
 }
+
 //VENTANAS MODALES
 // Alta
 let openFormButton = document.getElementById("openFormButton");
@@ -79,7 +82,6 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
-
 // carga de clientes en select
 let idCusSelect = document.getElementById("idCusSelect");
 for (let i = 0; i < Customers.length; i++) {
@@ -104,9 +106,9 @@ for (let i = 0; i < Equipments.length; i++) {
         <p>Precio: $${Equipments[i].pRenEqui}</p>
       </div>
       <div class="buttonEquipmentLable">
-        <input type="number" id="cantEqui${i}">
-        <label for="">/${Equipments[i].avaEqui}</label>
-        <button onclick="addEquipment(${i})">+</button>
+        <input type="number" min="0" max="${Equipments[i].avaEqui}" id="cantEqui${i}">
+        <label id="labelCantEqui${i}">/${Equipments[i].avaEqui}</label>
+        <button type="button" onclick="addEquipment(${i})">+</button>
       </div>
     </div>
   </div>
@@ -135,7 +137,6 @@ idCusSelect.onchange = function() {
 let dateStrRen = document.getElementById("dateStrRen")
 let dateEndRen = document.getElementById("dateEndRen")
 let infoDays = document.getElementById("infoDays");
-
 dateStrRen.onchange = function(){
   dateStr = parseDate(dateStrRen.value);
   dateEnd = parseDate(dateEndRen.value);
@@ -151,7 +152,6 @@ dateStrRen.onchange = function(){
     }
   }
 }
-
 dateEndRen.onchange = function(){
   dateStr = parseDate(dateStrRen.value);
   dateEnd = parseDate(dateEndRen.value);
@@ -168,7 +168,9 @@ dateEndRen.onchange = function(){
   }
 }
 
+
 // DEFINICION DE FUNCIONES
+// Configuracion de fechas
 function parseDate(dateString) {
   let parts = dateString.split('-');
   let year = parseInt(parts[0]);
@@ -176,12 +178,12 @@ function parseDate(dateString) {
   let day = parseInt(parts[2]);
   return DateTime.local(year, month, day);
 }
-
+// Contar dias
 function countDays(start , end){
   const i = Interval.fromDateTimes(start, end);
   return Math.round(i.length("days"))
 }
-
+// calculo de dia de devolucion
 function calReturnDate(end){
   // Si el alquiler finaliza los dias Miercoles o Domingos como el comercio no atiende esos dias, la fecha de dovolucion pasa a ser el dia siguiente sin sumar dias de alquiler
   if(end.weekday == 3 || end.weekday == 7){
@@ -191,17 +193,88 @@ function calReturnDate(end){
     return end.toLocaleString(DateTime.DATE_SHORT)
   }
 }
-
+// Carga de equipamiento alquilado
 function addEquipment(id){
-  let cantEqui = document.getElementById(`cantEqui${id}`).value
-  equipmentRent[0]= id;
-  equipmentRent[1]= cantEqui;
-  equipmentRent[2]= cantEqui * (Equipments[id].pRenEqui);
-  alert(equipmentRent)
-
+  let cantEqui = document.getElementById(`cantEqui${id}`);
+  let avaEqui = document.getElementById(`labelCantEqui${id}`);
+  footModal.innerHTML = "";
+  let rest =0;
+  let existingIndex = equipmentsRent.findIndex(item => item.idEqui === id);
+  if(parseInt(cantEqui.value)>=1){
+    if (existingIndex !== -1){
+      let existAmount = parseInt(equipmentsRent[existingIndex].amount);
+      existAmount += parseInt(cantEqui.value);
+      rest = parseInt(Equipments[id].avaEqui) - existAmount
+      if(rest>=0){
+        avaEqui.innerText= `/${rest}`;
+        cantEqui.max= rest;
+        equipmentsRent[existingIndex].amount = existAmount;
+        let existSub = parseFloat(equipmentsRent[existingIndex].pRenEqui) * existAmount;
+        equipmentsRent[existingIndex].sub= existSub;
+        cantEqui.value=""
+      }else{
+        footModal.innerHTML = "!La cantidad que desea alquilar excede el stock disponible";
+      }
+    }else{
+      equipmentsRent.push(new rentedEquipment(id, cantEqui.value));
+      rest = parseInt(Equipments[id].avaEqui) - parseInt(cantEqui.value) 
+      avaEqui.innerText= `/${rest}`
+      cantEqui.max= rest;
+      cantEqui.value=""
+    }
+  }else{
+    footModal.innerHTML = "!Debe definir la cantidad que desea alquilar";
+  }
+    listEquipments();
+  }
+// Listar equipamientos
+function listEquipments(){
+  let tabEqui = document.getElementById("tableEquipment");
+    tabEqui.innerHTML = ``
+    total = 0;
+    document.getElementById("total").innerText=`TOTAL:$${total}`
+    tabEqui.innerHTML += `
+      <tr class="rentalHeadRow">
+        <th>Codigo</th>
+        <th>Articulo</th>
+        <th>cantidad</th>
+        <th>Precio Alquiler</th>
+        <th>Subtotal</th>
+        <th>Remover</th>
+      </tr>
+      `
+    for (let i = 0; i < equipmentsRent.length; i++) {
+      let rowClass = i % 2 === 0 ? "rentalEvenrow" : "rentalOddrow";
+      tabEqui.innerHTML += `
+        <tr class="${rowClass}">
+            <td>${equipmentsRent[i].codEqui}</td>
+            <td>${equipmentsRent[i].nameEqui}</td>
+            <td>${equipmentsRent[i].amount}</td>
+            <td>$${equipmentsRent[i].pRenEqui}</td>
+            <td>${equipmentsRent[i].sub}</td>
+            <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${equipmentsRent[i].idEqui})"><i class='bx bx-trash'></i></button></th>
+          </tr>
+        `
+        total += parseFloat(equipmentsRent[i].sub)
+        document.getElementById("total").innerText=`TOTAL:$${total}`
+    }
+}
+//Alta
+function addRents(){
+  Rentals.push(new rental(equipmentsRent));
+  // listEquipments();
+  // countEqui += 1
+  // modal.style.display = "none";
+  alert(Rentals[0].rentedEquipment);
 }
 //BOTONES
 // Alta
+let addRent = document.getElementById("addRent");
+addRent.addEventListener("click", (e) => {
+  e.preventDefault();
+  addRents();
+}
+)
 
 
 //CARGA
