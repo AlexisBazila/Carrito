@@ -3,9 +3,10 @@ const DateTime = luxon.DateTime;
 const Interval = luxon.Interval;
 // DEFINICION DE VARIABLES
 let Rentals = new Array();
-let equipmentRent = new Array();
+let equipmentsRent = new Array();
 let countRent = 1;
 let countPart = 1;
+let countEquipmentRent=1;
 let idEditRent = NaN;
 const today = DateTime.now();
 // Fechas
@@ -16,6 +17,11 @@ let dateEnd = NaN;
 if (localStorage.getItem("Rentals")){
     Rentals = JSON.parse(localStorage.getItem("Rentals"));
     countRent += Rentals.length;
+}
+// Lista de equipamientos en alquileres
+if (localStorage.getItem("equipmentsRent")) {
+  equipmentsRent = JSON.parse(localStorage.getItem("equipmentsRent"));
+  countEquipmentRent += equipmentsRent.length;
 }
 // Lista de equipamientos
 let Equipments = new Array();
@@ -46,6 +52,17 @@ class rental{
     }
 }
 
+class rentedEquipment{
+  constructor(id, codEqui,amount){
+    let i = Equipments.findIndex(equipo => equipo.idEqui === codEqui);
+
+    this.id = id;
+    this.codEqui = codEqui;
+    this.nameEqui = Equipments[i].nameEqui;
+    this.pRenEqui = Equipments[i].pRenEqui;
+    this.sub= parseFloat(Equipments[i].pRenEqui) * amount;
+  }
+}
 //VENTANAS MODALES
 // Alta
 let openFormButton = document.getElementById("openFormButton");
@@ -169,6 +186,8 @@ function calReturnDate(end){
   // Si el alquiler finaliza los dias Miercoles o Domingos como el comercio no atiende esos dias, la fecha de dovolucion pasa a ser el dia siguiente sin sumar dias de alquiler
   if(end.weekday == 3 || end.weekday == 7){
     end = end.plus({ day: 1})
+    return end.toLocaleString(DateTime.DATE_SHORT)
+  }else{
     return end.toLocaleString(DateTime.DATE_SHORT)
   }
 }
