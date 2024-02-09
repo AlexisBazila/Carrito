@@ -41,17 +41,45 @@ let footModal = document.getElementById("footModalMsg");
 //DEFINICION DE CLASES
 class rental{
     constructor(rentedEquipment){
+        let dateStrRen = document.getElementById("dateStrRen")
+        let dateEndRen = document.getElementById("dateEndRen")
+        dateStr = parseDate(dateStrRen.value);
+        dateEnd = parseDate(dateEndRen.value);
+
         this.idRent = countRent
         this.nameRent = document.getElementById("nameRent").value;
         this.dateEve = document.getElementById("dateEve").value;
         this.dateStrRen = document.getElementById("dateStrRen").value;
         this.dateEndRen = document.getElementById("dateEndRen").value;
+        this.amountDays = countDays(dateStr, dateEnd);
+        this.dateReturn = calReturnDate(dateEnd)
         this.rentedEquipment = rentedEquipment;
+        this.total = total
         
         document.getElementById("nameRent").value = "";
         document.getElementById("dateEve").value = "";
         document.getElementById("dateStrRen").value = "";
         document.getElementById("dateEndRen").value = "";
+        document.getElementById("total").innerText=`TOTAL:$0`
+        total=0
+        let tabEqui = document.getElementById("tableEquipment");
+        tabEqui.innerHTML = ``
+        tabEqui.innerHTML += `
+          <tr class="rentalHeadRow">
+            <th>Codigo</th>
+            <th>Articulo</th>
+            <th>cantidad</th>
+            <th>Precio Alquiler</th>
+            <th>Subtotal</th>
+            <th>Remover</th>
+          </tr>
+          `
+          let dataCus = document.getElementById("dataCus");
+            dataCus.innerHTML = `
+            <p class="titleP"><b>Nombre:</b></p>
+            <p class="titleP"><b>Cuit/DNI:</b></p>
+            <p class="titleP"><b>Telefono:</b></p>
+          `
     }
 }
 
@@ -262,10 +290,46 @@ function listEquipments(){
 //Alta
 function addRents(){
   Rentals.push(new rental(equipmentsRent));
-  // listEquipments();
-  // countEqui += 1
-  // modal.style.display = "none";
-  alert(Rentals[0].rentedEquipment);
+  listRentals();
+  countRent += 1
+  modal.style.display = "none";
+  alert(Rentals.length);
+}
+// Listar
+function listRentals() {
+  let tabRent = document.getElementById("tableRentals");
+  tabRent.innerHTML = ``
+  tabRent.innerHTML += `
+      <tr class="headRow">
+        <th>ID</th>
+        <th>Evento</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th>Devolucion</th>
+        <th>Cant. dias</th>
+        <th>Total</th>
+        <th colspan="3">Acciones</th>
+      </tr>
+    `
+  for (let i = 0; i < Rentals.length; i++) {
+    let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
+    tabRent.innerHTML += `
+      <tr class="${rowClass}">
+          <td>${Rentals[i].idRent}</td>
+          <td>${Rentals[i].nameRent}</td>
+          <td>${Rentals[i].dateStrRen}</td>
+          <td>${Rentals[i].dateEndRen}</td>
+          <td>${Rentals[i].dateReturn}</td>
+          <td>${Rentals[i].amountDays}</td>
+          <td>$${Rentals[i].total}</td>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${Rentals[i].idEqui})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewEqui${i}"><i class='bx bx-spreadsheet' onclick="viewEquipment(${Rentals[i].idEqui})"></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editEqui${i}" onclick="openEditEquipment(${Rentals[i].idEqui})"><i class='bx bx-edit-alt'></i></button></th>
+        </tr>
+      `
+    const jsonCost = JSON.stringify(Rentals);
+    localStorage.setItem("Rentals", jsonCost);
+  }
 }
 //BOTONES
 // Alta
@@ -278,3 +342,14 @@ addRent.addEventListener("click", (e) => {
 
 
 //CARGA
+if (localStorage.getItem("Rentals")) {
+  listRentals();
+} else {
+  let tabRent = document.getElementById("tableRentals");
+  tabRent.innerHTML = ``
+  tabRent.innerHTML += `
+      <tr>
+        <th>NO EXISTEN ALQUILERES PARA MOSTRAR, CARGE UN NUEVO ALQUILER DESDE EL BOTON "+ Registrar Alquiler"</th>
+      </tr>
+    `
+}

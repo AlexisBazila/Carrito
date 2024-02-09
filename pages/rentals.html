@@ -1,147 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rentals</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rentals</title>
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
-
-<body>
-    <header>
-      
-    </header>
+  <body>
+    <header></header>
     <main>
       <div class="container">
         <nav class="sidebar">
-          <img class="logo" src="../img/eventos.png" alt="">
+          <img class="logo" src="../img/eventos.png" alt="" />
           <ul>
-            <li> <a href="../index.html"><i class='bx bx-home' style='color:#ffffff'></i>
+            <li>
+              <a href="../index.html"
+                ><i class="bx bx-home" style="color: #ffffff"></i>
                 <p>Inicio</p>
-              </a></li>
-            <li><a href="./customers.html"> <i class='bx bx-user-circle' style='color:#ffffff'></i>
+              </a>
+            </li>
+            <li>
+              <a href="./customers.html">
+                <i class="bx bx-user-circle" style="color: #ffffff"></i>
                 <p>Clientes</p>
-              </a></li>
-            <li><a href="./rentals.html"> <i class='bx bxs-calendar-check' style='color:#ffffff'></i>
+              </a>
+            </li>
+            <li>
+              <a href="./rentals.html">
+                <i class="bx bxs-calendar-check" style="color: #ffffff"></i>
                 <p>Alquileres</p>
-              </a></li>
-            <li><a href="./equipments.html"><i class='bx bx-chair' style='color:#ffffff'></i>
+              </a>
+            </li>
+            <li>
+              <a href="./equipments.html"
+                ><i class="bx bx-chair" style="color: #ffffff"></i>
                 <p>Equipamientos</p>
-              </a></li>
+              </a>
+            </li>
           </ul>
         </nav>
 
         <div class="data-content">
-        <!-- TITULO -->
-        <div class="headerDataContent">
-          <i class='bx bxs-calendar-check'></i>
-          <h1>ALQUILERES</h1>
-          <button id="openFormButton" class="openCliFormButton">+ Registrar Alquiler</button>
-        </div>
-        <!-- SECCION DE ALTA -->
-        <div id="RentalModal" class="modal">
-          <div class="modal-rent-content">
-            <div class="modal-head">
-              <span class="close" id="closeModal">&times;</span>
-              <h2>ALTA ALQUILER</h2>
-            </div>
-            <!-- FORMULARIO --> 
-            <form class="rentForm">
-              <div class="headForm">
+          <!-- TITULO -->
+          <div class="headerDataContent">
+            <i class="bx bxs-calendar-check"></i>
+            <h1>ALQUILERES</h1>
+            <button id="openFormButton" class="openCliFormButton">
+              + Registrar Alquiler
+            </button>
+          </div>
 
-                              <div class="SectionRentForm">
-                                <div class="input-div">
-                                  <label for="idCusSelect">Cliente:</label>
-                                  <select name="customers" id="idCusSelect">
-                                    <option value="">--Seleccione un Cliente--</option>
-                                  </select>
-                                </div> 
-                                <div class="dataCus" id="dataCus">
-                                  <p class="titleP"><b>Nombre:</b></p>
-                                  <p class="titleP"><b>Cuit/DNI:</b></p>
-                                  <p class="titleP"><b>Telefono:</b></p>
-                                </div>
-                              </div>
-                
-                              <div class="eventSectionFomr">
-                                <div class="SectionRentForm">
-                                  <div class="eventRentForm">
-                                    <div class="input-div">
-                                      <label for="nameRent">Nombre del Evento:</label>
-                                      <input class="inputNameRent" type="text" id="nameRent"/>
-                                    </div>
-                                    <div class="input-div">
-                                      <label for="dateEve">Fecha del evento:</label>
-                                      <input type="date" id="dateEve">
-                                    </div>
-                                  </div>
-                                </div>
-                  
-                                <div class="SectionRentForm">
-                                  <div class="rentDateForm">
-                                    <div class="input-div">
-                                      <label for="dateStrRen">Alquiler desde:</label>
-                                      <input type="date" id="dateStrRen">
-                                    </div>
-                                    <div class="input-div">
-                                      <label for="dateEndRen">Alquiler hasta:</label>
-                                      <input type="date" id="dateEndRen">
-                                    </div>
-                                    <div class="infoDays" id="infoDays">
-                                      <p><b>Cantidad de dias:</b></p>
-                                      <p><b>Fecha de devolucion:</b></p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+          <!-- SECCION DE ALTA -->
+          <div id="RentalModal" class="modal">
+            <div class="modal-rent-content">
+              <div class="modal-head">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>ALTA ALQUILER</h2>
               </div>
-
-              <div class="EquipmentSectionForm">
-
-                <div class="SearchEquipments">
-                  <div class="find">
+              <!-- FORMULARIO -->
+              <form class="rentForm">
+                <div class="headForm">
+                  <div class="SectionRentForm">
                     <div class="input-div">
-                      <label for="findEquipmentInput"></label>
-                      <input class="findEquipmentInput" type="text" id="findEquipmentInput">
+                      <label for="idCusSelect">Cliente:</label>
+                      <select name="customers" id="idCusSelect">
+                        <option value="">--Seleccione un Cliente--</option>
+                      </select>
                     </div>
-                    <button title="Aplicar filtro" id="findEquipmentButon" class="findEquipmentButon"><i class='bx bx-search-alt'
-                      undefined></i></button>
+                    <div class="dataCus" id="dataCus">
+                      <p class="titleP"><b>Nombre:</b></p>
+                      <p class="titleP"><b>Cuit/DNI:</b></p>
+                      <p class="titleP"><b>Telefono:</b></p>
+                    </div>
                   </div>
-                  <div class="EquipmentLables" id="EquipmentLables">
-                    
+
+                  <div class="eventSectionFomr">
+                    <div class="SectionRentForm">
+                      <div class="eventRentForm">
+                        <div class="input-div">
+                          <label for="nameRent">Nombre del Evento:</label>
+                          <input
+                            class="inputNameRent"
+                            type="text"
+                            id="nameRent"
+                          />
+                        </div>
+                        <div class="input-div">
+                          <label for="dateEve">Fecha del evento:</label>
+                          <input type="date" id="dateEve" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="SectionRentForm">
+                      <div class="rentDateForm">
+                        <div class="input-div">
+                          <label for="dateStrRen">Alquiler desde:</label>
+                          <input type="date" id="dateStrRen" />
+                        </div>
+                        <div class="input-div">
+                          <label for="dateEndRen">Alquiler hasta:</label>
+                          <input type="date" id="dateEndRen" />
+                        </div>
+                        <div class="infoDays" id="infoDays">
+                          <p><b>Cantidad de dias:</b></p>
+                          <p><b>Fecha de devolucion:</b></p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="listEquipments">
-                  <div class="rentalView">
-
-                    <table class="rentalViewTable" id="tableEquipment">
-                      <tr class="rentalHeadRow">
-                        <th>Codigo</th>
-                        <th>Articulo</th>
-                        <th>cantidad</th>
-                        <th>Precio Alquiler</th>
-                        <th>Subtotal</th>
-                        <th>Remover</th>
-                      </tr>
-                    </table>
+                <div class="EquipmentSectionForm">
+                  <div class="SearchEquipments">
+                    <div class="find">
+                      <div class="input-div">
+                        <label for="findEquipmentInput"></label>
+                        <input
+                          class="findEquipmentInput"
+                          type="text"
+                          id="findEquipmentInput"
+                        />
+                      </div>
+                      <button
+                        title="Aplicar filtro"
+                        id="findEquipmentButon"
+                        class="findEquipmentButon"
+                      >
+                        <i class="bx bx-search-alt" undefined></i>
+                      </button>
+                    </div>
+                    <div class="EquipmentLables" id="EquipmentLables"></div>
                   </div>
 
-                  <div class="totalRent">
-                    <p id="total">TOTAL:$######</p>
+                  <div class="listEquipments">
+                    <div class="rentalView">
+                      <table class="rentalViewTable" id="tableEquipment">
+                        <tr class="rentalHeadRow">
+                          <th>Codigo</th>
+                          <th>Articulo</th>
+                          <th>cantidad</th>
+                          <th>Precio Alquiler</th>
+                          <th>Subtotal</th>
+                          <th>Remover</th>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="totalRent">
+                      <p id="total">TOTAL:$0</p>
+                    </div>
                   </div>
                 </div>
-
+              </form>
+              <div class="modal-foot">
+                <p class="errorMsg" id="footModalMsg"></p>
+                <button class="addBtn" id="addRent">
+                  <i class="bx bx-check"></i>
+                </button>
               </div>
-          
-            </form>
-            <div class="modal-foot">
-              <p class="errorMsg" id="footModalMsg"></p>
-              <button class="addBtn" id="addRent"><i class='bx bx-check'></i></button>
             </div>
           </div>
+
+           <!-- SECCION DE BUSQUEDA -->
+        <div class="find-content">
+          <h2>BUSCAR ALQUILER:</h2>
+          <form name="findForm">
+            <label for="nameFindEqui">Nombre:</label>
+            <input type="text" id="nameFindEqui" />
+            <label for="codFindEqui">Codigo:</label>
+            <input type="text" id="codFindEqui">
+          </form>
+          <div>
+            <button title="Aplicar filtro" id="findButton" class="findButon"><i class='bx bx-search-alt'
+                undefined></i></button>
+            <button title="Quitar filtro" id="unFindButton" class="findButon"><i class='bx bx-eraser'></i></button>
+          </div>
+        </div>
+
+        <!-- TABLA DE LISTADO -->
+        <div id="viewRentals">
+          <table class="viewTable" id="tableRentals">
+          </table>
         </div>
         </div>
       </div>
@@ -149,6 +194,5 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/rentals.js" defer></script>
-</body>
-
+  </body>
 </html>
