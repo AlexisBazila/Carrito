@@ -29,7 +29,7 @@ header{
 }
 .modal-rent-content{
   margin: 2% auto;
-  width: 90%;
+  max-width: 1200px;
   border-radius: 15px;
   background-color: #F7F7F7;
 }
@@ -246,7 +246,7 @@ input:focus {
   border-radius: 10px;
 }
 .equipmentImage{
-  width: 30%;
+  width: 150px;
   text-align: center;
 }
 .equipmentImage p{
@@ -267,14 +267,23 @@ input:focus {
   justify-content: right;
 }
 .buttonEquipmentLable input{
-  width: 50px;
+  width: 70px;
+  height: 25px;
 }
-
+.buttonEquipmentLable label{
+  font-size: 20px;
+  margin-right: 10px;
+}
 .EquipmentLables {
   max-height: 280px;
   overflow-y: auto;
 }
-
+.buttonEquipmentLable button{
+  background-color: #28A745;
+}
+.EquipmentInformation{
+  width: 100%;
+}
 /* CONTENIDO */
 .container {
   display: flex;
@@ -560,6 +569,30 @@ header {
   color: #FFFFFF;
   font-size: 25px;
 }
+
+.rentIndicator{
+  background-color: #21889E;
+  height: 200px;
+  width: 200px;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 0 5px 0px 5px;
+  text-align: center;
+}
+.rentIndicator:hover{
+  background-color: #32C3E4;
+}
+.rentIndicator i{
+  color: #8CE2EF;
+  font-size: 80px;
+}
+
+.rentIndicator div p{
+  color: #FFFFFF;
+  font-size: 25px;
+}
+
+
 .indicatorNumber{
   color: #FFFFFF;
   font-size: 100px;
