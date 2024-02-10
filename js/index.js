@@ -19,3 +19,21 @@ countEqui.innerHTML=`${Equipments.length}`
 
 let countRent = document.getElementById("countRent");
 countRent.innerHTML=`${Rentals.length}`
+
+let demo = document.getElementById("demo");
+demo.addEventListener("click", async (e) => {
+  e.preventDefault();
+  await traerDatos("../json/customers.json", Customers, "Customers");
+  await traerDatos("../json/equipments.json", Equipments, "Equipments");
+  location.reload();
+});
+
+const traerDatos = async (ruta, array, table) => {
+  try {
+    const response = await fetch(ruta);
+    array = await response.json();
+    localStorage.setItem(table, JSON.stringify(array));
+  } catch (error) {
+    console.log(error);
+  }
+};

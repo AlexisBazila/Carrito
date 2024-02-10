@@ -1,13 +1,18 @@
 ///DEFINICION DE VARIABLES
 let Customers = new Array();
-if (localStorage.getItem("Customers")) {
-  Customers = JSON.parse(localStorage.getItem("Customers"));
-}
+let countCus = 1;
+// if (localStorage.getItem("Customers")) {
+//   Customers = JSON.parse(localStorage.getItem("Customers"));
+//   countCus += Customers.length
+// }
+Customers = localStorage.getItem("Customers") ? JSON.parse(localStorage.getItem("Customers")) : [];
+countCus += Customers.length;
 let idEditCustomer = NaN;
 
 //DEFINICION DE CLASES
 class customer {
   constructor() {
+    this.idCus = countCus;
     this.nameCus = document.getElementById("nameCus").value;
     this.cuitdni = document.getElementById("cuitdni").value;
     this.telefon = document.getElementById("telCus").value;
@@ -77,7 +82,7 @@ function listCustomers() {
     let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
     tabCos.innerHTML += `
       <tr class="${rowClass}">
-          <td>${i}</td>
+          <td>${Customers[i].idCus}</td>
           <td>${Customers[i].cuitdni}</td>
           <td>${Customers[i].nameCus}</td>
           <td>${Customers[i].telefon}</td>
@@ -88,6 +93,7 @@ function listCustomers() {
       `
     const jsonCost = JSON.stringify(Customers);
     localStorage.setItem("Customers", jsonCost);
+    countCus += Customers.length
   }
 }
 // Eliminar

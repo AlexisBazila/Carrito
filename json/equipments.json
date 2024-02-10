@@ -1,0 +1,52 @@
+[
+    {
+        "idEqui": 1,
+        "codEqui": "M001",
+        "nameEqui": "Mesa larga",
+        "pRenEqui": "2000",
+        "pRepEqui": "30000",
+        "stockEqui": "200",
+        "avaEqui": "200",
+        "picEqui": "../img/equipamiento/mesa-larga.jpg"
+    },
+    {
+        "idEqui": 2,
+        "codEqui": "M002",
+        "nameEqui": "Mesa redonda",
+        "pRenEqui": "2000",
+        "pRepEqui": "20000",
+        "stockEqui": "200",
+        "avaEqui": "200",
+        "picEqui": "../img/equipamiento/mesa-redonda.jpg"
+    },
+    {
+        "idEqui": 3,
+        "codEqui": "V001",
+        "nameEqui": "Vaso corto vistro",
+        "pRenEqui": "100",
+        "pRepEqui": "3000",
+        "stockEqui": "500",
+        "avaEqui": "500",
+        "picEqui": "../img/equipamiento/vaso.jpeg"
+    },
+    {
+        "idEqui": 4,
+        "codEqui": "S001",
+        "nameEqui": "Silla plastica",
+        "pRenEqui": "300",
+        "pRepEqui": "3500",
+        "stockEqui": "2000",
+        "avaEqui": "2000",
+        "picEqui": "../img/equipamiento/silla-plastica.jpg"
+    },
+    {
+        "idEqui": 5,
+        "codEqui": "S002",
+        "nameEqui": "Silla plegable madera",
+        "pRenEqui": "400",
+        "pRepEqui": "5000",
+        "stockEqui": "2000",
+        "avaEqui": "2000",
+        "picEqui": "../img/equipamiento/silla-madera.jpg"
+    }
+]

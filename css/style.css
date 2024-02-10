@@ -278,9 +278,24 @@ input:focus {
   max-height: 280px;
   overflow-y: auto;
 }
-.buttonEquipmentLable button{
+
+.buttonEquipmentLable button {
+  /* height: 40px;
+  width: 40px; */
+  border-radius: 5px;
+  margin: 5px;
+  /* font-size: 20px; */
+  color: #FFFFFF;
   background-color: #28A745;
+  border: solid #28A745 1px;
 }
+
+.buttonEquipmentLable button:hover {
+  background-color: #FFFFFF;
+  border: solid #28A745 1px;
+  color: #28A745;
+}
+
 .EquipmentInformation{
   width: 100%;
 }
@@ -605,3 +620,33 @@ header {
   align-items: center;
 }
 
+.demoDiv{
+width: 100%;
+text-align: center;
+border-radius: 10px;
+border: solid #DDDDDD 2px;
+}
+
+.demoBtn {
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: Trebuchet MS;
+  font-size: 70px;
+  font-weight: 100;
+  padding: 10px;
+  background-color: #7B36E2;
+  border: solid #7B36E2 1px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  margin: 30px;
+}
+
+.demoBtn:hover {
+  background: #fff;
+  border: solid #7B36E2 1px;
+  color: #7B36E2;
+  border-radius: 10px;
+  text-decoration: none;
+}
