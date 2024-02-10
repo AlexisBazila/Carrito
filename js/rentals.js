@@ -287,12 +287,26 @@ function listEquipments(){
             <td>${equipmentsRent[i].amount}</td>
             <td>$${equipmentsRent[i].pRenEqui}</td>
             <td>${equipmentsRent[i].sub}</td>
-            <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${equipmentsRent[i].idEqui})"><i class='bx bx-trash'></i></button></th>
+            <th><button type="buton" title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${equipmentsRent[i].idEqui})"><i class='bx bx-trash'></i></button></th>
           </tr>
         `
         total += parseFloat(equipmentsRent[i].sub)
         document.getElementById("total").innerText=`TOTAL:$${total}`
     }
+}
+// Eliminar equipamiento alquilado
+function dellEquipment(id){
+  let i = equipmentsRent.findIndex(equipo => equipo.idEqui === id);
+  let avaEqui = document.getElementById(`labelCantEqui${id}`);
+  let cantEqui = document.getElementById(`cantEqui${id}`);
+  let rest =  parseInt(avaEqui.textContent.trim().slice(1));
+  let existAmount = parseInt(equipmentsRent[i].amount);
+  
+  existAmount += parseInt(rest);
+  avaEqui.innerText= `/${existAmount}`
+  cantEqui.max= existAmount;
+  equipmentsRent.splice(i, 1);
+  listEquipments();
 }
 //Alta
 function addRents(){
