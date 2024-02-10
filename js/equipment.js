@@ -2,10 +2,6 @@
 let Equipments = new Array();
 let countEqui = 1;
 let idEditEquipment= NaN;
-// if (localStorage.getItem("Equipments")) {
-//   Equipments = JSON.parse(localStorage.getItem("Equipments"));
-//   countEqui += Equipments.length;
-// }
 Equipments = localStorage.getItem("Equipments") ? JSON.parse(localStorage.getItem("Equipments")) : [];
 countEqui += Equipments.length;
 //DEFINICION DE CLASES

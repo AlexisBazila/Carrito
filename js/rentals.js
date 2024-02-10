@@ -19,11 +19,6 @@ if (localStorage.getItem("Rentals")){
     Rentals = JSON.parse(localStorage.getItem("Rentals"));
     countRent += Rentals.length;
 }
-// Lista de equipamientos en alquileres
-// if (localStorage.getItem("equipmentsRent")) {
-//   equipmentsRent = JSON.parse(localStorage.getItem("equipmentsRent"));
-//   countEquipmentRent += equipmentsRent.length;
-// }
 // Lista de equipamientos
 let Equipments = new Array();
 if (localStorage.getItem("Equipments")) {
@@ -301,7 +296,7 @@ function dellEquipment(id){
   let cantEqui = document.getElementById(`cantEqui${id}`);
   let rest =  parseInt(avaEqui.textContent.trim().slice(1));
   let existAmount = parseInt(equipmentsRent[i].amount);
-  
+
   existAmount += parseInt(rest);
   avaEqui.innerText= `/${existAmount}`
   cantEqui.max= existAmount;
@@ -370,6 +365,54 @@ function listRentals() {
     localStorage.setItem("Rentals", jsonCost);
   }
 }
+// Filtrar alquileres entre 2 fechas
+function filterRentalsForDate(since, until){
+  let filterRentals = Rentals.filter(rental => {
+    let rentalDateStrRen = DateTime.fromISO(rental.dateStrRen);
+    let rentalDateReturn = DateTime.fromFormat(rental.dateReturn, "d/M/yyyy");
+    
+    return rentalDateStrRen >= since && rentalDateStrRen <= until &&
+           rentalDateReturn >= since && rentalDateReturn <= until;
+});
+
+}
+// Listar alquileres filtrados
+function listFilterRentals(filterRentals) {
+  let tabRent = document.getElementById("tableRentals");
+  tabRent.innerHTML = ``
+  tabRent.innerHTML += `
+      <tr class="headRow">
+        <th>ID</th>
+        <th>Evento</th>
+        <th colspan="2">Cliente</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th>Devolucion</th>
+        <th>Cant. dias</th>
+        <th>Total</th>
+        <th colspan="3">Acciones</th>
+      </tr>
+    `
+  for (let i = 0; i < filterRentals.length; i++) {
+    let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
+    tabRent.innerHTML += `
+      <tr class="${rowClass}">
+          <td>${filterRentals[i].idRent}</td>
+          <td>${filterRentals[i].nameRent}</td>
+          <td>${Customers[filterRentals[i].idCus].idCus}</td>
+          <td>${Customers[filterRentals[i].idCus].nameCus}</td>
+          <td>${filterRentals[i].dateStrRen}</td>
+          <td>${filterRentals[i].dateEndRen}</td>
+          <td>${filterRentals[i].dateReturn}</td>
+          <td>${filterRentals[i].amountDays}</td>
+          <td>$${filterRentals[i].total}</td>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${filterRentals[i].idRent}" onclick="dellRentals(${filterRentals[i].idRent})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewEqui${filterRentals[i].idRent}"><i class='bx bx-spreadsheet' onclick="viewEquipment(${filterRentals[i].idRent})"></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editEqui${filterRentals[i].idRent}" onclick="openEditEquipment(${filterRentals[i].idRent})"><i class='bx bx-edit-alt'></i></button></th>
+        </tr>
+      `
+  }
+}
 // Eliminar
 function dellRentals(id) {
   let i = Rentals.findIndex(rental => rental.idRent === id);
@@ -402,6 +445,14 @@ addRent.addEventListener("click", (e) => {
   addRents();
 }
 )
+// Busqueda
+let filter30 = document.getElementById("filter30");
+filter30.addEventListener("click", (e) => {
+  e.preventDefault();
+  let since = DateTime.local();
+  let until = since.plus({ days: 30 });
+  listFilterRentals(filterRentalsForDate(since, until));
+})
 
 //CARGA
 if (localStorage.getItem("Rentals")) {
