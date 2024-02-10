@@ -1,62 +1,68 @@
 [
     {
-        "idCus": "1",
+        "idCus": 1,
         "nameCus": "Envasando S.R.L",
         "cuitdni": "20372216345",
         "telefon": "422422"
     },
     {
-        "idCus": "2",
+        "idCus": 2,
         "nameCus": "Ricardo Ricardi",
         "cuitdni": "3658456",
         "telefon": "42156"
     },
     {
-        "idCus": "3",
+        "idCus": 3,
         "nameCus": "Alfredo Palacios",
         "cuitdni": "8548845",
         "telefon": "4325532"
     },
     {
-        "idCus": "4",
+        "idCus": 4,
         "nameCus": "Romina Reina",
         "cuitdni": "36987756",
         "telefon": "4256654"
     },
     {
-        "idCus": "5",
+        "idCus": 5,
         "nameCus": "Regina Lombardi",
         "cuitdni": "856654",
         "telefon": "4256654"
     },
     {
-        "idCus": "6",
+        "idCus": 6,
         "nameCus": "Armando Eteban Quito",
         "cuitdni": "5485564",
         "telefon": "4584556"
     },
     {
-        "idCus": "7",
+        "idCus": 7,
         "nameCus": "Lola Mento",
         "cuitdni": "35648895",
         "telefon": ""
     },
     {
-        "idCus": "8",
+        "idCus": 8,
         "nameCus": "Zacarías Flores del Campo",
         "cuitdni": "12312312",
         "telefon": ""
     },
     {
-        "idCus": "9",
+        "idCus": 9,
         "nameCus": "Emiliano Salido del Pozo",
         "cuitdni": "20356547895",
         "telefon": ""
     },
     {
-        "idCus": "10",
-        "nameCus": "asd",
-        "cuitdni": "12345678",
-        "telefon": "456"
+        "idCus": 10,
+        "nameCus": "Juan Perolargo",
+        "cuitdni": "1234567",
+        "telefon": "987654321"
+    },
+    {
+        "idCus": 11,
+        "nameCus": "Pepito Papas Fritas",
+        "cuitdni": "9876543",
+        "telefon": "123456789"
     }
 ]

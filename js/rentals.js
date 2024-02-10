@@ -43,10 +43,14 @@ class rental{
     constructor(rentedEquipment){
         let dateStrRen = document.getElementById("dateStrRen")
         let dateEndRen = document.getElementById("dateEndRen")
+        let tabEqui = document.getElementById("tableEquipment");
+        let infoDays = document.getElementById("infoDays");
+        let dataCus = document.getElementById("dataCus");
         dateStr = parseDate(dateStrRen.value);
         dateEnd = parseDate(dateEndRen.value);
 
         this.idRent = countRent
+        this.idCus = document.getElementById("idCusSelect").value
         this.nameRent = document.getElementById("nameRent").value;
         this.dateEve = document.getElementById("dateEve").value;
         this.dateStrRen = document.getElementById("dateStrRen").value;
@@ -60,26 +64,29 @@ class rental{
         document.getElementById("dateEve").value = "";
         document.getElementById("dateStrRen").value = "";
         document.getElementById("dateEndRen").value = "";
-        document.getElementById("total").innerText=`TOTAL:$0`
-        total=0
-        let tabEqui = document.getElementById("tableEquipment");
-        tabEqui.innerHTML = ``
+        equipmentsRent = [];
+        total=0;
+        tabEqui.innerHTML = ``;
         tabEqui.innerHTML += `
-          <tr class="rentalHeadRow">
-            <th>Codigo</th>
-            <th>Articulo</th>
-            <th>cantidad</th>
-            <th>Precio Alquiler</th>
-            <th>Subtotal</th>
-            <th>Remover</th>
-          </tr>
-          `
-          let dataCus = document.getElementById("dataCus");
-            dataCus.innerHTML = `
+            <tr class="rentalHeadRow">
+              <th>Codigo</th>
+              <th>Articulo</th>
+              <th>cantidad</th>
+              <th>Precio Alquiler</th>
+              <th>Subtotal</th>
+              <th>Remover</th>
+            </tr>
+          `;
+        document.getElementById("idCusSelect").value="";
+        dataCus.innerHTML = `
             <p class="titleP"><b>Nombre:</b></p>
             <p class="titleP"><b>Cuit/DNI:</b></p>
             <p class="titleP"><b>Telefono:</b></p>
-          `
+          `;
+        infoDays.innerHTML=`
+            <p><b>Cantidad de dias:</b></p>
+            <p><b>Fecha de devolucion:</b></p>
+          `;
     }
 }
 
@@ -289,11 +296,26 @@ function listEquipments(){
 }
 //Alta
 function addRents(){
-  Rentals.push(new rental(equipmentsRent));
-  listRentals();
-  countRent += 1
-  modal.style.display = "none";
-  alert(Rentals.length);
+  if(document.getElementById("idCusSelect").value!=""){
+    if(document.getElementById("dateStrRen").value !=""){
+      if(document.getElementById("dateEndRen").value != ""){
+        if(equipmentsRent.length > 0){
+          Rentals.push(new rental(equipmentsRent));
+          listRentals();
+          countRent += 1
+          modal.style.display = "none";
+        }else{
+          footModal.innerHTML = "!Debe agregar al menos un equipo a alquilar";
+        }
+      }else{
+        footModal.innerHTML = "!Debe informar una fecha de finalización del alquiler";
+      }
+    }else{
+      footModal.innerHTML = "!Debe informar una fecha de inicio del alquiler";
+    }
+  }else{
+    footModal.innerHTML = "!Debe seleccionar un cliente para el alquiler";
+  }
 }
 // Listar
 function listRentals() {
@@ -303,6 +325,7 @@ function listRentals() {
       <tr class="headRow">
         <th>ID</th>
         <th>Evento</th>
+        <th colspan="2">Cliente</th>
         <th>Desde</th>
         <th>Hasta</th>
         <th>Devolucion</th>
@@ -317,12 +340,14 @@ function listRentals() {
       <tr class="${rowClass}">
           <td>${Rentals[i].idRent}</td>
           <td>${Rentals[i].nameRent}</td>
+          <td>${Customers[Rentals[i].idCus].idCus}</td>
+          <td>${Customers[Rentals[i].idCus].nameCus}</td>
           <td>${Rentals[i].dateStrRen}</td>
           <td>${Rentals[i].dateEndRen}</td>
           <td>${Rentals[i].dateReturn}</td>
           <td>${Rentals[i].amountDays}</td>
           <td>$${Rentals[i].total}</td>
-          <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${Rentals[i].idEqui})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellRentals(${Rentals[i].idRent})"><i class='bx bx-trash'></i></button></th>
           <th><button title="Visualizar" class="viewBtn actionBtn" id="viewEqui${i}"><i class='bx bx-spreadsheet' onclick="viewEquipment(${Rentals[i].idEqui})"></i></button></th>
           <th><button title="Editar"     class="editBtn actionBtn" id="editEqui${i}" onclick="openEditEquipment(${Rentals[i].idEqui})"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
@@ -331,6 +356,30 @@ function listRentals() {
     localStorage.setItem("Rentals", jsonCost);
   }
 }
+// Eliminar
+function dellRentals(id) {
+  let i = Rentals.findIndex(rental => rental.idRent === id);
+  Swal.fire({
+    title: `Alquiler: ${id} \n Evento: ${Rentals[i].nameRent} \n Cliente: ${Customers[Rentals[i].idCus].nameCus} \n Desde: ${Rentals[i].dateStrRen} \n Hasta: ${Rentals[i].dateEndRen}`,
+    text: `esta a punto de eliminar el Alquiler actual  ¿Realmente desea hacerlo?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, Eliminarlo!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+          Rentals.splice(i, 1);
+          listRentals();
+      Swal.fire({
+        title: "Eliminado!",
+        text: "El Alquiler ha sido eliminado.",
+        icon: "success"
+      });
+    }
+  });
+}
+
 //BOTONES
 // Alta
 let addRent = document.getElementById("addRent");
@@ -339,7 +388,6 @@ addRent.addEventListener("click", (e) => {
   addRents();
 }
 )
-
 
 //CARGA
 if (localStorage.getItem("Rentals")) {

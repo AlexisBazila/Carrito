@@ -25,6 +25,7 @@ demo.addEventListener("click", async (e) => {
   e.preventDefault();
   await traerDatos("../json/customers.json", Customers, "Customers");
   await traerDatos("../json/equipments.json", Equipments, "Equipments");
+  await traerDatos("../json/rentals.json", Rentals, "Rentals");
   location.reload();
 });
 

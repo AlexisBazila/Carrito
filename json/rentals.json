@@ -1,0 +1,142 @@
+[
+    {
+        "idRent": 1,
+        "idCus": "9",
+        "nameRent": "Fiesta de fin de año",
+        "dateEve": "2024-12-21",
+        "dateStrRen": "2024-12-20",
+        "dateEndRen": "2024-12-22",
+        "amountDays": 2,
+        "dateReturn": "23/12/2024",
+        "rentedEquipment": [
+            {
+                "idEqui": 0,
+                "codEqui": "M001",
+                "nameEqui": "Mesa larga",
+                "amount": "20",
+                "pRenEqui": "2000",
+                "sub": 40000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "S001",
+                "nameEqui": "Silla plastica",
+                "amount": "200",
+                "pRenEqui": "300",
+                "sub": 60000
+            },
+            {
+                "idEqui": 2,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "300",
+                "pRenEqui": "100",
+                "sub": 30000
+            }
+        ],
+        "total": 130000
+    },
+    {
+        "idRent": 2,
+        "idCus": "10",
+        "nameRent": "Cumpleaños",
+        "dateEve": "2024-02-23",
+        "dateStrRen": "2024-02-23",
+        "dateEndRen": "2024-02-24",
+        "amountDays": 1,
+        "dateReturn": "24/2/2024",
+        "rentedEquipment": [
+            {
+                "idEqui": 0,
+                "codEqui": "M001",
+                "nameEqui": "Mesa larga",
+                "amount": "1",
+                "pRenEqui": "2000",
+                "sub": 2000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "S001",
+                "nameEqui": "Silla plastica",
+                "amount": "10",
+                "pRenEqui": "300",
+                "sub": 3000
+            },
+            {
+                "idEqui": 2,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "10",
+                "pRenEqui": "100",
+                "sub": 1000
+            }
+        ],
+        "total": 6000
+    },
+    {
+        "idRent": 3,
+        "idCus": "5",
+        "nameRent": "Aniversario",
+        "dateEve": "",
+        "dateStrRen": "2024-02-14",
+        "dateEndRen": "2024-02-15",
+        "amountDays": 1,
+        "dateReturn": "15/2/2024",
+        "rentedEquipment": [
+            {
+                "idEqui": 1,
+                "codEqui": "M002",
+                "nameEqui": "Mesa redonda",
+                "amount": "3",
+                "pRenEqui": "2000",
+                "sub": 6000
+            },
+            {
+                "idEqui": 2,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "30",
+                "pRenEqui": "100",
+                "sub": 3000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "S001",
+                "nameEqui": "Silla plastica",
+                "amount": "30",
+                "pRenEqui": "300",
+                "sub": 9000
+            }
+        ],
+        "total": 18000
+    },
+    {
+        "idRent": 4,
+        "idCus": "6",
+        "nameRent": "Cumpleaños",
+        "dateEve": "2024-03-02",
+        "dateStrRen": "2024-03-01",
+        "dateEndRen": "2024-03-02",
+        "amountDays": 1,
+        "dateReturn": "2/3/2024",
+        "rentedEquipment": [
+            {
+                "idEqui": 0,
+                "codEqui": "M001",
+                "nameEqui": "Mesa larga",
+                "amount": "1",
+                "pRenEqui": "2000",
+                "sub": 2000
+            },
+            {
+                "idEqui": 4,
+                "codEqui": "S002",
+                "nameEqui": "Silla plegable madera",
+                "amount": "10",
+                "pRenEqui": "400",
+                "sub": 4000
+            }
+        ],
+        "total": 6000
+    }
+]

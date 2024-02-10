@@ -1,13 +1,14 @@
 ///DEFINICION DE VARIABLES
 let Customers = new Array();
 let countCus = 1;
+let idEditCustomer = NaN;
 // if (localStorage.getItem("Customers")) {
 //   Customers = JSON.parse(localStorage.getItem("Customers"));
 //   countCus += Customers.length
 // }
 Customers = localStorage.getItem("Customers") ? JSON.parse(localStorage.getItem("Customers")) : [];
 countCus += Customers.length;
-let idEditCustomer = NaN;
+
 
 //DEFINICION DE CLASES
 class customer {
@@ -86,20 +87,20 @@ function listCustomers() {
           <td>${Customers[i].cuitdni}</td>
           <td>${Customers[i].nameCus}</td>
           <td>${Customers[i].telefon}</td>
-          <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" onclick="dellCustomer(${i})"><i class='bx bx-trash'></i></button></th>
-          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${i})"></i></button></th>
-          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" onclick="openEditCustomer(${i})"><i class='bx bx-edit-alt'></i></button></th>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${Customers[i].idCus}" onclick="dellCustomer(${Customers[i].idCus})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${Customers[i].idCus}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${Customers[i].idCus})"></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${Customers[i].idCus}" onclick="openEditCustomer(${Customers[i].idCus})"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
       `
     const jsonCost = JSON.stringify(Customers);
     localStorage.setItem("Customers", jsonCost);
-    countCus += Customers.length
   }
 }
 // Eliminar
 function dellCustomer(id) {
+  let i = Customers.findIndex(customer => customer.idCus === id);
   Swal.fire({
-    title: `${id} -> ${Customers[id].cuitdni} - ${Customers[id].nameCus}`,
+    title: `${id} -> ${Customers[i].cuitdni} - ${Customers[i].nameCus}`,
     text: `esta a punto de eliminar el Cliente  ¿Realmente desea hacerlo`,
     icon: "warning",
     showCancelButton: true,
@@ -108,7 +109,7 @@ function dellCustomer(id) {
     confirmButtonText: "Si, Eliminarlo!"
   }).then((result) => {
     if (result.isConfirmed) {
-        Customers.splice(id, 1);
+        Customers.splice(i, 1);
         listCustomers();
       Swal.fire({
         title: "Eliminado!",
@@ -126,12 +127,14 @@ function addCustomer() {
     if (cuitdni.length === 7 || cuitdni.length === 8) {
       Customers.push(new customer());
       listCustomers();
+      countCus += Customers.length
       modal.style.display = "none";
     } else {
       if (cuitdni.length === 11) {
         let inicioCuit = cuitdni.slice(0, 2);
         if ([20, 23, 27, 30].includes(parseInt(inicioCuit))) {
           Customers.push(new customer());
+          countCus += Customers.length
           listCustomers();
           modal.style.display = "none";
         } else {
@@ -172,13 +175,13 @@ function findCustomer() {
       let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
       tabCos.innerHTML += `
       <tr class="${rowClass}">
-          <td>${i}</td>
+          <td>${filteredCustomers[i].idCus}</td>
           <td>${filteredCustomers[i].cuitdni}</td>
           <td>${filteredCustomers[i].nameCus}</td>
           <td>${filteredCustomers[i].telefon}</td>
-          <th><button  title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
-          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet' disabled></i></button></th>
-          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt' disabled></i></button></th>
+          <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${filteredCustomers[i].idCus}" onclick="dellCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-trash'></i></button></th>
+          <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${filteredCustomers[i].idCus}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${filteredCustomers[i].idCus})"></i></button></th>
+          <th><button title="Editar"     class="editBtn actionBtn" id="editCos${filteredCustomers[i].idCus}" onclick="openEditCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-edit-alt'></i></button></th>
         </tr>
       `
     }
@@ -202,13 +205,13 @@ function findCustomer() {
       let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
       tabCos.innerHTML += `
         <tr class="${rowClass}">
-            <td>${i}</td>
+            <td>${filteredCustomers[i].idCus}</td>
             <td>${filteredCustomers[i].cuitdni}</td>
             <td>${filteredCustomers[i].nameCus}</td>
             <td>${filteredCustomers[i].telefon}</td>
-            <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
-            <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet'></i></button></th>
-            <th><button title="Editar"     class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt'></i></button></th>
+            <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${filteredCustomers[i].idCus}" onclick="dellCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-trash'></i></button></th>
+            <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${filteredCustomers[i].idCus}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${filteredCustomers[i].idCus})"></i></button></th>
+            <th><button title="Editar"     class="editBtn actionBtn" id="editCos${filteredCustomers[i].idCus}" onclick="openEditCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-edit-alt'></i></button></th>
           </tr>
         `
     }
@@ -232,13 +235,13 @@ function findCustomer() {
       let rowClass = i % 2 === 0 ? "evenrow" : "oddrow";
       tabCos.innerHTML += `
         <tr class="${rowClass}">
-            <td>${i}</td>
+            <td>${filteredCustomers[i].idCus}</td>
             <td>${filteredCustomers[i].cuitdni}</td>
             <td>${filteredCustomers[i].nameCus}</td>
             <td>${filteredCustomers[i].telefon}</td>
-            <th><button title="Eliminar"     class="delBtn actionBtn" id="delCos${i}" disabled><i class='bx bx-trash'></i></button></th>
-            <th><button title="Visualizar"  class="viewBtn actionBtn" id="viewCos${i}" disabled><i class='bx bx-spreadsheet'></i></button></th>
-            <th><button title="Editar"      class="editBtn actionBtn" id="editCos${i}" disabled><i class='bx bx-edit-alt'></i></button></th>
+            <th><button title="Eliminar"   class="delBtn actionBtn" id="delCos${filteredCustomers[i].idCus}" onclick="dellCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-trash'></i></button></th>
+            <th><button title="Visualizar" class="viewBtn actionBtn" id="viewCos${filteredCustomers[i].idCus}"><i class='bx bx-spreadsheet' onclick="viewCustomer(${filteredCustomers[i].idCus})"></i></button></th>
+            <th><button title="Editar"     class="editBtn actionBtn" id="editCos${filteredCustomers[i].idCus}" onclick="openEditCustomer(${filteredCustomers[i].idCus})"><i class='bx bx-edit-alt'></i></button></th>
           </tr>
         `
     }
@@ -246,11 +249,12 @@ function findCustomer() {
 }
 // Edicion
 function openEditCustomer(id){
+  let i = Customers.findIndex(customer => customer.idCus === id);
   editModal.style.display = "block";
-  document.getElementById("editNameCus").value =Customers[id].nameCus;
-  document.getElementById("EditCuitdni").value =Customers[id].cuitdni;
-  document.getElementById("editTelCus").value =Customers[id].telefon;
-  idEditCustomer = id;
+  document.getElementById("editNameCus").value =Customers[i].nameCus;
+  document.getElementById("EditCuitdni").value =Customers[i].cuitdni;
+  document.getElementById("editTelCus").value =Customers[i].telefon;
+  idEditCustomer = i;
 }
 function editCustomer(id){
   let nameEditCustomer = document.getElementById("editNameCus").value;
@@ -287,14 +291,15 @@ function editCustomer(id){
 }
 // Visualizacion
 function viewCustomer(id){
+  let i = Customers.findIndex(customer => customer.idCus === id);
   viewModal.style.display = "block";
   document.getElementById("viewModalTitle").innerHTML=`
     CLIENTE: ${id}
   `
   document.getElementById("viewModalContent").innerHTML=`
-    <p>Nombre: ${Customers[id].nameCus}</p>
-    <p>Cuit/DNI: ${Customers[id].cuitdni}</p>
-    <p>Telefono: ${Customers[id].telefon}</p>
+    <p>Nombre: ${Customers[i].nameCus}</p>
+    <p>Cuit/DNI: ${Customers[i].cuitdni}</p>
+    <p>Telefono: ${Customers[i].telefon}</p>
   `
   idEditCustomer = id;
 }

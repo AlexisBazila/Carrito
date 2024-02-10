@@ -2,17 +2,12 @@
 let Equipments = new Array();
 let countEqui = 1;
 let idEditEquipment= NaN;
-if (localStorage.getItem("Equipments")) {
-  Equipments = JSON.parse(localStorage.getItem("Equipments"));
-  countEqui += Equipments.length
-}
-
-// Equipments[0] = { nombre: "Mesa", precioAlquiler: 3000, precioReposicion: 30000, stock: 50, Disponible: 50 };
-// Equipments[1] = { nombre: "Silla", precioAlquiler: 1000, precioReposicion: 10000, stock: 500, Disponible: 500 };
-// Equipments[2] = { nombre: "Mantel", precioAlquiler: 500, precioReposicion: 5000, stock: 500, Disponible: 500 };
-// Equipments[3] = { nombre: "Plato", precioAlquiler: 150, precioReposicion: 1500, stock: 5000, Disponible: 500 };
-// Equipments[4] = { nombre: "Cubiertos", precioAlquiler: 100, precioReposicion: 1000, stock: 50, Disponible: 50 };
-
+// if (localStorage.getItem("Equipments")) {
+//   Equipments = JSON.parse(localStorage.getItem("Equipments"));
+//   countEqui += Equipments.length;
+// }
+Equipments = localStorage.getItem("Equipments") ? JSON.parse(localStorage.getItem("Equipments")) : [];
+countEqui += Equipments.length;
 //DEFINICION DE CLASES
 class equipment {
     constructor() {
@@ -174,7 +169,7 @@ function listEquipments() {
 function dellEquipment(id) {
   let i = Equipments.findIndex(equipo => equipo.idEqui === id);
   Swal.fire({
-    title: `${i} -> ${Equipments[i].codEqui} - ${Equipments[i].nameEqui}`,
+    title: `${id} -> ${Equipments[i].codEqui} - ${Equipments[i].nameEqui}`,
     text: `esta a punto de eliminar el Equipamiento  ¿Realmente desea hacerlo`,
     icon: "warning",
     showCancelButton: true,
