@@ -208,6 +208,19 @@ function parseDate(dateString) {
   let day = parseInt(parts[2]);
   return DateTime.local(year, month, day);
 }
+//Formateo de fehcas
+function formatDate(inputDate, outputFormat) {
+  alert(inputDate)
+  const parsedDate = DateTime.fromFormat(inputDate, [
+    'yyyy-MM-dd', 'dd/MM/yyyy', 'YYYY-MM-DDTHH:MM:SS.SSSZZZZZ', 'd/M/yyyy', 'dd/MM/yyyy HH:mm:ss'
+  ]);
+
+  if (parsedDate.isValid) {
+      return parsedDate.toFormat(outputFormat);
+  } else {
+      return null;
+  }
+}
 // Contar dias
 function countDays(start , end){
   const i = Interval.fromDateTimes(start, end);
@@ -218,9 +231,9 @@ function calReturnDate(end){
   // Si el alquiler finaliza los dias Miercoles o Domingos como el comercio no atiende esos dias, la fecha de dovolucion pasa a ser el dia siguiente sin sumar dias de alquiler
   if(end.weekday == 3 || end.weekday == 7){
     end = end.plus({ day: 1})
-    return end.toLocaleString(DateTime.DATE_SHORT)
+    return end.toISODate()
   }else{
-    return end.toLocaleString(DateTime.DATE_SHORT)
+    return end.toISODate()
   }
 }
 // Carga de equipamiento alquilado
@@ -366,16 +379,18 @@ function listRentals() {
   }
 }
 // Filtrar alquileres entre 2 fechas
-function filterRentalsForDate(since, until){
+function filterRentalsForDate(since, until) {
+  let formatSince = DateTime.fromISO(since);
+  let formatUntil = DateTime.fromISO(until);
   let filterRentals = Rentals.filter(rental => {
     let rentalDateStrRen = DateTime.fromISO(rental.dateStrRen);
-    let rentalDateReturn = DateTime.fromFormat(rental.dateReturn, "d/M/yyyy");
-    
-    return rentalDateStrRen >= since && rentalDateStrRen <= until &&
-           rentalDateReturn >= since && rentalDateReturn <= until;
-});
-
+    let rentalDateReturn = DateTime.fromISO(rental.dateReturn);
+    return rentalDateStrRen >= formatSince && rentalDateStrRen <= formatUntil &&
+           rentalDateReturn >= formatSince && rentalDateReturn <= formatUntil;
+  });
+  return filterRentals;
 }
+
 // Listar alquileres filtrados
 function listFilterRentals(filterRentals) {
   let tabRent = document.getElementById("tableRentals");
@@ -451,9 +466,33 @@ filter30.addEventListener("click", (e) => {
   e.preventDefault();
   let since = DateTime.local();
   let until = since.plus({ days: 30 });
+  since = since.toISODate(DateTime.local())
+  until = until.toISODate()
   listFilterRentals(filterRentalsForDate(since, until));
 })
-
+let filter7 = document.getElementById("filter7");
+filter7.addEventListener("click", (e) => {
+  e.preventDefault();
+  let since = DateTime.local();
+  let until = since.plus({ days: 7 });
+  since = since.toISODate(DateTime.local())
+  until = until.toISODate()
+  listFilterRentals(filterRentalsForDate(since, until));
+})
+let filterMonth = document.getElementById("filterMonth");
+filterMonth.addEventListener("click", (e) => {
+  e.preventDefault();
+  let since = today.startOf('month').toISODate();
+  let until = today.endOf('month').toISODate();
+  listFilterRentals(filterRentalsForDate(since, until));
+})
+let filterWeek = document.getElementById("filterWeek");
+filterWeek.addEventListener("click", (e) => {
+  e.preventDefault();
+  let since = today.startOf('week').toISODate();
+  let until = today.endOf('week').toISODate();
+  listFilterRentals(filterRentalsForDate(since, until));
+})
 //CARGA
 if (localStorage.getItem("Rentals")) {
   listRentals();

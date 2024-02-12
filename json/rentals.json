@@ -7,7 +7,7 @@
         "dateStrRen": "2024-12-20",
         "dateEndRen": "2024-12-22",
         "amountDays": 2,
-        "dateReturn": "23/12/2024",
+        "dateReturn": "2024-12-23",
         "rentedEquipment": [
             {
                 "idEqui": 0,
@@ -44,7 +44,7 @@
         "dateStrRen": "2024-02-23",
         "dateEndRen": "2024-02-24",
         "amountDays": 1,
-        "dateReturn": "24/2/2024",
+        "dateReturn": "2024-02-24",
         "rentedEquipment": [
             {
                 "idEqui": 0,
@@ -81,7 +81,7 @@
         "dateStrRen": "2024-02-14",
         "dateEndRen": "2024-02-15",
         "amountDays": 1,
-        "dateReturn": "15/2/2024",
+        "dateReturn": "2024-02-15",
         "rentedEquipment": [
             {
                 "idEqui": 1,
@@ -118,7 +118,7 @@
         "dateStrRen": "2024-03-01",
         "dateEndRen": "2024-03-02",
         "amountDays": 1,
-        "dateReturn": "2/3/2024",
+        "dateReturn": "2024-03-02",
         "rentedEquipment": [
             {
                 "idEqui": 0,

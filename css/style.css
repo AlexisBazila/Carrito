@@ -504,10 +504,18 @@ h1 {
 }
 
 .filterDiv{
-  display: flex;
-  flex-wrap: wrap;
   border: solid #DDDDDD 1px;
   border-radius: 10px;
+}
+.manualFilter{
+  width: 250px;
+}
+select{
+  width: 100%;
+  margin-bottom: 5px;
+  height: 30px;
+  border: solid #BCC3CA 1px;
+  border-radius: 6px;
 }
 h3{
   margin: 0;

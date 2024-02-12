@@ -23,9 +23,13 @@ countRent.innerHTML=`${Rentals.length}`
 let demo = document.getElementById("demo");
 demo.addEventListener("click", async (e) => {
   e.preventDefault();
+  // await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/customers.json", Customers, "Customers");
+  // await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/equipments.json", Equipments, "Equipments");
+  // await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/rentals.json", Rentals, "Rentals");
+
   await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/customers.json", Customers, "Customers");
   await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/equipments.json", Equipments, "Equipments");
-  await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/rentals.json", Rentals, "Rentals");
+  await traerDatos("../json/rentals.json", Rentals, "Rentals");
   location.reload();
 });
 

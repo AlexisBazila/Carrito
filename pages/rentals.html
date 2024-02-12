@@ -285,19 +285,28 @@
           <div>
             <h3>Filtros Preconfigurados:</h3>
             <div class="filterDiv">
-              <button class="filterButon" type="button" id="filter30">30 dias</button>
-              <button class="filterButon" type="button" id="filter7">7 dias</button>
-              <button class="filterButon" type="button" id="filterMonth">Mes en curso</button>
-              <button class="filterButon" type="button" id="filterWeek">Semana en curso</button>
+              <div>
+                <button class="filterButon" type="button" id="filter30">30 dias</button>
+                <button class="filterButon" type="button" id="filter7">7 dias</button>
+              </div>
+              <div>
+                <button class="filterButon" type="button" id="filterMonth">Mes en curso</button>
+                <button class="filterButon" type="button" id="filterWeek">Semana en curso</button>
+              </div>
             </div>
           </div>
+          <p>-</p>
+          <div class="manualFilter">
+            <form name="findForm">
+              <label for="eventFindRent">Evento:</label>
+              <input type="text" id="eventFindRent" />
+              <label for="cusFindRent">Cliente:</label>
+              <select name="customers" id="cusFindRent">
+                <option value="">--Seleccione un Cliente--</option>
+              </select>
+            </form>
+          </div>
           
-          <form name="findForm">
-            <label for="nameFindEqui">Nombre:</label>
-            <input type="text" id="nameFindEqui" />
-            <label for="codFindEqui">Codigo:</label>
-            <input type="text" id="codFindEqui">
-          </form>
           <div>
             <button title="Aplicar filtro" id="findButton" class="findButon"><i class='bx bx-search-alt'
                 undefined></i></button>
