@@ -120,33 +120,37 @@ for (let i = 0; i < Customers.length; i++) {
     cusFindRent.innerHTML += `<option value="${i}">${Customers[i].cuitdni}-${Customers[i].nameCus}</option> `
 }
 
+
+
 // carga de Equipamientos en selector
-let EquipmentLables = document.getElementById("EquipmentLables");
-for (let i = 0; i < Equipments.length; i++) {
-  let picEqui = Equipments[i].picEqui
-  if(picEqui==undefined){
-    picEqui = "../img/equipamiento/noimage.jpg"
-  }
-  EquipmentLables.innerHTML += `
-    <div class="label">
-    <div class="equipmentImage">
-    <img src="${picEqui}" alt="" class="imgEquipment">
-      <p>${Equipments[i].codEqui}</p>
-    </div>
-    <div class="EquipmentInformation">
-      <div>
-        <p>${Equipments[i].nameEqui}</p>
-        <p>Precio: $${Equipments[i].pRenEqui}</p>
-      </div>
-      <div class="buttonEquipmentLable">
-        <input type="number" min="0" max="${Equipments[i].avaEqui}" id="cantEqui${i}">
-        <label id="labelCantEqui${i}">/${Equipments[i].avaEqui}</label>
-        <button type="button" onclick="addEquipment(${i})">+</button>
-      </div>
-    </div>
-  </div>
-  `
-}
+// let EquipmentLables = document.getElementById("EquipmentLables");
+// for (let i = 0; i < Equipments.length; i++) {
+//   let picEqui = Equipments[i].picEqui
+//   if(picEqui==undefined){
+//     picEqui = "../img/equipamiento/noimage.jpg"
+//   }
+//   EquipmentLables.innerHTML += `
+//     <div class="label">
+//     <div class="equipmentImage">
+//     <img src="${picEqui}" alt="" class="imgEquipment">
+//       <p>${Equipments[i].codEqui}</p>
+//     </div>
+//     <div class="EquipmentInformation">
+//       <div>
+//         <p>${Equipments[i].nameEqui}</p>
+//         <p>Precio: $${Equipments[i].pRenEqui}</p>
+//       </div>
+//       <div class="buttonEquipmentLable">
+//         <input type="number" min="0" max="${Equipments[i].avaEqui}" id="cantEqui${i}">
+//         <label id="labelCantEqui${i}">/${Equipments[i].avaEqui}</label>
+//         <button type="button" onclick="addEquipment(${i})">+</button>
+//       </div>
+//     </div>
+//   </div>
+//   `
+// }
+
+
 // FUNCIONALIDAD DE ELEMENTOS
 // Seleccion del cliente
 idCusSelect.onchange = function() {
@@ -179,6 +183,7 @@ dateStrRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
+      chargeEquipment(dateStr, dateEnd);
       footModal.innerHTML = "";
     }else{
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
@@ -194,6 +199,7 @@ dateEndRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
+      chargeEquipment(dateStr, dateEnd);
       footModal.innerHTML = "";
     }else{
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
@@ -203,6 +209,55 @@ dateEndRen.onchange = function(){
 
 
 // DEFINICION DE FUNCIONES
+// let findEquipmentButon = document.getElementById("findEquipmentButon");
+// findEquipmentButon,addEventListener("click", (e) =>{
+//   e.preventDefault();
+//   chargeEquipment();
+// })
+
+//Carga de equipamientos en selector
+function chargeEquipment(since, until){
+let EquipmentLables = document.getElementById("EquipmentLables");
+EquipmentLables.innerHTML=``
+for (let i = 0; i < Equipments.length; i++) {
+  let picEqui = Equipments[i].picEqui
+  if(picEqui==undefined){
+    picEqui = "../img/equipamiento/noimage.jpg"
+  }
+
+  let rentalsFiltered = filterRentalsForDate(since, until); 
+  let rest = Equipments[i].avaEqui;
+  for (let x = 0; x < rentalsFiltered.length; x++){
+    for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+      if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
+        alert(`Inicio: ${rentalsFiltered[x].dateStrRen} Final:${rentalsFiltered[x].dateEndRen} \n Equipo: ${rentalsFiltered[x].rentedEquipment[y].nameEqui} \n Cantidad alquilada: ${rentalsFiltered[x].rentedEquipment[y].amount}`)
+        rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+
+      }
+    }
+  }
+  EquipmentLables.innerHTML += `
+    <div class="label">
+    <div class="equipmentImage">
+    <img src="${picEqui}" alt="" class="imgEquipment">
+      <p>${Equipments[i].codEqui}</p>
+    </div>
+    <div class="EquipmentInformation">
+      <div>
+        <p>${Equipments[i].nameEqui}</p>
+        <p>Precio: $${Equipments[i].pRenEqui}</p>
+        <p>Stock: ${Equipments[i].avaEqui}</p>
+      </div>
+      <div class="buttonEquipmentLable">
+        <input type="number" min="0" max="${rest}" id="cantEqui${i}">
+        <label id="labelCantEqui${i}">/${rest}</label>
+        <button type="button" onclick="addEquipment(${i})">+</button>
+      </div>
+    </div>
+  </div>
+  `
+}
+}
 // Configuracion de fechas
 function parseDate(dateString) {
   let parts = dateString.split('-');
@@ -393,7 +448,6 @@ function filterRentalsForDate(since, until) {
   });
   return filterRentals;
 }
-
 // Listar alquileres filtrados
 function listFilterRentals(filterRentals) {
   let tabRent = document.getElementById("tableRentals");
