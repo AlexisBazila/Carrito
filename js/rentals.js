@@ -114,9 +114,12 @@ window.onclick = function (event) {
 }
 // carga de clientes en select
 let idCusSelect = document.getElementById("idCusSelect");
+let cusFindRent= document.getElementById("cusFindRent");
 for (let i = 0; i < Customers.length; i++) {
     idCusSelect.innerHTML += `<option value="${i}">${Customers[i].cuitdni}-${Customers[i].nameCus}</option> `
+    cusFindRent.innerHTML += `<option value="${i}">${Customers[i].cuitdni}-${Customers[i].nameCus}</option> `
 }
+
 // carga de Equipamientos en selector
 let EquipmentLables = document.getElementById("EquipmentLables");
 for (let i = 0; i < Equipments.length; i++) {
@@ -493,6 +496,45 @@ filterWeek.addEventListener("click", (e) => {
   let until = today.endOf('week').toISODate();
   listFilterRentals(filterRentalsForDate(since, until));
 })
+// Busqueda
+let findButton = document.getElementById("findButton");
+findButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  let eventFindRent = document.getElementById("eventFindRent").value;
+  let cusFindRent = document.getElementById("cusFindRent").value;
+  let filteredRentals = [];
+  if(eventFindRent != ""){
+    filteredRentals = Rentals.filter(rental => {
+      return (
+        rental.nameRent.toLowerCase().includes(eventFindRent.toLowerCase())
+      );
+    });
+  }
+  if(cusFindRent != ""){
+    filteredRentals = Rentals.filter(rental => {
+      return (
+        rental.idCus === cusFindRent
+      );
+    });
+  }
+  if (eventFindRent != "" && cusFindRent != "") {
+    filteredRentals = Rentals.filter(rental => {
+      return (
+        rental.nameRent.toLowerCase().includes(eventFindRent.toLowerCase()) &&
+        rental.idCus === cusFindRent
+      );
+    });
+  }
+  listFilterRentals(filteredRentals); 
+});
+let unFindRent = document.getElementById("unFindButton");
+unFindRent.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("eventFindRent").value="";
+  document.getElementById("cusFindRent").value="";
+  listRentals();
+})
+
 //CARGA
 if (localStorage.getItem("Rentals")) {
   listRentals();
