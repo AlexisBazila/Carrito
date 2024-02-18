@@ -339,8 +339,8 @@ h1 {
   text-align: left;
 }
 
-.viewRentalsClass{
-  height: 350px;
+.viewClass{
+  height: 55vh;
   overflow-y: auto;
 }
 
