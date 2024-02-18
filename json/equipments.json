@@ -48,5 +48,55 @@
         "stockEqui": "2000",
         "avaEqui": "2000",
         "picEqui": "../img/equipamiento/silla-madera.jpg"
+    },
+    {
+        "idEqui": 6,
+        "codEqui": "P001",
+        "nameEqui": "Plato blanco",
+        "pRenEqui": "500",
+        "pRepEqui": "5000",
+        "stockEqui": "4000",
+        "avaEqui": "4000",
+        "picEqui": "../img/equipamiento/plato blanco.jpg"
+    },
+    {
+        "idEqui": 7,
+        "codEqui": "C001",
+        "nameEqui": "Copa cristal para agua",
+        "pRenEqui": "250",
+        "pRepEqui": "3000",
+        "stockEqui": "2000",
+        "avaEqui": "2000",
+        "picEqui": "../img/equipamiento/copa-agua.jpg"
+    },
+    {
+        "idEqui": 8,
+        "codEqui": "C002",
+        "nameEqui": "Copa para vino tinto",
+        "pRenEqui": "300",
+        "pRepEqui": "7000",
+        "stockEqui": "3000",
+        "avaEqui": "3000",
+        "picEqui": "../img/equipamiento/copa-vino-tinto.jpeg"
+    },
+    {
+        "idEqui": 9,
+        "codEqui": "CU01",
+        "nameEqui": "Cuchillo metal",
+        "pRenEqui": "100",
+        "pRepEqui": "1500",
+        "stockEqui": "3000",
+        "avaEqui": "3000",
+        "picEqui": "../img/equipamiento/cuchillo-metal.jpg"
+    },
+    {
+        "idEqui": 10,
+        "codEqui": "TE01",
+        "nameEqui": "Tenedor metal",
+        "pRenEqui": "100",
+        "pRepEqui": "1500",
+        "stockEqui": "3000",
+        "avaEqui": "3000",
+        "picEqui": "../img/equipamiento/tenedor-metal.jpg"
     }
 ]
