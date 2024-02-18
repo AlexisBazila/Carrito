@@ -9,6 +9,7 @@ let countPart = 1;
 let countEquipmentRent=1;
 let idEditRent = NaN;
 let total = 0;
+let amountD = 0;
 const today = DateTime.now();
 // Fechas
 let dateStr = NaN;
@@ -29,7 +30,6 @@ let Customers = new Array();
 if (localStorage.getItem("Customers")) {
   Customers = JSON.parse(localStorage.getItem("Customers"));
 }
-
 // Elementos globales
 let footModal = document.getElementById("footModalMsg");
 
@@ -84,10 +84,9 @@ class rental{
           `;
     }
 }
-
 class rentedEquipment{
   constructor(codEqui,amount){
-    this.idEqui = codEqui
+    this.idEqui = Equipments[codEqui].idEqui;
     this.codEqui = Equipments[codEqui].codEqui;
     this.nameEqui = Equipments[codEqui].nameEqui;
     this.amount = amount;
@@ -120,37 +119,6 @@ for (let i = 0; i < Customers.length; i++) {
     cusFindRent.innerHTML += `<option value="${i}">${Customers[i].cuitdni}-${Customers[i].nameCus}</option> `
 }
 
-
-
-// carga de Equipamientos en selector
-// let EquipmentLables = document.getElementById("EquipmentLables");
-// for (let i = 0; i < Equipments.length; i++) {
-//   let picEqui = Equipments[i].picEqui
-//   if(picEqui==undefined){
-//     picEqui = "../img/equipamiento/noimage.jpg"
-//   }
-//   EquipmentLables.innerHTML += `
-//     <div class="label">
-//     <div class="equipmentImage">
-//     <img src="${picEqui}" alt="" class="imgEquipment">
-//       <p>${Equipments[i].codEqui}</p>
-//     </div>
-//     <div class="EquipmentInformation">
-//       <div>
-//         <p>${Equipments[i].nameEqui}</p>
-//         <p>Precio: $${Equipments[i].pRenEqui}</p>
-//       </div>
-//       <div class="buttonEquipmentLable">
-//         <input type="number" min="0" max="${Equipments[i].avaEqui}" id="cantEqui${i}">
-//         <label id="labelCantEqui${i}">/${Equipments[i].avaEqui}</label>
-//         <button type="button" onclick="addEquipment(${i})">+</button>
-//       </div>
-//     </div>
-//   </div>
-//   `
-// }
-
-
 // FUNCIONALIDAD DE ELEMENTOS
 // Seleccion del cliente
 idCusSelect.onchange = function() {
@@ -174,9 +142,11 @@ idCusSelect.onchange = function() {
 let dateStrRen = document.getElementById("dateStrRen")
 let dateEndRen = document.getElementById("dateEndRen")
 let infoDays = document.getElementById("infoDays");
+let EquipmentLables = document.getElementById("EquipmentLables");
 dateStrRen.onchange = function(){
   dateStr = parseDate(dateStrRen.value);
   dateEnd = parseDate(dateEndRen.value);
+  amountD=countDays(dateStr, dateEnd);
   if(dateEndRen.value!=""){
     if(dateEnd > dateStr){
       infoDays.innerHTML=`
@@ -186,6 +156,7 @@ dateStrRen.onchange = function(){
       chargeEquipment(dateStr, dateEnd);
       footModal.innerHTML = "";
     }else{
+      EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
     }
   }
@@ -193,6 +164,7 @@ dateStrRen.onchange = function(){
 dateEndRen.onchange = function(){
   dateStr = parseDate(dateStrRen.value);
   dateEnd = parseDate(dateEndRen.value);
+  amountD=countDays(dateStr, dateEnd);
   if(dateStrRen.value!=""){
     if(dateEnd > dateStr){
       infoDays.innerHTML=`
@@ -202,6 +174,7 @@ dateEndRen.onchange = function(){
       chargeEquipment(dateStr, dateEnd);
       footModal.innerHTML = "";
     }else{
+      EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
     }
   }
@@ -212,7 +185,7 @@ dateEndRen.onchange = function(){
 // let findEquipmentButon = document.getElementById("findEquipmentButon");
 // findEquipmentButon,addEventListener("click", (e) =>{
 //   e.preventDefault();
-//   chargeEquipment();
+//  
 // })
 
 //Carga de equipamientos en selector
@@ -224,15 +197,12 @@ for (let i = 0; i < Equipments.length; i++) {
   if(picEqui==undefined){
     picEqui = "../img/equipamiento/noimage.jpg"
   }
-
   let rentalsFiltered = filterRentalsForDate(since, until); 
   let rest = Equipments[i].avaEqui;
   for (let x = 0; x < rentalsFiltered.length; x++){
     for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
       if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
-        alert(`Inicio: ${rentalsFiltered[x].dateStrRen} Final:${rentalsFiltered[x].dateEndRen} \n Equipo: ${rentalsFiltered[x].rentedEquipment[y].nameEqui} \n Cantidad alquilada: ${rentalsFiltered[x].rentedEquipment[y].amount}`)
         rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
-
       }
     }
   }
@@ -244,7 +214,7 @@ for (let i = 0; i < Equipments.length; i++) {
     </div>
     <div class="EquipmentInformation">
       <div>
-        <p>${Equipments[i].nameEqui}</p>
+        <p>${Equipments[i].idEqui}-${Equipments[i].nameEqui}</p>
         <p>Precio: $${Equipments[i].pRenEqui}</p>
         <p>Stock: ${Equipments[i].avaEqui}</p>
       </div>
@@ -298,15 +268,27 @@ function calReturnDate(end){
 function addEquipment(id){
   let cantEqui = document.getElementById(`cantEqui${id}`);
   let avaEqui = document.getElementById(`labelCantEqui${id}`);
+  let ok = false;
+  let since = document.getElementById("dateStrRen").value
+  let until = document.getElementById("dateEndRen").value
+  let rentalsFiltered = filterRentalsForDate(since, until);
   footModal.innerHTML = "";
   let rest =0;
-  let existingIndex = equipmentsRent.findIndex(item => item.idEqui === id);
+  let existingIndex = equipmentsRent.findIndex(item => item.idEqui === Equipments[id].idEqui);
   if(parseInt(cantEqui.value)>=1){
     if (existingIndex !== -1){
       let existAmount = parseInt(equipmentsRent[existingIndex].amount);
       existAmount += parseInt(cantEqui.value);
       rest = parseInt(Equipments[id].avaEqui) - existAmount
+      for (let x = 0; x < rentalsFiltered.length; x++){
+        for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+          if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[id].idEqui){
+            rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+          }
+        }
+      }
       if(rest>=0){
+        ok= true
         avaEqui.innerText= `/${rest}`;
         cantEqui.max= rest;
         equipmentsRent[existingIndex].amount = existAmount;
@@ -319,14 +301,28 @@ function addEquipment(id){
     }else{
       equipmentsRent.push(new rentedEquipment(id, cantEqui.value));
       rest = parseInt(Equipments[id].avaEqui) - parseInt(cantEqui.value) 
-      avaEqui.innerText= `/${rest}`
-      cantEqui.max= rest;
-      cantEqui.value=""
+      for (let x = 0; x < rentalsFiltered.length; x++){
+        for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+          if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[id].idEqui){
+            rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+          }
+        }
+      }
+      if(rest>=0){
+        ok=true
+        avaEqui.innerText= `/${rest}`
+        cantEqui.max= rest;
+        cantEqui.value=""
+      }else{
+        footModal.innerHTML = "!La cantidad que desea alquilar excede el stock disponible";
+      }
     }
   }else{
     footModal.innerHTML = "!Debe definir la cantidad que desea alquilar";
   }
-    listEquipments();
+    if(ok){
+      listEquipments();
+    }
   }
 // Listar equipamientos
 function listEquipments(){
@@ -356,18 +352,18 @@ function listEquipments(){
             <th><button type="buton" title="Eliminar"   class="delBtn actionBtn" id="delEqui${i}" onclick="dellEquipment(${equipmentsRent[i].idEqui})"><i class='bx bx-trash'></i></button></th>
           </tr>
         `
-        total += parseFloat(equipmentsRent[i].sub)
+        total += (parseFloat(equipmentsRent[i].sub))*amountD
         document.getElementById("total").innerText=`TOTAL:$${total}`
     }
 }
 // Eliminar equipamiento alquilado
 function dellEquipment(id){
   let i = equipmentsRent.findIndex(equipo => equipo.idEqui === id);
-  let avaEqui = document.getElementById(`labelCantEqui${id}`);
-  let cantEqui = document.getElementById(`cantEqui${id}`);
+  let y = Equipments.findIndex(equipo => equipo.idEqui === id);
+  let avaEqui = document.getElementById(`labelCantEqui${y}`);
+  let cantEqui = document.getElementById(`cantEqui${y}`);
   let rest =  parseInt(avaEqui.textContent.trim().slice(1));
   let existAmount = parseInt(equipmentsRent[i].amount);
-
   existAmount += parseInt(rest);
   avaEqui.innerText= `/${existAmount}`
   cantEqui.max= existAmount;
@@ -443,7 +439,7 @@ function filterRentalsForDate(since, until) {
   let filterRentals = Rentals.filter(rental => {
     let rentalDateStrRen = DateTime.fromISO(rental.dateStrRen);
     let rentalDateReturn = DateTime.fromISO(rental.dateReturn);
-    return rentalDateStrRen >= formatSince && rentalDateStrRen <= formatUntil &&
+    return rentalDateStrRen >= formatSince && rentalDateStrRen <= formatUntil ||
            rentalDateReturn >= formatSince && rentalDateReturn <= formatUntil;
   });
   return filterRentals;

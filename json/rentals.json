@@ -10,7 +10,7 @@
         "dateReturn": "2024-12-23",
         "rentedEquipment": [
             {
-                "idEqui": 0,
+                "idEqui": 1,
                 "codEqui": "M001",
                 "nameEqui": "Mesa larga",
                 "amount": "20",
@@ -18,7 +18,7 @@
                 "sub": 40000
             },
             {
-                "idEqui": 3,
+                "idEqui": 4,
                 "codEqui": "S001",
                 "nameEqui": "Silla plastica",
                 "amount": "200",
@@ -26,7 +26,7 @@
                 "sub": 60000
             },
             {
-                "idEqui": 2,
+                "idEqui": 3,
                 "codEqui": "V001",
                 "nameEqui": "Vaso corto vistro",
                 "amount": "300",
@@ -47,7 +47,7 @@
         "dateReturn": "2024-02-24",
         "rentedEquipment": [
             {
-                "idEqui": 0,
+                "idEqui": 1,
                 "codEqui": "M001",
                 "nameEqui": "Mesa larga",
                 "amount": "1",
@@ -55,7 +55,7 @@
                 "sub": 2000
             },
             {
-                "idEqui": 3,
+                "idEqui": 4,
                 "codEqui": "S001",
                 "nameEqui": "Silla plastica",
                 "amount": "10",
@@ -63,7 +63,7 @@
                 "sub": 3000
             },
             {
-                "idEqui": 2,
+                "idEqui": 3,
                 "codEqui": "V001",
                 "nameEqui": "Vaso corto vistro",
                 "amount": "10",
@@ -84,7 +84,7 @@
         "dateReturn": "2024-02-15",
         "rentedEquipment": [
             {
-                "idEqui": 1,
+                "idEqui": 2,
                 "codEqui": "M002",
                 "nameEqui": "Mesa redonda",
                 "amount": "3",
@@ -92,7 +92,7 @@
                 "sub": 6000
             },
             {
-                "idEqui": 2,
+                "idEqui": 3,
                 "codEqui": "V001",
                 "nameEqui": "Vaso corto vistro",
                 "amount": "30",
@@ -100,7 +100,7 @@
                 "sub": 3000
             },
             {
-                "idEqui": 3,
+                "idEqui": 4,
                 "codEqui": "S001",
                 "nameEqui": "Silla plastica",
                 "amount": "30",
@@ -121,7 +121,7 @@
         "dateReturn": "2024-03-02",
         "rentedEquipment": [
             {
-                "idEqui": 0,
+                "idEqui": 1,
                 "codEqui": "M001",
                 "nameEqui": "Mesa larga",
                 "amount": "1",
@@ -129,7 +129,7 @@
                 "sub": 2000
             },
             {
-                "idEqui": 4,
+                "idEqui": 5,
                 "codEqui": "S002",
                 "nameEqui": "Silla plegable madera",
                 "amount": "10",
@@ -138,5 +138,185 @@
             }
         ],
         "total": 6000
+    },
+    {
+        "idRent": 5,
+        "idCus": "2",
+        "nameRent": "Aniversario casino",
+        "dateEve": "2024-02-27",
+        "dateStrRen": "2024-02-27",
+        "dateEndRen": "2024-02-28",
+        "amountDays": 1,
+        "dateReturn": "2024-02-29",
+        "rentedEquipment": [
+            {
+                "idEqui": 1,
+                "codEqui": "M001",
+                "nameEqui": "Mesa larga",
+                "amount": 2,
+                "pRenEqui": "2000",
+                "sub": 4000
+            },
+            {
+                "idEqui": 2,
+                "codEqui": "M002",
+                "nameEqui": "Mesa redonda",
+                "amount": "1",
+                "pRenEqui": "2000",
+                "sub": 2000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "50",
+                "pRenEqui": "100",
+                "sub": 5000
+            },
+            {
+                "idEqui": 4,
+                "codEqui": "S001",
+                "nameEqui": "Silla plastica",
+                "amount": "20",
+                "pRenEqui": "300",
+                "sub": 6000
+            },
+            {
+                "idEqui": 5,
+                "codEqui": "S002",
+                "nameEqui": "Silla plegable madera",
+                "amount": "100",
+                "pRenEqui": "400",
+                "sub": 40000
+            }
+        ],
+        "total": 57000
+    },
+    {
+        "idRent": 6,
+        "idCus": "10",
+        "nameRent": "Almuerzo Campestre",
+        "dateEve": "2024-02-18",
+        "dateStrRen": "2024-02-17",
+        "dateEndRen": "2024-02-18",
+        "amountDays": 1,
+        "dateReturn": "2024-02-19",
+        "rentedEquipment": [
+            {
+                "idEqui": 2,
+                "codEqui": "M002",
+                "nameEqui": "Mesa redonda",
+                "amount": "10",
+                "pRenEqui": "2000",
+                "sub": 20000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "100",
+                "pRenEqui": "100",
+                "sub": 10000
+            },
+            {
+                "idEqui": 5,
+                "codEqui": "S002",
+                "nameEqui": "Silla plegable madera",
+                "amount": "100",
+                "pRenEqui": "400",
+                "sub": 40000
+            }
+        ],
+        "total": 70000
+    },
+    {
+        "idRent": 7,
+        "idCus": "5",
+        "nameRent": "Fiesta de 15",
+        "dateEve": "2024-03-02",
+        "dateStrRen": "2024-03-02",
+        "dateEndRen": "2024-03-03",
+        "amountDays": 1,
+        "dateReturn": "2024-03-04",
+        "rentedEquipment": [
+            {
+                "idEqui": 1,
+                "codEqui": "M001",
+                "nameEqui": "Mesa larga",
+                "amount": "10",
+                "pRenEqui": "2000",
+                "sub": 20000
+            },
+            {
+                "idEqui": 2,
+                "codEqui": "M002",
+                "nameEqui": "Mesa redonda",
+                "amount": "2",
+                "pRenEqui": "2000",
+                "sub": 4000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "150",
+                "pRenEqui": "100",
+                "sub": 15000
+            },
+            {
+                "idEqui": 4,
+                "codEqui": "S001",
+                "nameEqui": "Silla plastica",
+                "amount": "100",
+                "pRenEqui": "300",
+                "sub": 30000
+            },
+            {
+                "idEqui": 5,
+                "codEqui": "S002",
+                "nameEqui": "Silla plegable madera",
+                "amount": "10",
+                "pRenEqui": "400",
+                "sub": 4000
+            }
+        ],
+        "total": 73000
+    },
+    {
+        "idRent": 8,
+        "idCus": "9",
+        "nameRent": "Gala",
+        "dateEve": "2024-03-02",
+        "dateStrRen": "2024-03-01",
+        "dateEndRen": "2024-03-03",
+        "amountDays": 2,
+        "dateReturn": "2024-03-04",
+        "rentedEquipment": [
+            {
+                "idEqui": 2,
+                "codEqui": "M002",
+                "nameEqui": "Mesa redonda",
+                "amount": "2",
+                "pRenEqui": "2000",
+                "sub": 4000
+            },
+            {
+                "idEqui": 3,
+                "codEqui": "V001",
+                "nameEqui": "Vaso corto vistro",
+                "amount": "20",
+                "pRenEqui": "100",
+                "sub": 2000
+            },
+            {
+                "idEqui": 5,
+                "codEqui": "S002",
+                "nameEqui": "Silla plegable madera",
+                "amount": "20",
+                "pRenEqui": "400",
+                "sub": 8000
+            }
+        ],
+        "total": 28000
     }
 ]
