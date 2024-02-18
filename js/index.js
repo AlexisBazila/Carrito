@@ -26,11 +26,7 @@ demo.addEventListener("click", async (e) => {
   await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/customers.json", Customers, "Customers");
   await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/equipments.json", Equipments, "Equipments");
   await traerDatos("https://raw.githubusercontent.com/AlexisBazila/Carrito/main/json/rentals.json", Rentals, "Rentals");
-<<<<<<< HEAD
-
   location.reload();
-=======
->>>>>>> final
 });
 
 const traerDatos = async (ruta, array, table) => {
