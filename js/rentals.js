@@ -30,8 +30,13 @@ let Customers = new Array();
 if (localStorage.getItem("Customers")) {
   Customers = JSON.parse(localStorage.getItem("Customers"));
 }
-// Elementos globales
+
+// ELEMENTOS GLOBALES
+// Mensajes de error
 let footModal = document.getElementById("footModalMsg");
+// Input de busqueda de equipamientos en alquiler
+let findEquipmentInput = document.getElementById("findEquipmentInput");
+
 
 //DEFINICION DE CLASES
 class rental{
@@ -153,11 +158,13 @@ dateStrRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
+      findEquipmentInput.disabled = false;
       chargeEquipment(dateStr, dateEnd);
       footModal.innerHTML = "";
     }else{
       EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
+      findEquipmentInput.disabled = true;
     }
   }
 }
@@ -172,22 +179,29 @@ dateEndRen.onchange = function(){
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
       chargeEquipment(dateStr, dateEnd);
+      findEquipmentInput.disabled = false;
       footModal.innerHTML = "";
     }else{
       EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
+      findEquipmentInput.disabled = true;
     }
   }
 }
 
+// Busqueda de equipamientos
+findEquipmentInput.onchange = function(){
+  let FindEqui = findEquipmentInput.value;
+  let filteredEquipments = Equipments.filter(equipment => {
+    return (
+      equipment.nameEqui.toLowerCase().includes(FindEqui.toLowerCase()) ||
+      equipment.codEqui.includes(FindEqui.toLowerCase())
+    );
+  });
+  alert(filteredEquipments.length)
+}
 
 // DEFINICION DE FUNCIONES
-// let findEquipmentButon = document.getElementById("findEquipmentButon");
-// findEquipmentButon,addEventListener("click", (e) =>{
-//   e.preventDefault();
-//  
-// })
-
 //Carga de equipamientos en selector
 function chargeEquipment(since, until){
 let EquipmentLables = document.getElementById("EquipmentLables");

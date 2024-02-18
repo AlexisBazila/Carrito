@@ -210,12 +210,15 @@ input:focus {
   font-size: 20px;
 
 }
-.find{
-  display: flex;
+.findEquipmentInput {
+  width: 90%;
+  padding-left: 25px;
+  background-image: url("../img/srch2.webp");
+  background-size: 20px; 
+  background-repeat: no-repeat; 
+  background-position: 5px center;
 }
-.findEquipmentInput{
-  width: 300px;
-}
+
 .findEquipmentButon {
   border-radius: 10px;
   color: #FFFFFF;
