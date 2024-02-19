@@ -159,7 +159,7 @@ dateStrRen.onchange = function(){
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
       findEquipmentInput.disabled = false;
-      chargeEquipment(dateStr, dateEnd);
+      chargeEquipment(dateStr, dateEnd, Equipments);
       footModal.innerHTML = "";
     }else{
       EquipmentLables.innerHTML=``
@@ -178,7 +178,7 @@ dateEndRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
-      chargeEquipment(dateStr, dateEnd);
+      chargeEquipment(dateStr, dateEnd, Equipments);
       findEquipmentInput.disabled = false;
       footModal.innerHTML = "";
     }else{
@@ -190,7 +190,7 @@ dateEndRen.onchange = function(){
 }
 
 // Busqueda de equipamientos
-findEquipmentInput.onchange = function(){
+findEquipmentInput.addEventListener('input', function() {
   let FindEqui = findEquipmentInput.value;
   let filteredEquipments = Equipments.filter(equipment => {
     return (
@@ -198,50 +198,101 @@ findEquipmentInput.onchange = function(){
       equipment.codEqui.includes(FindEqui.toLowerCase())
     );
   });
-  alert(filteredEquipments.length)
-}
+  dateStr = parseDate(dateStrRen.value);
+  dateEnd = parseDate(dateEndRen.value);
+  chargeEquipment(dateStr, dateEnd, filteredEquipments);
+});
 
 // DEFINICION DE FUNCIONES
 //Carga de equipamientos en selector
-function chargeEquipment(since, until){
-let EquipmentLables = document.getElementById("EquipmentLables");
-EquipmentLables.innerHTML=``
-for (let i = 0; i < Equipments.length; i++) {
-  let picEqui = Equipments[i].picEqui
-  if(picEqui==undefined){
-    picEqui = "../img/equipamiento/noimage.jpg"
-  }
-  let rentalsFiltered = filterRentalsForDate(since, until); 
-  let rest = Equipments[i].avaEqui;
-  for (let x = 0; x < rentalsFiltered.length; x++){
-    for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
-      if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
-        rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+// function chargeEquipment(since, until){
+// let EquipmentLables = document.getElementById("EquipmentLables");
+// EquipmentLables.innerHTML=``
+// for (let i = 0; i < Equipments.length; i++) {
+//   let picEqui = Equipments[i].picEqui
+//   if(picEqui==undefined){
+//     picEqui = "../img/equipamiento/noimage.jpg"
+//   }
+//   let rentalsFiltered = filterRentalsForDate(since, until); 
+//   let rest = Equipments[i].avaEqui;
+//   for (let x = 0; x < rentalsFiltered.length; x++){
+//     for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+//       if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
+//         rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+//       }
+//     }
+//   }
+//   EquipmentLables.innerHTML += `
+//     <div class="label">
+//     <div class="equipmentImage">
+//     <img src="${picEqui}" alt="" class="imgEquipment">
+//       <p>${Equipments[i].codEqui}</p>
+//     </div>
+//     <div class="EquipmentInformation">
+//       <div>
+//         <p>${Equipments[i].idEqui}-${Equipments[i].nameEqui}</p>
+//         <p>Precio: $${Equipments[i].pRenEqui}</p>
+//         <p>Stock: ${Equipments[i].avaEqui}</p>
+//       </div>
+//       <div class="buttonEquipmentLable">
+//         <input type="number" min="0" max="${rest}" id="cantEqui${i}">
+//         <label id="labelCantEqui${i}">/${rest}</label>
+//         <button type="button" onclick="addEquipment(${i})">+</button>
+//       </div>
+//     </div>
+//   </div>
+//   `
+// }
+// }
+
+function chargeEquipment(since, until, table){
+  let EquipmentLables = document.getElementById("EquipmentLables");
+  EquipmentLables.innerHTML=``
+  for (let i = 0; i < table.length; i++) {
+    let picEqui = table[i].picEqui
+    if(picEqui==undefined){
+      picEqui = "../img/equipamiento/noimage.jpg"
+    }
+
+    let rentalsFiltered = filterRentalsForDate(since, until); 
+    let rest = table[i].avaEqui;
+    for (let x = 0; x < rentalsFiltered.length; x++){
+      for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+        if(rentalsFiltered[x].rentedEquipment[y].idEqui == table[i].idEqui){
+          rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+        }
       }
     }
+
+    if(equipmentsRent.length>0){
+      alert("Reconteo de elementos cuando hay algo prealquilado")
+    }else{
+      alert("no")
+    }
+    
+    EquipmentLables.innerHTML += `
+      <div class="label">
+      <div class="equipmentImage">
+      <img src="${picEqui}" alt="" class="imgEquipment">
+        <p>${table[i].codEqui}</p>
+      </div>
+      <div class="EquipmentInformation">
+        <div>
+          <p>${table[i].idEqui}-${table[i].nameEqui}</p>
+          <p>Precio: $${table[i].pRenEqui}</p>
+          <p>Stock: ${table[i].avaEqui}</p>
+        </div>
+        <div class="buttonEquipmentLable">
+          <input type="number" min="0" max="${rest}" id="cantEqui${i}">
+          <label id="labelCantEqui${i}">/${rest}</label>
+          <button type="button" onclick="addEquipment(${i})">+</button>
+        </div>
+      </div>
+    </div>
+    `
   }
-  EquipmentLables.innerHTML += `
-    <div class="label">
-    <div class="equipmentImage">
-    <img src="${picEqui}" alt="" class="imgEquipment">
-      <p>${Equipments[i].codEqui}</p>
-    </div>
-    <div class="EquipmentInformation">
-      <div>
-        <p>${Equipments[i].idEqui}-${Equipments[i].nameEqui}</p>
-        <p>Precio: $${Equipments[i].pRenEqui}</p>
-        <p>Stock: ${Equipments[i].avaEqui}</p>
-      </div>
-      <div class="buttonEquipmentLable">
-        <input type="number" min="0" max="${rest}" id="cantEqui${i}">
-        <label id="labelCantEqui${i}">/${rest}</label>
-        <button type="button" onclick="addEquipment(${i})">+</button>
-      </div>
-    </div>
-  </div>
-  `
-}
-}
+  }
+
 // Configuracion de fechas
 function parseDate(dateString) {
   let parts = dateString.split('-');
@@ -336,6 +387,8 @@ function addEquipment(id){
   }
     if(ok){
       listEquipments();
+      dateStrRen.disabled = true
+      dateEndRen.disabled = true
     }
   }
 // Listar equipamientos
@@ -383,6 +436,10 @@ function dellEquipment(id){
   cantEqui.max= existAmount;
   equipmentsRent.splice(i, 1);
   listEquipments();
+  if(equipmentsRent.length==0){
+    dateStrRen.disabled = false
+    dateEndRen.disabled = false
+  }
 }
 //Alta
 function addRents(){
