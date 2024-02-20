@@ -265,9 +265,11 @@ function chargeEquipment(since, until, table){
     }
 
     if(equipmentsRent.length>0){
-      alert("Reconteo de elementos cuando hay algo prealquilado")
-    }else{
-      alert("no")
+      let existingIndex = rentalsFiltered.findIndex(item => item.idEqui === Equipments[i].idEqui);
+      if (existingIndex !== -1){
+      let existAmount = parseInt(equipmentsRent[existingIndex].amount);
+      rest -= existAmount
+      }
     }
     
     EquipmentLables.innerHTML += `
