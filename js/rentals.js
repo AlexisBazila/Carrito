@@ -205,46 +205,6 @@ findEquipmentInput.addEventListener('input', function() {
 
 // DEFINICION DE FUNCIONES
 //Carga de equipamientos en selector
-// function chargeEquipment(since, until){
-// let EquipmentLables = document.getElementById("EquipmentLables");
-// EquipmentLables.innerHTML=``
-// for (let i = 0; i < Equipments.length; i++) {
-//   let picEqui = Equipments[i].picEqui
-//   if(picEqui==undefined){
-//     picEqui = "../img/equipamiento/noimage.jpg"
-//   }
-//   let rentalsFiltered = filterRentalsForDate(since, until); 
-//   let rest = Equipments[i].avaEqui;
-//   for (let x = 0; x < rentalsFiltered.length; x++){
-//     for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
-//       if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
-//         rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
-//       }
-//     }
-//   }
-//   EquipmentLables.innerHTML += `
-//     <div class="label">
-//     <div class="equipmentImage">
-//     <img src="${picEqui}" alt="" class="imgEquipment">
-//       <p>${Equipments[i].codEqui}</p>
-//     </div>
-//     <div class="EquipmentInformation">
-//       <div>
-//         <p>${Equipments[i].idEqui}-${Equipments[i].nameEqui}</p>
-//         <p>Precio: $${Equipments[i].pRenEqui}</p>
-//         <p>Stock: ${Equipments[i].avaEqui}</p>
-//       </div>
-//       <div class="buttonEquipmentLable">
-//         <input type="number" min="0" max="${rest}" id="cantEqui${i}">
-//         <label id="labelCantEqui${i}">/${rest}</label>
-//         <button type="button" onclick="addEquipment(${i})">+</button>
-//       </div>
-//     </div>
-//   </div>
-//   `
-// }
-// }
-
 function chargeEquipment(since, until, table){
   let EquipmentLables = document.getElementById("EquipmentLables");
   EquipmentLables.innerHTML=``
@@ -273,6 +233,8 @@ function chargeEquipment(since, until, table){
 
     }
     
+    let indexEqui = Equipments.findIndex(item => item.idEqui === table[i].idEqui);
+
     EquipmentLables.innerHTML += `
       <div class="label">
       <div class="equipmentImage">
@@ -286,9 +248,9 @@ function chargeEquipment(since, until, table){
           <p>Stock: ${table[i].avaEqui}</p>
         </div>
         <div class="buttonEquipmentLable">
-          <input type="number" min="0" max="${rest}" id="cantEqui${i}">
-          <label id="labelCantEqui${i}">/${rest}</label>
-          <button type="button" onclick="addEquipment(${i})">+</button>
+          <input type="number" min="0" max="${rest}" id="cantEqui${indexEqui}">
+          <label id="labelCantEqui${indexEqui}">/${rest}</label>
+          <button type="button" onclick="addEquipment(${indexEqui})">+</button>
         </div>
       </div>
     </div>
@@ -306,7 +268,6 @@ function parseDate(dateString) {
 }
 //Formateo de fehcas
 function formatDate(inputDate, outputFormat) {
-  alert(inputDate)
   const parsedDate = DateTime.fromFormat(inputDate, [
     'yyyy-MM-dd', 'dd/MM/yyyy', 'YYYY-MM-DDTHH:MM:SS.SSSZZZZZ', 'd/M/yyyy', 'dd/MM/yyyy HH:mm:ss'
   ]);
@@ -345,7 +306,6 @@ function addEquipment(id){
   let existingIndex = equipmentsRent.findIndex(item => item.idEqui === Equipments[id].idEqui);
   if(parseInt(cantEqui.value)>=1){
     if (existingIndex !== -1){
-      alert(`Equipo: ${Equipments[id].idEqui}-$${Equipments[id].nameEqui} | Rentado: ${equipmentsRent[existingIndex].idEqui}-${equipmentsRent[existingIndex].nameEqui}`)
       let existAmount = parseInt(equipmentsRent[existingIndex].amount);
       existAmount += parseInt(cantEqui.value);
       rest = parseInt(Equipments[id].avaEqui) - existAmount
@@ -429,6 +389,10 @@ function listEquipments(){
 }
 // Eliminar equipamiento alquilado
 function dellEquipment(id){
+  dateStr = parseDate(dateStrRen.value);
+  dateEnd = parseDate(dateEndRen.value);
+  findEquipmentInput.value = "";
+  chargeEquipment(dateStr, dateEnd, Equipments);
   let i = equipmentsRent.findIndex(equipo => equipo.idEqui === id);
   let y = Equipments.findIndex(equipo => equipo.idEqui === id);
   let avaEqui = document.getElementById(`labelCantEqui${y}`);
