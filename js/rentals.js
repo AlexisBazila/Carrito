@@ -30,8 +30,13 @@ let Customers = new Array();
 if (localStorage.getItem("Customers")) {
   Customers = JSON.parse(localStorage.getItem("Customers"));
 }
-// Elementos globales
+
+// ELEMENTOS GLOBALES
+// Mensajes de error
 let footModal = document.getElementById("footModalMsg");
+// Input de busqueda de equipamientos en alquiler
+let findEquipmentInput = document.getElementById("findEquipmentInput");
+
 
 //DEFINICION DE CLASES
 class rental{
@@ -153,11 +158,13 @@ dateStrRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
-      chargeEquipment(dateStr, dateEnd);
+      findEquipmentInput.disabled = false;
+      chargeEquipment(dateStr, dateEnd, Equipments);
       footModal.innerHTML = "";
     }else{
       EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
+      findEquipmentInput.disabled = true;
     }
   }
 }
@@ -171,63 +178,86 @@ dateEndRen.onchange = function(){
         <p><b>Cantidad de dias:</b> ${countDays(dateStr, dateEnd)}</p>
         <p><b>Fecha de devolucion:</b> ${calReturnDate(dateEnd)}</p>
       `
-      chargeEquipment(dateStr, dateEnd);
+      chargeEquipment(dateStr, dateEnd, Equipments);
+      findEquipmentInput.disabled = false;
       footModal.innerHTML = "";
     }else{
       EquipmentLables.innerHTML=``
       footModal.innerHTML = "!La fecha de finalizacion del alquiler debe ser superior a la fecha de inicio del alquiler";
+      findEquipmentInput.disabled = true;
     }
   }
 }
 
+// Busqueda de equipamientos
+findEquipmentInput.addEventListener('input', function() {
+  let FindEqui = findEquipmentInput.value;
+  let filteredEquipments = Equipments.filter(equipment => {
+    return (
+      equipment.nameEqui.toLowerCase().includes(FindEqui.toLowerCase()) ||
+      equipment.codEqui.includes(FindEqui.toLowerCase())
+    );
+  });
+  dateStr = parseDate(dateStrRen.value);
+  dateEnd = parseDate(dateEndRen.value);
+  chargeEquipment(dateStr, dateEnd, filteredEquipments);
+});
 
 // DEFINICION DE FUNCIONES
-// let findEquipmentButon = document.getElementById("findEquipmentButon");
-// findEquipmentButon,addEventListener("click", (e) =>{
-//   e.preventDefault();
-//  
-// })
-
 //Carga de equipamientos en selector
-function chargeEquipment(since, until){
-let EquipmentLables = document.getElementById("EquipmentLables");
-EquipmentLables.innerHTML=``
-for (let i = 0; i < Equipments.length; i++) {
-  let picEqui = Equipments[i].picEqui
-  if(picEqui==undefined){
-    picEqui = "../img/equipamiento/noimage.jpg"
-  }
-  let rentalsFiltered = filterRentalsForDate(since, until); 
-  let rest = Equipments[i].avaEqui;
-  for (let x = 0; x < rentalsFiltered.length; x++){
-    for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
-      if(rentalsFiltered[x].rentedEquipment[y].idEqui == Equipments[i].idEqui){
-        rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+function chargeEquipment(since, until, table){
+  let EquipmentLables = document.getElementById("EquipmentLables");
+  EquipmentLables.innerHTML=``
+  for (let i = 0; i < table.length; i++) {
+    let picEqui = table[i].picEqui
+    if(picEqui==undefined){
+      picEqui = "../img/equipamiento/noimage.jpg"
+    }
+    // Resta las cantidades del equipo ya alquiladas para esa fecha
+    let rentalsFiltered = filterRentalsForDate(since, until); 
+    let rest = table[i].avaEqui;
+    for (let x = 0; x < rentalsFiltered.length; x++){
+      for (let y = 0; y < rentalsFiltered[x].rentedEquipment.length; y++){
+        if(rentalsFiltered[x].rentedEquipment[y].idEqui == table[i].idEqui){
+          rest -=  rentalsFiltered[x].rentedEquipment[y].amount;
+        }
       }
     }
+    // Resta las cantidades del equipo listadas en el alquiler actual
+    if(equipmentsRent.length>0){
+      for (let w = 0; w < equipmentsRent.length; w++){
+        if(equipmentsRent[w].idEqui == table[i].idEqui){
+          rest -= equipmentsRent[w].amount;
+        }
+      }
+
+    }
+    
+    let indexEqui = Equipments.findIndex(item => item.idEqui === table[i].idEqui);
+
+    EquipmentLables.innerHTML += `
+      <div class="label">
+      <div class="equipmentImage">
+      <img src="${picEqui}" alt="" class="imgEquipment">
+        <p>${table[i].codEqui}</p>
+      </div>
+      <div class="EquipmentInformation">
+        <div>
+          <p>${table[i].idEqui}-${table[i].nameEqui}</p>
+          <p>Precio: $${table[i].pRenEqui}</p>
+          <p>Stock: ${table[i].avaEqui}</p>
+        </div>
+        <div class="buttonEquipmentLable">
+          <input type="number" min="0" max="${rest}" id="cantEqui${indexEqui}">
+          <label id="labelCantEqui${indexEqui}">/${rest}</label>
+          <button type="button" onclick="addEquipment(${indexEqui})">+</button>
+        </div>
+      </div>
+    </div>
+    `
   }
-  EquipmentLables.innerHTML += `
-    <div class="label">
-    <div class="equipmentImage">
-    <img src="${picEqui}" alt="" class="imgEquipment">
-      <p>${Equipments[i].codEqui}</p>
-    </div>
-    <div class="EquipmentInformation">
-      <div>
-        <p>${Equipments[i].idEqui}-${Equipments[i].nameEqui}</p>
-        <p>Precio: $${Equipments[i].pRenEqui}</p>
-        <p>Stock: ${Equipments[i].avaEqui}</p>
-      </div>
-      <div class="buttonEquipmentLable">
-        <input type="number" min="0" max="${rest}" id="cantEqui${i}">
-        <label id="labelCantEqui${i}">/${rest}</label>
-        <button type="button" onclick="addEquipment(${i})">+</button>
-      </div>
-    </div>
-  </div>
-  `
-}
-}
+  }
+
 // Configuracion de fechas
 function parseDate(dateString) {
   let parts = dateString.split('-');
@@ -238,7 +268,6 @@ function parseDate(dateString) {
 }
 //Formateo de fehcas
 function formatDate(inputDate, outputFormat) {
-  alert(inputDate)
   const parsedDate = DateTime.fromFormat(inputDate, [
     'yyyy-MM-dd', 'dd/MM/yyyy', 'YYYY-MM-DDTHH:MM:SS.SSSZZZZZ', 'd/M/yyyy', 'dd/MM/yyyy HH:mm:ss'
   ]);
@@ -322,6 +351,8 @@ function addEquipment(id){
   }
     if(ok){
       listEquipments();
+      dateStrRen.disabled = true
+      dateEndRen.disabled = true
     }
   }
 // Listar equipamientos
@@ -358,6 +389,10 @@ function listEquipments(){
 }
 // Eliminar equipamiento alquilado
 function dellEquipment(id){
+  dateStr = parseDate(dateStrRen.value);
+  dateEnd = parseDate(dateEndRen.value);
+  findEquipmentInput.value = "";
+  chargeEquipment(dateStr, dateEnd, Equipments);
   let i = equipmentsRent.findIndex(equipo => equipo.idEqui === id);
   let y = Equipments.findIndex(equipo => equipo.idEqui === id);
   let avaEqui = document.getElementById(`labelCantEqui${y}`);
@@ -369,6 +404,10 @@ function dellEquipment(id){
   cantEqui.max= existAmount;
   equipmentsRent.splice(i, 1);
   listEquipments();
+  if(equipmentsRent.length==0){
+    dateStrRen.disabled = false
+    dateEndRen.disabled = false
+  }
 }
 //Alta
 function addRents(){
