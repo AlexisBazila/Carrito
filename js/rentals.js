@@ -253,7 +253,7 @@ function chargeEquipment(since, until, table){
     if(picEqui==undefined){
       picEqui = "../img/equipamiento/noimage.jpg"
     }
-
+    // Resta las cantidades del equipo ya alquiladas para esa fecha
     let rentalsFiltered = filterRentalsForDate(since, until); 
     let rest = table[i].avaEqui;
     for (let x = 0; x < rentalsFiltered.length; x++){
@@ -263,13 +263,14 @@ function chargeEquipment(since, until, table){
         }
       }
     }
-
+    // Resta las cantidades del equipo listadas en el alquiler actual
     if(equipmentsRent.length>0){
-      let existingIndex = rentalsFiltered.findIndex(item => item.idEqui === Equipments[i].idEqui);
-      if (existingIndex !== -1){
-      let existAmount = parseInt(equipmentsRent[existingIndex].amount);
-      rest -= existAmount
+      for (let w = 0; w < equipmentsRent.length; w++){
+        if(equipmentsRent[w].idEqui == table[i].idEqui){
+          rest -= equipmentsRent[w].amount;
+        }
       }
+
     }
     
     EquipmentLables.innerHTML += `
@@ -344,6 +345,7 @@ function addEquipment(id){
   let existingIndex = equipmentsRent.findIndex(item => item.idEqui === Equipments[id].idEqui);
   if(parseInt(cantEqui.value)>=1){
     if (existingIndex !== -1){
+      alert(`Equipo: ${Equipments[id].idEqui}-$${Equipments[id].nameEqui} | Rentado: ${equipmentsRent[existingIndex].idEqui}-${equipmentsRent[existingIndex].nameEqui}`)
       let existAmount = parseInt(equipmentsRent[existingIndex].amount);
       existAmount += parseInt(cantEqui.value);
       rest = parseInt(Equipments[id].avaEqui) - existAmount
