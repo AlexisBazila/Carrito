@@ -12,13 +12,27 @@ if (localStorage.getItem("Rentals")){
 }
 
 let countCus = document.getElementById("countCus");
-countCus.innerHTML=`${Customers.length}`
+for (let i = 0; i < Customers.length; i++){
+  setTimeout(function() {
+    countCus.innerHTML=`${i}`
+  }, i * 50);
+}
 
 let countEqui = document.getElementById("countEqui");
-countEqui.innerHTML=`${Equipments.length}`
+for (let i = 0; i < Equipments.length; i++){
+  setTimeout(function() {
+    countEqui.innerHTML=`${i}`
+  }, i * 50);
+}
+
 
 let countRent = document.getElementById("countRent");
-countRent.innerHTML=`${Rentals.length}`
+for (let i = 0; i < Rentals.length; i++){
+  setTimeout(function() {
+    countRent.innerHTML=`${i}`
+  }, i * 50);
+}
+
 
 let demo = document.getElementById("demo");
 demo.addEventListener("click", async (e) => {
