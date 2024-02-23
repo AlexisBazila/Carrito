@@ -59,52 +59,75 @@ const traerDatos = async (ruta, array, table) => {
 
 
 
-
-function parseDate(dateString) {
-  let parts = dateString.split('-');
-  let year = parseInt(parts[0]);
-  let month = parseInt(parts[1]);
-  let day = parseInt(parts[2]);
-  return DateTime.local(year, month, day);
-}
-// Paso 1: Calcular la cantidad de alquileres por semana
-const rentalsPerWeek = {};
+// GRAFICOS
+// Grafica alquileres por mes
+const rentalsPerMonth = {};
 Rentals.forEach(rental => {
-  
-  const startDate = DateTime.fromISO(rental.dateStrRen);
-    const weekNumber = startDate.weekNumber;
+    const startDate = DateTime.fromISO(rental.dateStrRen);
+    const yearMonth = startDate.toFormat('yyyy-MM');
 
-    if (rentalsPerWeek[weekNumber]) {
-        rentalsPerWeek[weekNumber]++;
+    if (rentalsPerMonth[yearMonth]) {
+        rentalsPerMonth[yearMonth]++;
     } else {
-        rentalsPerWeek[weekNumber] = 1;
+        rentalsPerMonth[yearMonth] = 1;
     }
 });
-
-// Paso 2: Preparar los datos para el gráfico
-const weeks = Object.keys(rentalsPerWeek).sort((a, b) => a - b);
-const rentalCounts = weeks.map(week => rentalsPerWeek[week]);
-
-
-
-// Paso 3: Crear el gráfico con Chart.js
+const months = Object.keys(rentalsPerMonth).sort();
+const rentalCounts = months.map(month => rentalsPerMonth[month]);
 const ctx = document.getElementById('myChart').getContext('2d');
 const myChart = new Chart(ctx, {
-    type: 'bar', // Puedes cambiar el tipo de gráfico según tu preferencia
+    type: 'line',
     data: {
-        labels: weeks,
+        labels: months,
         datasets: [{
-            label: 'Cantidad de alquileres por semana',
+            label: 'Cantidad de alquileres por mes',
             data: rentalCounts,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
-            borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
+            backgroundColor: '#32C3E4',
+            borderColor: '#21889E',
             borderWidth: 1
         }]
     },
     options: {
         scales: {
             y: {
-                beginAtZero: true // Comienza el eje Y en cero
+                beginAtZero: true
+            }
+        }
+    }
+});
+// Grafico alquileres por clientes
+const rentalsPerCustomer = {};
+Rentals.forEach(rental => {
+    const customerId = rental.idCus;
+
+    if (rentalsPerCustomer[customerId]) {
+        rentalsPerCustomer[customerId]++;
+    } else {
+        rentalsPerCustomer[customerId] = 1;
+    }
+});
+const customers = Object.keys(rentalsPerCustomer).sort((a, b) => a - b);
+const rentalCountsPerCustomer = customers.map(customerId => {
+    const customer = Customers.find(c => c.idCus == customerId);
+    return customer ? customer.nameCus : customerId;
+});
+const ctxCustomer = document.getElementById('ChartCus').getContext('2d');
+const myChartCustomer = new Chart(ctxCustomer, {
+    type: 'bar',
+    data: {
+        labels: rentalCountsPerCustomer,
+        datasets: [{
+            label: 'Cantidad de alquileres por cliente',
+            data: Object.values(rentalsPerCustomer),
+            backgroundColor: '#4ab644b0',
+            borderColor: '#306A2D',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
         }
     }
